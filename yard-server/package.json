@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "name": "yard-server",
+  "version": "1.0.0",
+  "description": "server for virtual yard",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "ts-node-dev src/index.ts",
+    "loadtest": "colyseus-loadtest loadtest/loadtest.ts --room yard --numClients 70",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefan Neubert <dev@steditor.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "@colyseus/loadtest": "^0.13.1",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.1",
+    "@types/randomcolor": "^0.5.5",
+    "ts-node": "^8.1.0",
+    "ts-node-dev": "^1.0.0-pre.63",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@colyseus/monitor": "^0.12.2",
+    "@colyseus/social": "^0.10.9",
+    "colyseus": "^0.13.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "randomcolor": "^0.6.2"
+  }
+}
