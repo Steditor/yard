@@ -1,5 +1,4 @@
 import http from "http";
-import * as path from "path";
 
 import express from "express";
 import cors from "cors";
@@ -11,7 +10,9 @@ import { monitor } from "@colyseus/monitor";
 
 import { Yard } from "./rooms/Yard";
 
-const port = Number(process.env.PORT || 2567);
+import localConfig from "../../local.config.json";
+
+const port = Number(process.env.EXPRESS_PORT ?? localConfig.EXPRESS_PORT);
 const app = express()
 
 app.use(cors());
@@ -29,10 +30,10 @@ gameServer.define('yard', Yard);
 app.use("/colyseus", monitor());
 
 if (process.env.NODE_ENV === "production") {
-  app.use("/", serveStatic(path.join(__dirname, "../../yard-client/dist")));
+  app.use("/", serveStatic(process.env.VUE_DIST_DIR ?? localConfig.VUE_DIST_DIR));
 } else {
   app.use("/", createProxyMiddleware({
-    target: "http://localhost:8080",
+    target: "http://localhost:" + (process.env.VUE_DEV_SERVER_PORT ?? localConfig.VUE_DEV_SERVER_PORT),
     changeOrigin: true,
   }));
 }

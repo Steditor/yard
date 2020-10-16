@@ -37,7 +37,8 @@
     async connect() {
       const host = window.document.location.host.replace(/:.*/, "");
       const port = location.port ? ":" + location.port : "";
-      const endpoint = location.protocol.replace(/https?/, "ws") + "//" + host + port;
+      const protocol = location.protocol.replace(/http(s?)/, "ws$1");
+      const endpoint = protocol + "//" + host + port;
       this.client = new Colyseus.Client(endpoint);
       this.room = await this.client.joinOrCreate("yard");
     }

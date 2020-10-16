@@ -8,7 +8,7 @@
     "dev": "ts-node-dev src/index.ts",
     "loadtest": "colyseus-loadtest loadtest/loadtest.ts --room yard --numClients 70",
     "build": "tsc",
-    "start": "node dist/src/index.js"
+    "start": "node dist/yard-server/src/index.js"
   },
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
