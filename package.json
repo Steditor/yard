@@ -5,14 +5,15 @@
   "description": "Simulate running around on a yard with many people.",
   "scripts": {
     "postinstall": "multiview [ npm run install-client ] [ npm run install-server ] -x 4000",
-    "install-client": "cd yard-client && npm install && cd ..",
-    "install-server": "cd yard-server && npm install && cd ..",
+    "install-client": "cd yard-client && npm install",
+    "install-server": "cd yard-server && npm install",
     "dev": "multiview [ npm run dev-client ] [ npm run dev-server ] -x 1000",
-    "dev-client": "cd yard-client && npm run serve && cd ..",
-    "dev-server": "cd yard-server && npm run start && cd ..",
-    "build": "multiview [ npm run build-client ] -x 1000",
-    "build-client": "cd yard-client && npm run build && cd ..",
-    "serve": "cross-env NODE_ENV=production cd yard-server && npm start && cd .."
+    "dev-client": "cd yard-client && npm run serve",
+    "dev-server": "cd yard-server && npm run dev",
+    "build": "multiview [ npm run build-client ] [ npm run build-server ] -x 1000",
+    "build-client": "cd yard-client && npm run build",
+    "build-server": "cd yard-server && npm run build",
+    "start": "cross-env-shell NODE_ENV=production \"cd yard-server && npm start\""
   },
   "repository": {
     "type": "git",

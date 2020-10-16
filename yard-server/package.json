@@ -5,9 +5,10 @@
   "description": "server for virtual yard",
   "main": "lib/index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "loadtest": "colyseus-loadtest loadtest/loadtest.ts --room yard --numClients 70",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/src/index.js"
   },
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
@@ -16,6 +17,7 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.1",
     "@types/randomcolor": "^0.5.5",
+    "@types/serve-static": "^1.13.5",
     "ts-node": "^8.1.0",
     "ts-node-dev": "^1.0.0-pre.63",
     "typescript": "^3.4.5"
@@ -28,6 +30,7 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "http-proxy-middleware": "^1.0.6",
-    "randomcolor": "^0.6.2"
+    "randomcolor": "^0.6.2",
+    "serve-static": "^1.14.1"
   }
 }

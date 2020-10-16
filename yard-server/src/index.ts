@@ -1,11 +1,15 @@
 import http from "http";
+import * as path from "path";
+
 import express from "express";
 import cors from "cors";
+import { createProxyMiddleware } from "http-proxy-middleware";
+import serveStatic from "serve-static";
+
 import { Server } from "colyseus";
 import { monitor } from "@colyseus/monitor";
 
 import { Yard } from "./rooms/Yard";
-import { createProxyMiddleware } from "http-proxy-middleware";
 
 const port = Number(process.env.PORT || 2567);
 const app = express()
@@ -25,13 +29,12 @@ gameServer.define('yard', Yard);
 app.use("/colyseus", monitor());
 
 if (process.env.NODE_ENV === "production") {
-  console.log("production mode todo!");
-  // TODO: serve static
+  app.use("/", serveStatic(path.join(__dirname, "../../yard-client/dist")));
 } else {
   app.use("/", createProxyMiddleware({
     target: "http://localhost:8080",
     changeOrigin: true,
-  }))
+  }));
 }
 
 gameServer.listen(port);

@@ -1,7 +1,19 @@
 # Yard Server
 
-Start with
+Develop with
 
 ```
-npm start
+npm run dev
+```
+
+Build with
+
+```
+npm run build
+```
+
+Run with
+
+```
+npm run
 ```
