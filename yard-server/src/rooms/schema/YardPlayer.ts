@@ -24,6 +24,10 @@ export class YardPlayer extends Schema {
     this.x = clamp(this.x + clamp(x, -maxSpeed, maxSpeed), 0, canvasWidth);
     this.y = clamp(this.y + clamp(y, -maxSpeed, maxSpeed), 0, canvasHeight);
   }
+
+  setName(name: string) {
+    this.name = name;
+  }
 }
 
 function clamp(val: number, low: number, high: number): number {

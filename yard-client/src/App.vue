@@ -1,10 +1,17 @@
 <template>
-  <div id="app">
-    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
-      <rect x="-5" y="-5" width="810" height="610" fill="white" />
-      <Player v-for="(p, k) in players" :key="k" :player="p" />
-    </svg>
-  </div>
+  <v-app id="app">
+    <v-app-bar app dense>
+      <v-toolbar-title>GTA Yard</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-text-field label="Name" single-line class="flex-grow-0" v-model="name" @input="changeName"></v-text-field>
+    </v-app-bar>
+    <v-main>
+      <svg viewBox="-5 -5 810 610" preserveAspectRatio="xMidYMid meet">
+        <rect x="-5" y="-5" width="810" height="610" fill="white" />
+        <Player v-for="(p, k) in players" :key="k" :player="p" />
+      </svg>
+    </v-main>
+  </v-app>
 </template>
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
@@ -28,6 +35,8 @@
 
     players: Record<string, YardPlayer> = {};
 
+    name = "";
+
     async mounted() {
       await this.connect();
       this.watchPlayers();
@@ -47,11 +56,28 @@
       if (this.room) {
         this.room.state.players.onAdd = (player, key) => {
           this.$set(this.players, key, player);
+          if (key === this.room?.sessionId) {
+            this.watchSelf(player);
+          }
         };
         this.room.state.players.onRemove = (player, key) => {
           this.$delete(this.players, key);
         };
       }
+    }
+
+    watchSelf(me: YardPlayer) {
+      this.name = me.name;
+      me.onChange = (changes) => {
+        const nameChange = changes.find(c => c.field === "name");
+        if (nameChange) {
+          this.name = nameChange.value;
+        }
+      };
+    }
+
+    changeName(e: InputEvent) {
+      this.room?.send("setName", this.name);
     }
 
     listenForInput() {
@@ -115,15 +141,14 @@
 </script>
 
 <style lang="scss" scoped>
-  #app {
+  #app .v-main {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-
-    background: black;
   }
+
   svg {
     width: 100%;
     height: 100%;

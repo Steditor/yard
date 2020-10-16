@@ -20,4 +20,10 @@ export class YardState extends Schema {
         typeof movement.y === "number" ? movement.y : 0
     );
   }
+
+  setName(id: string, name: any) {
+    if (typeof name === "string") {
+      (this.players[id] as YardPlayer | null)?.setName(name);
+    }
+  }
 }

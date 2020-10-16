@@ -1,7 +1,7 @@
 <template>
   <g class="player" :style="style">
     <rect x="-5" y="-5" width="10" height="10"></rect>
-    <text text-anchor="middle" dominant-baseline="central">{{player.name}}</text>
+    <text text-anchor="middle" dominant-baseline="central">{{name}}</text>
   </g>
 </template>
 <script lang="ts">
@@ -15,9 +15,12 @@
     @Prop()
     player!: YardPlayer;
 
+    name = "";
+
     private tween?: gsap.core.Tween;
 
     mounted() {
+      this.name = this.player.name;
       gsap.set(this.$el, { translateX: this.player.x, translateY: this.player.y });
       this.watchPlayer();
     }
@@ -28,6 +31,10 @@
         if (changesPosition) {
           this.tween?.kill();
           this.tween = gsap.to(this.$el, { translateX: this.player.x, translateY: this.player.y, duration: 0.3 });
+        }
+        const nameChange = changes.find(c => c.field === "name");
+        if (nameChange) {
+          this.name = this.player.name;
         }
       };
     }
@@ -48,7 +55,7 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 200ms ease-in-out;
-    filter: drop-shadow(1px 1px 1px white);
+    filter: drop-shadow(0 0 3px white);
   }
   rect:hover + text {
     opacity: 1;

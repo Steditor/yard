@@ -7,5 +7,8 @@ module.exports = {
   outputDir: settings["VUE_DIST_DIR"],
   devServer: {
     port: settings["VUE_DEV_SERVER_PORT"],
-  }
-}
+  },
+  transpileDependencies: [
+    "vuetify",
+  ],
+};

@@ -9,6 +9,9 @@ export class Yard extends Room<YardState> {
     this.onMessage("move", (client, data) => {
       this.state.movePlayer(client.sessionId, data);
     });
+    this.onMessage("setName", (client, data) => {
+      this.state.setName(client.sessionId, data);
+    })
 
   }
 
