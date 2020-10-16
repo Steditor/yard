@@ -1,0 +1,31 @@
+{
+  "name": "yard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simulate running around on a yard with many people.",
+  "scripts": {
+    "postinstall": "multiview [ npm run install-client ] [ npm run install-server ] -x 4000",
+    "install-client": "cd yard-client && npm install && cd ..",
+    "install-server": "cd yard-server && npm install && cd ..",
+    "dev": "multiview [ npm run dev-client ] [ npm run dev-server ] -x 1000",
+    "dev-client": "cd yard-client && npm run serve && cd ..",
+    "dev-server": "cd yard-server && npm run start && cd ..",
+    "build": "multiview [ npm run build-client ] -x 1000",
+    "build-client": "cd yard-client && npm run build && cd ..",
+    "serve": "cross-env NODE_ENV=production cd yard-server && npm start && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@nas.stefan-neubert.net:5503/Stefan.Neubert/yard.git"
+  },
+  "keywords": [
+    "io-game",
+    "yard"
+  ],
+  "author": "Stefan Neubert <dev@steditor.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "multiview": "^3.0.1"
+  }
+}

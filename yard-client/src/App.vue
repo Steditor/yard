@@ -36,7 +36,8 @@
 
     async connect() {
       const host = window.document.location.host.replace(/:.*/, "");
-      const endpoint = location.protocol.replace(/https?/, "ws") + "//" + host + ":2567";
+      const port = location.port ? ":" + location.port : "";
+      const endpoint = location.protocol.replace(/https?/, "ws") + "//" + host + port;
       this.client = new Colyseus.Client(endpoint);
       this.room = await this.client.joinOrCreate("yard");
     }
@@ -105,7 +106,6 @@
         if (keys === 0) {
           speed = 1;
         } else {
-          console.log(keys);
           speed = Math.min(5, speed * 1.07);
         }
       });
