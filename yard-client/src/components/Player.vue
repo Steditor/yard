@@ -1,5 +1,5 @@
 <template>
-  <g class="player" :style="style">
+  <g class="player" :style="dynamicStyle" :class="dynamicClass">
     <rect x="-5" y="-5" width="10" height="10"></rect>
     <text text-anchor="middle" dominant-baseline="central">{{name}}</text>
   </g>
@@ -14,6 +14,11 @@
   export default class App extends Vue {
     @Prop()
     player!: YardPlayer;
+
+    @Prop({
+      type: Boolean,
+    })
+    showName!: boolean;
 
     name = "";
 
@@ -39,10 +44,14 @@
       };
     }
 
-    get style() {
+    get dynamicStyle() {
       return {
         "--player-color": this.player.color,
       };
+    }
+
+    get dynamicClass() {
+      return this.showName ? "show-name" : "";
     }
   }
 </script>
@@ -57,7 +66,7 @@
     transition: opacity 200ms ease-in-out;
     filter: drop-shadow(0 0 3px white);
   }
-  rect:hover + text {
+  rect:hover + text, .show-name text {
     opacity: 1;
   }
 </style>

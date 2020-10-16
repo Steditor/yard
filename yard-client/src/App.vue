@@ -3,12 +3,13 @@
     <v-app-bar app dense>
       <v-toolbar-title>GTA Yard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-text-field label="Name" single-line class="flex-grow-0" v-model="name" @input="changeName"></v-text-field>
+      <v-text-field hide-details label="Name" single-line class="flex-grow-0 mr-5" v-model="name" @input="changeName" @keydown.stop="" />
+      <v-switch flat hide-details v-model="showNames" label="Namen anzeigen"></v-switch>
     </v-app-bar>
     <v-main>
       <svg viewBox="-5 -5 810 610" preserveAspectRatio="xMidYMid meet">
         <rect x="-5" y="-5" width="810" height="610" fill="white" />
-        <Player v-for="(p, k) in players" :key="k" :player="p" />
+        <Player v-for="(p, k) in players" :key="k" :player="p" :showName="showNames" />
       </svg>
     </v-main>
   </v-app>
@@ -36,6 +37,7 @@
     players: Record<string, YardPlayer> = {};
 
     name = "";
+    showNames = false;
 
     async mounted() {
       await this.connect();
@@ -76,7 +78,7 @@
       };
     }
 
-    changeName(e: InputEvent) {
+    changeName() {
       this.room?.send("setName", this.name);
     }
 
@@ -136,6 +138,10 @@
           speed = Math.min(5, speed * 1.07);
         }
       });
+    }
+
+    stopPropagation(event: Event) {
+      event.stopPropagation();
     }
   }
 </script>
