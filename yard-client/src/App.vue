@@ -79,7 +79,7 @@
     }
 
     changeName() {
-      this.room?.send("setName", this.name);
+      this.room?.send("setName", this.name.substr(0, 20));
     }
 
     listenForInput() {

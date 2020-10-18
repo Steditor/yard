@@ -23,7 +23,7 @@ export class YardState extends Schema {
 
   setName(id: string, name: any) {
     if (typeof name === "string") {
-      (this.players[id] as YardPlayer | null)?.setName(name);
+      (this.players[id] as YardPlayer | null)?.setName(name.substr(0, 20));
     }
   }
 }
