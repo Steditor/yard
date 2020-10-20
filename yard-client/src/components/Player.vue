@@ -21,11 +21,13 @@
     showName!: boolean;
 
     name = "";
+    color = "#000000";
 
     private tween?: gsap.core.Tween;
 
     mounted() {
       this.name = this.player.name;
+      this.color = this.player.color;
       gsap.set(this.$el, { translateX: this.player.x, translateY: this.player.y });
       this.watchPlayer();
     }
@@ -41,12 +43,16 @@
         if (nameChange) {
           this.name = this.player.name;
         }
+        const colorChange = changes.find(c => c.field === "color");
+        if (colorChange) {
+          this.color = colorChange.value;
+        }
       };
     }
 
     get dynamicStyle() {
       return {
-        "--player-color": this.player.color,
+        "--player-color": this.color,
       };
     }
 

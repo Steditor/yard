@@ -26,4 +26,10 @@ export class YardState extends Schema {
       (this.players[id] as YardPlayer | null)?.setName(name.substr(0, 20));
     }
   }
+
+  setColor(id: string, val: any) {
+    if (typeof val === "string" && /^#[A-Fa-f0-9]{6}$/.test(val)) {
+      (this.players[id] as YardPlayer | null)?.setColor(val);
+    }
+  }
 }

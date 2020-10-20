@@ -3,6 +3,12 @@
     <v-app-bar app dense>
       <v-toolbar-title>GTA Yard</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-dialog v-model="showColorDialog">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on" :color="color" class="mr-5">Farbe wählen</v-btn>
+        </template>
+        <v-card><v-color-picker hide-inputs :value="color" @input="setColor"></v-color-picker></v-card>
+      </v-dialog>
       <v-text-field hide-details label="Name" single-line class="flex-grow-0 mr-5" v-model="name" @input="changeName" @keydown.stop="" />
       <v-switch flat hide-details v-model="showNames" label="Namen anzeigen"></v-switch>
     </v-app-bar>
@@ -38,6 +44,8 @@
 
     name = "";
     showNames = false;
+    color = "";
+    showColorDialog = false;
 
     async mounted() {
       await this.connect();
@@ -59,7 +67,8 @@
         this.room.state.players.onAdd = (player, key) => {
           this.$set(this.players, key, player);
           if (key === this.room?.sessionId) {
-            this.watchSelf(player);
+            this.name = player.name;
+            this.color = player.color;
           }
         };
         this.room.state.players.onRemove = (player, key) => {
@@ -68,18 +77,13 @@
       }
     }
 
-    watchSelf(me: YardPlayer) {
-      this.name = me.name;
-      me.onChange = (changes) => {
-        const nameChange = changes.find(c => c.field === "name");
-        if (nameChange) {
-          this.name = nameChange.value;
-        }
-      };
-    }
-
     changeName() {
       this.room?.send("setName", this.name.substr(0, 20));
+    }
+
+    setColor(val: string) {
+      this.room?.send("setColor", val);
+      this.color = val;
     }
 
     listenForInput() {

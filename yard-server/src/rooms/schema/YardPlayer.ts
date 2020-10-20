@@ -28,6 +28,10 @@ export class YardPlayer extends Schema {
   setName(name: string) {
     this.name = name;
   }
+
+  setColor(color: string) {
+    this.color = color;
+  }
 }
 
 function clamp(val: number, low: number, high: number): number {

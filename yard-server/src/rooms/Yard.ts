@@ -11,8 +11,10 @@ export class Yard extends Room<YardState> {
     });
     this.onMessage("setName", (client, data) => {
       this.state.setName(client.sessionId, data);
-    })
-
+    });
+    this.onMessage("setColor", (client, data) => {
+      this.state.setColor(client.sessionId, data);
+    });
   }
 
   onJoin (client: Client, options: any) {
