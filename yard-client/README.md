@@ -1,21 +1,27 @@
 # Yard Client
 
-## Project setup
-```
-npm install
-```
+This is the client component for Yard.
 
-### Compiles and hot-reloads for development
+## Local Commands
+
+Usually you should use the commands provided on the [project's top level](../README.md).
+If you feel like running local commands - here they are:
+
+
+Develop with
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+Build with
+
 ```
 npm run build
 ```
 
-### Lints and fixes files
+Lint and fix files
+
 ```
 npm run lint
 ```

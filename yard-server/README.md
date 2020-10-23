@@ -1,5 +1,12 @@
 # Yard Server
 
+This is the server component for Yard.
+
+## Local commands
+
+Usually you should use the commands provided on the [project's top level](../README.md).
+If you feel like running local commands - here they are:
+
 Develop with
 
 ```
@@ -12,8 +19,8 @@ Build with
 npm run build
 ```
 
-Run with
+Run the built server with
 
 ```
-npm run
+npm start
 ```
