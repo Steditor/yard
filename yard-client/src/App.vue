@@ -15,6 +15,7 @@
     <v-main>
       <svg viewBox="-5 -5 810 610" preserveAspectRatio="xMidYMid meet">
         <rect x="-5" y="-5" width="810" height="610" fill="white" />
+        <path ref="rope" d="" stroke-width="2" stroke="black" fill="none" />
         <Player v-for="(p, k) in store.players" :key="k" :player="p" :showName="showNames" />
       </svg>
     </v-main>
@@ -22,13 +23,15 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Ref, Vue, Watch } from "vue-property-decorator";
   import * as Colyseus from "colyseus.js";
   import kd from "keydrown";
 
   import { YardState } from "@/schema/YardState";
   import Player from "@/components/Player.vue";
   import YardStore from "@/store/YardStore";
+  import gsap from "gsap";
+  import { deepEqual } from "vuetify/src/util/helpers";
 
   enum Dir {
     UP = 1, RIGHT = 2, DOWN = 4, LEFT = 8
@@ -38,6 +41,9 @@
     components: { Player },
   })
   export default class App extends Vue {
+    @Ref()
+    rope: SVGPathElement;
+
     private client?: Colyseus.Client;
     private room?: Colyseus.Room<YardState>;
 
@@ -46,7 +52,7 @@
     showNames = false;
     showColorDialog = false;
 
-    async mounted() {
+    async mounted(): void {
       await this.connect();
       if (this.room) {
         this.store.watch(this.room);
@@ -54,7 +60,7 @@
       }
     }
 
-    async connect() {
+    async connect(): void {
       const host = window.document.location.host.replace(/:.*/, "");
       const port = location.port ? ":" + location.port : "";
       const protocol = location.protocol.replace(/http(s?)/, "ws$1");
@@ -63,23 +69,36 @@
       this.room = await this.client.joinOrCreate("yard");
     }
 
-    get myColor() {
+    get myColor(): string {
       return this.store.players[this.store.me]?.color ?? "#000000";
     }
 
-    set myColor(val: string) {
+    set myColor(val: string): void {
       this.room?.send("setColor", val);
     }
 
-    get myName() {
+    get myName(): string {
       return this.store.players[this.store.me]?.name ?? "Unbenannt";
     }
 
-    set myName(name: string) {
+    set myName(name: string): void {
       this.room?.send("setName", name.substr(0, 20));
     }
 
-    listenForInput() {
+    @Watch("store.orderedPlayers")
+    @Watch("store.players", { deep: true })
+    onRopeChange(): void {
+      console.log("updated");
+      let d = "";
+      const last = this.store.orderedPlayers[this.store.orderedPlayers.length - 1];
+      d += "M" + this.store.players[last].position.x + "," + this.store.players[last].position.y + "L";
+      for (const player of this.store.orderedPlayers) {
+        d += " " + this.store.players[player].position.x + "," + this.store.players[player].position.y;
+      }
+      gsap.to(this.rope, { attr: { d }, duration: 0.3 });
+    }
+
+    listenForInput(): void {
       let speed = 1;
       let keys = 0;
       kd.Key.prototype.down((event) => {
