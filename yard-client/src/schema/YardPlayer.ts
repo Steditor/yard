@@ -1,11 +1,12 @@
-//
+// 
 // THIS FILE HAS BEEN GENERATED AUTOMATICALLY
 // DO NOT CHANGE IT MANUALLY UNLESS YOU KNOW WHAT YOU'RE DOING
-//
-// GENERATED USING @colyseus/schema 0.5.41
-//
+// 
+// GENERATED USING @colyseus/schema 1.0.1
+// 
 
-import { Schema, type } from "@colyseus/schema";
+import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/schema";
+
 
 export class YardPlayer extends Schema {
     @type("string") public name!: string;
