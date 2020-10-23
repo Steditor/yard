@@ -1,58 +1,39 @@
 <template>
   <g class="player" :style="dynamicStyle" :class="dynamicClass">
     <rect x="-5" y="-5" width="10" height="10"></rect>
-    <text text-anchor="middle" dominant-baseline="central">{{name}}</text>
+    <text text-anchor="middle" dominant-baseline="central">{{player.name}}</text>
   </g>
 </template>
 <script lang="ts">
-  import { Component, Vue, Prop } from "vue-property-decorator";
+  import { Component, Vue, Prop, Watch } from "vue-property-decorator";
   import gsap from "gsap";
 
-  import { YardPlayer } from "@/schema/YardPlayer";
+  import PlayerStore from "@/store/PlayerStore";
 
   @Component({})
   export default class App extends Vue {
     @Prop()
-    player!: YardPlayer;
+    player!: PlayerStore;
 
     @Prop({
       type: Boolean,
     })
     showName!: boolean;
 
-    name = "";
-    color = "#000000";
-
     private tween?: gsap.core.Tween;
 
     mounted() {
-      this.name = this.player.name;
-      this.color = this.player.color;
-      gsap.set(this.$el, { translateX: this.player.x, translateY: this.player.y });
-      this.watchPlayer();
+      gsap.set(this.$el, { translateX: this.player.position.x, translateY: this.player.position.y });
     }
 
-    watchPlayer() {
-      this.player.onChange = (changes) => {
-        const changesPosition = changes.find((change) => [ "x", "y" ].includes(change.field));
-        if (changesPosition) {
-          this.tween?.kill();
-          this.tween = gsap.to(this.$el, { translateX: this.player.x, translateY: this.player.y, duration: 0.3 });
-        }
-        const nameChange = changes.find(c => c.field === "name");
-        if (nameChange) {
-          this.name = this.player.name;
-        }
-        const colorChange = changes.find(c => c.field === "color");
-        if (colorChange) {
-          this.color = colorChange.value;
-        }
-      };
+    @Watch("player.position", { deep: true })
+    onPositionChange(position: { x: number; y: number }) {
+      gsap.to(this.$el, { translateX: position.x, translateY: position.y, duration: 0.3 });
     }
 
     get dynamicStyle() {
       return {
-        "--player-color": this.color,
+        "--player-color": this.player.color,
       };
     }
 

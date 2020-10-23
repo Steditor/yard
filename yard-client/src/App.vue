@@ -5,29 +5,30 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="showColorDialog">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" :color="color" class="mr-5">Farbe wählen</v-btn>
+          <v-btn v-bind="attrs" v-on="on" :color="myColor" class="mr-5">Farbe wählen</v-btn>
         </template>
-        <v-card><v-color-picker hide-inputs :value="color" @input="setColor"></v-color-picker></v-card>
+        <v-card><v-color-picker hide-inputs v-model="myColor"></v-color-picker></v-card>
       </v-dialog>
-      <v-text-field hide-details label="Name" single-line class="flex-grow-0 mr-5" v-model="name" @input="changeName" @keydown.stop="" />
+      <v-text-field hide-details label="Name" single-line class="flex-grow-0 mr-5" v-model="myName" @keydown.stop="" />
       <v-switch flat hide-details v-model="showNames" label="Namen anzeigen"></v-switch>
     </v-app-bar>
     <v-main>
       <svg viewBox="-5 -5 810 610" preserveAspectRatio="xMidYMid meet">
         <rect x="-5" y="-5" width="810" height="610" fill="white" />
-        <Player v-for="(p, k) in players" :key="k" :player="p" :showName="showNames" />
+        <Player v-for="(p, k) in store.players" :key="k" :player="p" :showName="showNames" />
       </svg>
     </v-main>
   </v-app>
 </template>
+
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
   import * as Colyseus from "colyseus.js";
   import kd from "keydrown";
 
   import { YardState } from "@/schema/YardState";
-  import { YardPlayer } from "@/schema/YardPlayer";
   import Player from "@/components/Player.vue";
+  import YardStore from "@/store/YardStore";
 
   enum Dir {
     UP = 1, RIGHT = 2, DOWN = 4, LEFT = 8
@@ -40,17 +41,17 @@
     private client?: Colyseus.Client;
     private room?: Colyseus.Room<YardState>;
 
-    players: Record<string, YardPlayer> = {};
+    private store = new YardStore();
 
-    name = "";
     showNames = false;
-    color = "";
     showColorDialog = false;
 
     async mounted() {
       await this.connect();
-      this.watchPlayers();
-      this.listenForInput();
+      if (this.room) {
+        this.store.watch(this.room);
+        this.listenForInput();
+      }
     }
 
     async connect() {
@@ -62,28 +63,20 @@
       this.room = await this.client.joinOrCreate("yard");
     }
 
-    watchPlayers() {
-      if (this.room) {
-        this.room.state.players.onAdd = (player, key) => {
-          this.$set(this.players, key, player);
-          if (key === this.room?.sessionId) {
-            this.name = player.name;
-            this.color = player.color;
-          }
-        };
-        this.room.state.players.onRemove = (player, key) => {
-          this.$delete(this.players, key);
-        };
-      }
+    get myColor() {
+      return this.store.players[this.store.me]?.color ?? "#000000";
     }
 
-    changeName() {
-      this.room?.send("setName", this.name.substr(0, 20));
-    }
-
-    setColor(val: string) {
+    set myColor(val: string) {
       this.room?.send("setColor", val);
-      this.color = val;
+    }
+
+    get myName() {
+      return this.store.players[this.store.me]?.name ?? "Unbenannt";
+    }
+
+    set myName(name: string) {
+      this.room?.send("setName", name.substr(0, 20));
     }
 
     listenForInput() {
@@ -142,10 +135,6 @@
           speed = Math.min(5, speed * 1.07);
         }
       });
-    }
-
-    stopPropagation(event: Event) {
-      event.stopPropagation();
     }
   }
 </script>
