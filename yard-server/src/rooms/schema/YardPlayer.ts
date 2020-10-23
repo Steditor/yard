@@ -1,39 +1,15 @@
 import { Schema, type } from "@colyseus/schema";
 
-import randomColor from "randomcolor";
-
-const canvasWidth = 800;
-const canvasHeight = 600;
-const maxSpeed = 5;
-
 export class YardPlayer extends Schema {
+  @type("string")
+  name = "";
 
   @type("string")
-  name = "Unbenannt";
-
-  @type("string")
-  color: string = randomColor({ luminosity: "dark" });
+  color = "#000000";
 
   @type("number")
-  x = Math.floor(Math.random() * canvasWidth);
+  x = 0;
 
   @type("number")
-  y = Math.floor(Math.random() * canvasHeight);
-
-  move(x: number, y: number): void {
-    this.x = clamp(this.x + clamp(x, -maxSpeed, maxSpeed), 0, canvasWidth);
-    this.y = clamp(this.y + clamp(y, -maxSpeed, maxSpeed), 0, canvasHeight);
-  }
-
-  setName(name: string): void {
-    this.name = name;
-  }
-
-  setColor(color: string): void {
-    this.color = color;
-  }
-}
-
-function clamp(val: number, low: number, high: number): number {
-  return Math.min(Math.max(val, low), high);
+  y = 0;
 }
