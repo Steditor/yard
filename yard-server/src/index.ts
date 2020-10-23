@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import serveStatic from "serve-static";
+import expressBasicAuth from "express-basic-auth";
 
 import { Server } from "colyseus";
 import { monitor } from "@colyseus/monitor";
@@ -23,11 +24,16 @@ const gameServer = new Server({
   server,
 });
 
-// register your room handlers
+// register room handlers
 gameServer.define("yard", Yard);
 
-// register colyseus monitor AFTER registering your room handlers
-app.use("/colyseus", monitor());
+// register colyseus monitor
+const monitorPassword = process.env.MONITOR_PASSWORD ?? localConfig.MONITOR_PASSWORD;
+app.use("/colyseus", expressBasicAuth({
+  users: { admin: monitorPassword },
+  challenge: true,
+  realm: "Colyseus monitor for Yard",
+}), monitor());
 
 if (process.env.NODE_ENV === "production") {
   app.use("/", serveStatic(process.env.VUE_DIST_DIR ?? localConfig.VUE_DIST_DIR));
