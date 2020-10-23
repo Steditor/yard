@@ -41,7 +41,7 @@
   })
   export default class App extends Vue {
     @Ref()
-    rope: SVGPathElement;
+    rope!: SVGPathElement;
 
     private client?: Colyseus.Client;
     private room?: Colyseus.Room<YardState>;
