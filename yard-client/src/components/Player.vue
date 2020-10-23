@@ -22,22 +22,22 @@
 
     private tween?: gsap.core.Tween;
 
-    mounted() {
+    mounted(): void {
       gsap.set(this.$el, { translateX: this.player.position.x, translateY: this.player.position.y });
     }
 
     @Watch("player.position", { deep: true })
-    onPositionChange(position: { x: number; y: number }) {
+    onPositionChange(position: { x: number; y: number }): void {
       gsap.to(this.$el, { translateX: position.x, translateY: position.y, duration: 0.3 });
     }
 
-    get dynamicStyle() {
+    get dynamicStyle(): Record<string, string> {
       return {
         "--player-color": this.player.color,
       };
     }
 
-    get dynamicClass() {
+    get dynamicClass(): string {
       return this.showName ? "show-name" : "";
     }
   }

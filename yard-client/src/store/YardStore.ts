@@ -13,14 +13,14 @@ export default class YardStore {
 
   orderedPlayers: string[] = [];
 
-  watch(room: Room<YardState>) {
+  watch(room: Room<YardState>): void {
     this.me = room.sessionId;
     const state = room.state;
     state.players.onAdd = (player, key) => this.addPlayer(player, key);
     state.players.onRemove = (player, key) => this.removePlayer(player, key);
 
     state.orderedPlayers.onAdd = (player, index) => this.addOrderedPlayer(player, index);
-    state.orderedPlayers.onRemove = (player, index) => this.removeOrderedPlayer(player, index);
+    state.orderedPlayers.onRemove = (player) => this.removeOrderedPlayer(player);
     state.orderedPlayers.onChange = (player, index) => this.changeOrderedPlayer(player, index);
   }
 
@@ -37,7 +37,7 @@ export default class YardStore {
     this.orderedPlayers.splice(index, 0, player);
   }
 
-  private removeOrderedPlayer(player: string, i: number) {
+  private removeOrderedPlayer(player: string) {
     // careful: provided index i seems to be wrong in quite a lot of cases!
     const index = this.orderedPlayers.indexOf(player);
     if (index !== -1) {

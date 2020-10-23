@@ -31,7 +31,6 @@
   import Player from "@/components/Player.vue";
   import YardStore from "@/store/YardStore";
   import gsap from "gsap";
-  import { deepEqual } from "vuetify/src/util/helpers";
 
   enum Dir {
     UP = 1, RIGHT = 2, DOWN = 4, LEFT = 8
@@ -52,7 +51,7 @@
     showNames = false;
     showColorDialog = false;
 
-    async mounted(): void {
+    async mounted(): Promise<void> {
       await this.connect();
       if (this.room) {
         this.store.watch(this.room);
@@ -60,7 +59,7 @@
       }
     }
 
-    async connect(): void {
+    async connect(): Promise<void> {
       const host = window.document.location.host.replace(/:.*/, "");
       const port = location.port ? ":" + location.port : "";
       const protocol = location.protocol.replace(/http(s?)/, "ws$1");
@@ -73,7 +72,7 @@
       return this.store.players[this.store.me]?.color ?? "#000000";
     }
 
-    set myColor(val: string): void {
+    set myColor(val: string) {
       this.room?.send("setColor", val);
     }
 
@@ -81,7 +80,7 @@
       return this.store.players[this.store.me]?.name ?? "Unbenannt";
     }
 
-    set myName(name: string): void {
+    set myName(name: string) {
       this.room?.send("setName", name.substr(0, 20));
     }
 
