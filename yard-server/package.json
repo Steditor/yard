@@ -1,9 +1,8 @@
 {
-  "private": true,
   "name": "yard-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "server for virtual yard",
-  "main": "lib/index.js",
+  "private": true,
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "lint": "npx eslint ./src --ext .js,.jsx,.ts,.tsx --fix",

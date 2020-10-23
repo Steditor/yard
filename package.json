@@ -1,6 +1,6 @@
 {
   "name": "yard",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Simulate running around on a yard with many people.",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@nas.stefan-neubert.net:5503/Stefan.Neubert/yard.git"
+    "url": "git@github.com:Steditor/yard.git"
   },
   "keywords": [
     "io-game",

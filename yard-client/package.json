@@ -1,12 +1,15 @@
 {
   "name": "yard-client",
   "version": "0.1.0",
+  "description": "client for virtual yard",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --skip-plugins @vue/cli-plugin-eslint",
     "lint": "vue-cli-service lint"
   },
+  "author": "Stefan Neubert <dev@steditor.net>",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
     "colyseus.js": "^0.14.0",

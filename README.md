@@ -27,3 +27,4 @@ Remember to put in the `EXPRESS_PORT` you specified during setup.
 ## Server monitoring
 
 The server exposes the [Colyseus Monitoring Panel](https://docs.colyseus.io/tools/monitor/) under `URL:PORT/colyseus`.
+Use `admin` and your local `MONITOR_PASSWORD` to login.
