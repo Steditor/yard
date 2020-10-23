@@ -13,10 +13,10 @@ import { Yard } from "./rooms/Yard";
 import localConfig from "../../local.config.json";
 
 const port = Number(process.env.EXPRESS_PORT ?? localConfig.EXPRESS_PORT);
-const app = express()
+const app = express();
 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
 const server = http.createServer(app);
 const gameServer = new Server({
@@ -24,7 +24,7 @@ const gameServer = new Server({
 });
 
 // register your room handlers
-gameServer.define('yard', Yard);
+gameServer.define("yard", Yard);
 
 // register colyseus monitor AFTER registering your room handlers
 app.use("/colyseus", monitor());
@@ -39,4 +39,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 gameServer.listen(port);
-console.log(`Listening on ws://localhost:${ port }`)
+console.log(`Listening on ws://localhost:${ port }`);

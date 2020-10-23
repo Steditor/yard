@@ -9,7 +9,7 @@ const maxSpeed = 5;
 export class YardPlayer extends Schema {
 
   @type("string")
-  name: string = "Unbenannt";
+  name = "Unbenannt";
 
   @type("string")
   color: string = randomColor({ luminosity: "dark" });
@@ -20,16 +20,16 @@ export class YardPlayer extends Schema {
   @type("number")
   y = Math.floor(Math.random() * canvasHeight);
 
-  move(x: number, y: number) {
+  move(x: number, y: number): void {
     this.x = clamp(this.x + clamp(x, -maxSpeed, maxSpeed), 0, canvasWidth);
     this.y = clamp(this.y + clamp(y, -maxSpeed, maxSpeed), 0, canvasHeight);
   }
 
-  setName(name: string) {
+  setName(name: string): void {
     this.name = name;
   }
 
-  setColor(color: string) {
+  setColor(color: string): void {
     this.color = color;
   }
 }

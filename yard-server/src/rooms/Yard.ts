@@ -3,7 +3,7 @@ import { YardState } from "./schema/YardState";
 
 export class Yard extends Room<YardState> {
 
-  onCreate (options: any) {
+  onCreate(): void {
     this.setState(new YardState());
 
     this.onMessage("move", (client, data) => {
@@ -17,11 +17,11 @@ export class Yard extends Room<YardState> {
     });
   }
 
-  onJoin (client: Client, options: any) {
+  onJoin(client: Client): void {
     this.state.createPlayer(client.sessionId);
   }
 
-  async onLeave (client: Client, consented: boolean) {
+  async onLeave(client: Client, consented: boolean): Promise<void> {
     try {
       if (consented) {
         throw new Error("left_manually");
@@ -30,8 +30,5 @@ export class Yard extends Room<YardState> {
     } catch (e) {
       this.state.removePlayer(client.sessionId);
     }
-  }
-
-  onDispose() {
   }
 }

@@ -13,6 +13,12 @@ Develop with
 npm run dev
 ```
 
+Lint with
+
+```
+npm run lint
+```
+
 Build with
 
 ```
