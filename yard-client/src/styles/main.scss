@@ -1,3 +1,15 @@
 html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   overflow: hidden;
+
+  background-color: var(--surface-a);
+
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+#app {
+  height: 100%;
 }

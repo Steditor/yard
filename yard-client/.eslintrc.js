@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   extends: [
-    "plugin:vue/essential",
+    "plugin:vue/vue3-essential",
     "@vue/standard",
     "@vue/typescript/recommended",
   ],
@@ -35,6 +35,12 @@ module.exports = {
       files: [ "*.vue" ],
       rules: {
         indent: "off",
+      },
+    },
+    {
+      files: [ "*.js" ],
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
       },
     },
   ],

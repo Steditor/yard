@@ -1,6 +1,6 @@
 {
   "name": "yard",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "description": "Simulate running around on a yard with many people.",
   "scripts": {
@@ -13,6 +13,8 @@
     "build": "multiview [ npm run build-client ] [ npm run build-server ] -x 1000",
     "build-client": "cd yard-client && npm run build",
     "build-server": "cd yard-server && npm run build",
+    "build-favicon": "cd logo && real-favicon generate faviconDescription.json faviconData.json favicon",
+    "check-favicon": "cd logo && real-favicon check-for-update --fail-on-update faviconData.json",
     "start": "cross-env-shell NODE_ENV=production \"cd yard-server && npm start\""
   },
   "repository": {
@@ -26,7 +28,8 @@
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
   "devDependencies": {
-    "cross-env": "^7.0.2",
+    "cli-real-favicon": "0.0.8",
+    "cross-env": "^7.0.3",
     "multiview": "^3.0.1"
   }
 }

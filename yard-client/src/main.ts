@@ -1,12 +1,19 @@
-import Vue from "vue";
+import { createApp } from "vue";
+
+import PrimeVue from "primevue/config";
+import Button from "primevue/components/button/Button";
+
+import "./styles/styles";
+
 import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
-import "./styles/main.scss";
-import vuetify from "./plugins/vuetify";
+const app = createApp(App)
+  .use(store)
+  .use(router);
 
-Vue.config.productionTip = false;
+app.use(PrimeVue);
+app.component("Button", Button);
 
-new Vue({
-  vuetify,
-  render: h => h(App),
-}).$mount("#app");
+app.mount("#app");
