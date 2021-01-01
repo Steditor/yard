@@ -20,9 +20,11 @@
 </script>
 
 <style lang="scss" scoped>
+  @use "src/styles/vars" as vars;
+
   .content {
     position: absolute;
-    left: 50px;
+    left: vars.$menuWidth;
     top: 0;
     right: 0;
     bottom: 0;

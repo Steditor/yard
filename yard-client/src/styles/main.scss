@@ -4,7 +4,7 @@ html, body {
   height: 100%;
   overflow: hidden;
 
-  background-color: var(--surface-a);
+  background-color: var(--surface-b);
 
   font-family: var(--font-family);
   color: var(--text-color);
@@ -12,4 +12,24 @@ html, body {
 
 #app {
   height: 100%;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+.y-full-size {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.y-flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

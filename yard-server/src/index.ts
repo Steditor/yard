@@ -45,4 +45,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 gameServer.listen(port);
-console.log(`Listening on ws://localhost:${ port }`);
+console.log(`Listening on localhost:${ port }`);

@@ -1,26 +1,32 @@
 <template>
   <aside>
-    <router-link :to="{ name: 'Home' }" title="Home" class="logo-link"><YLogo icon animated /></router-link>
-    <Button icon="pi pi-home" class="p-button-text p-button-secondary" />
+    <RouterLink :to="{ name: 'Home' }" title="Home" class="logo-link"><YLogo icon animated /></RouterLink>
+    <YMenuItem :to="{ name: 'Home' }" title="Home" icon="pi pi-home" />
   </aside>
 </template>
 
 <script lang="ts">
+  import { defineComponent } from "vue";
+
   import YLogo from "@/components/YLogo.vue";
-  export default {
+  import YMenuItem from "@/components/menu/YMenuItem.vue";
+
+  export default defineComponent({
     name: "YMenu",
-    components: { YLogo },
-  };
+    components: { YMenuItem, YLogo },
+  });
 </script>
 
 <style lang="scss" scoped>
+  @use "src/styles/vars" as vars;
+
   aside {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 4rem;
-    background-color: var(--surface-b);
+    width: vars.$menuWidth;
+    background-color: var(--surface-c);
 
     display: flex;
     flex-direction: column;

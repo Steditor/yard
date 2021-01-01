@@ -31,5 +31,9 @@
     "cli-real-favicon": "0.0.8",
     "cross-env": "^7.0.3",
     "multiview": "^3.0.1"
+  },
+  "dependencies": {
+    "colyseus.js": "^0.14.1",
+    "keydrown": "^1.2.8"
   }
 }

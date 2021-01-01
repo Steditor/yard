@@ -21,7 +21,11 @@ module.exports = {
     "object-curly-spacing": [ "error", "always" ],
     "quote-props": [ "error", "consistent-as-needed" ],
     "semi": [ "error", "always" ],
-    "space-before-function-paren": [ "error", "never" ],
+    "space-before-function-paren": [ "error", {
+      anonymous: "never",
+      named: "never",
+      asyncArrow: "always",
+    } ],
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-expressions": [ "error", {
       allowShortCircuit: true,
