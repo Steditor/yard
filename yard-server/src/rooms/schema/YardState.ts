@@ -1,10 +1,11 @@
-import { Schema, type, MapSchema, ArraySchema } from "@colyseus/schema";
+import { Schema, type, MapSchema } from "@colyseus/schema";
 import { YardPlayer } from "./YardPlayer";
+import { YardSettings } from "./YardSettings";
 
 export class YardState extends Schema {
   @type({ map: YardPlayer })
   players = new MapSchema<YardPlayer>();
 
-  @type([ "string" ])
-  orderedPlayers = new ArraySchema<string>();
+  @type(YardSettings)
+  settings = new YardSettings();
 }

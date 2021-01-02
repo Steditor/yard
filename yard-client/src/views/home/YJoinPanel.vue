@@ -35,8 +35,11 @@
     },
     methods: {
       async joinYard(): Promise<void> {
-        if (await this.$yardConnection.joinYard(this.yardCode)) {
-          this.$yardConnection.setUsername(this.username);
+        const joined = await this.$yardConnection.joinYard(
+          this.yardCode,
+          { name: this.username },
+        );
+        if (joined) {
           await this.$router.push({ name: "Yard", params: { roomId: this.yardCode } });
         } else {
           // TODO: error handling

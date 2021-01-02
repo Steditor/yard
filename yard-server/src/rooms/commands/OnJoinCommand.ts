@@ -3,21 +3,26 @@ import { Client } from "colyseus";
 
 import { YardState } from "../schema/YardState";
 import { YardPlayer } from "../schema/YardPlayer";
-import { canvasHeight, canvasWidth } from "../YardConfig";
-import randomColor from "randomcolor";
+import { PlayerSetNameCommand } from "./PlayerSetNameCommand";
+
+export interface YardJoinOptions {
+  name?: string;
+}
 
 export class OnJoinCommand extends Command<YardState, {
-  client: Client
+  client: Client,
+  options?: YardJoinOptions,
 }> {
-  execute({ client }: this["payload"]): void {
+  execute({ client, options }: this["payload"]): Array<Command> {
     const player = new YardPlayer();
 
-    player.name = "Unbenannt"; // TODO: set via options
-    player.color = randomColor({ luminosity: "dark" });
-    player.x = Math.floor(Math.random() * canvasWidth);
-    player.y = Math.floor(Math.random() * canvasHeight);
+    player.name = "Unknown";
 
     this.state.players.set(client.sessionId, player);
-    this.state.orderedPlayers.push(client.sessionId);
+
+    const setName = new PlayerSetNameCommand();
+    setName.setPayload({ client, name: options?.name });
+
+    return [ setName ];
   }
 }

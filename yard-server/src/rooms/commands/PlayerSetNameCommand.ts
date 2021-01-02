@@ -2,19 +2,19 @@ import { Command } from "@colyseus/command";
 import { Client } from "colyseus";
 
 import { YardState } from "../schema/YardState";
-import { maxNameLength } from "../YardConfig";
 
 export class PlayerSetNameCommand extends Command<YardState, {
-  client: Client, data: unknown
+  client: Client, name: string
 }> {
-  execute({ client, data }: this["payload"]): void {
-    if (typeof data !== "string") {
-      return;
+  execute({ client, name }: this["payload"]): void {
+    this.state.players.get(client.sessionId).name =
+      name.trim().substr(0, this.state.settings.playerNameMaxLength);
+  }
+
+  validate({ client, name }: this["payload"] & { name: any }): boolean {
+    if (typeof name !== "string") {
+      return false;
     }
-    const player = this.state.players.get(client.sessionId);
-    if (!player) {
-      return;
-    }
-    player.name = data.substr(0, maxNameLength);
+    return this.state.players.has(client.sessionId);
   }
 }

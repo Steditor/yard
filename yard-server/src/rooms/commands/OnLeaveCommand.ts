@@ -16,11 +16,6 @@ export class OnLeaveCommand extends Command<YardState, {
     }
     if (consented || timeout) {
       this.state.players.delete(client.sessionId);
-      const index = this.state.orderedPlayers.indexOf(client.sessionId);
-
-      if (index !== -1) {
-        this.state.orderedPlayers.splice(index, 1);
-      }
     }
   }
 }

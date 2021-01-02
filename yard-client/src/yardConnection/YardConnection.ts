@@ -1,5 +1,7 @@
 import * as Colyseus from "colyseus.js";
 
+import { YardJoinOptions } from "../../../yard-server/src/rooms/commands/OnJoinCommand";
+
 export default class YardConnection {
   private _client: Colyseus.Client;
 
@@ -21,7 +23,7 @@ export default class YardConnection {
     return this._room.id;
   }
 
-  public async joinYard(id: string): Promise<boolean> {
+  public async joinYard(id: string, options?: YardJoinOptions): Promise<boolean> {
     if (this._room) {
       if (this._room.id === id) {
         return true;
@@ -30,7 +32,7 @@ export default class YardConnection {
       }
     }
     try {
-      this._room = await this._client.joinById(id);
+      this._room = await this._client.joinById(id, options);
     } catch (e) {
       return false;
     }
