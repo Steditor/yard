@@ -3,12 +3,19 @@ import * as Colyseus from "colyseus.js";
 import { YardState } from "%/schema/YardState";
 import { YardRoomJoinOptions } from "%/roomInterface";
 
+import YardStore from "@/yardAPI/store/YardStore";
+
 export default class YardAPI {
-  private _client: Colyseus.Client;
+  private readonly _client: Colyseus.Client;
 
   private _room?: Colyseus.Room<YardState>;
   get room(): Colyseus.Room | undefined {
     return this._room;
+  }
+
+  private _store?: YardStore;
+  get store(): YardStore | undefined {
+    return this._store;
   }
 
   constructor() {
@@ -18,6 +25,7 @@ export default class YardAPI {
   public async createYard(): Promise<string | undefined> {
     try {
       this._room = await this._client.create("yard");
+      this.watchRoom(this._room);
     } catch (e) {
       return undefined;
     }
@@ -35,10 +43,17 @@ export default class YardAPI {
     }
     try {
       this._room = await this._client.joinById(id, options);
+      this.watchRoom(this._room);
     } catch (e) {
       return false;
     }
     return true;
+  }
+
+  private watchRoom(room: Colyseus.Room<YardState>) {
+    room.onLeave((code) => this.onLeaveYard(code));
+    room.onError((code, message) => console.log(message));
+    this._store = new YardStore(this, room.state);
   }
 
   public send<T>(type: string | number, message?: T): boolean {
@@ -48,6 +63,14 @@ export default class YardAPI {
     } else {
       return false;
     }
+  }
+
+  private onLeaveYard(code: number) {
+    if (code !== 1000) {
+      // handle error
+    }
+    this._room = undefined;
+    this._store = undefined;
   }
 }
 
