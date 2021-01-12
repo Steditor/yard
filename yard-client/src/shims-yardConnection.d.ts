@@ -1,7 +1,7 @@
-import YardConnection from "./yardConnection/YardConnection";
+import YardAPI from "./yardAPI/YardAPI";
 
 declare module "@vue/runtime-core" {
   export interface ComponentCustomProperties {
-    $yardConnection: YardConnection;
+    $yardAPI: YardAPI;
   }
 }

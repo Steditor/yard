@@ -35,7 +35,7 @@
     },
     methods: {
       async joinYard(): Promise<void> {
-        const joined = await this.$yardConnection.joinYard(
+        const joined = await this.$yardAPI.joinYard(
           this.yardCode,
           { name: this.username },
         );

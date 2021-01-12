@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -17,6 +18,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "%/*": [
+        "../common/*"
       ]
     },
     "lib": [

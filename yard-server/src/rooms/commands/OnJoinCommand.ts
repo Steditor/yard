@@ -5,13 +5,14 @@ import { YardState } from "../schema/YardState";
 import { YardPlayer } from "../schema/YardPlayer";
 import { PlayerSetNameCommand } from "./PlayerSetNameCommand";
 
-export interface YardJoinOptions {
-  name?: string;
-}
+import { YardRoomJoinOptions } from "%/roomInterface";
+import Ajv from "ajv";
+
+const validate = new Ajv().compile<YardRoomJoinOptions>(YardRoomJoinOptions);
 
 export class OnJoinCommand extends Command<YardState, {
   client: Client,
-  options?: YardJoinOptions,
+  options?: YardRoomJoinOptions,
 }> {
   execute({ client, options }: this["payload"]): Array<Command> {
     const player = new YardPlayer();
@@ -21,8 +22,11 @@ export class OnJoinCommand extends Command<YardState, {
     this.state.players.set(client.sessionId, player);
 
     const setName = new PlayerSetNameCommand();
-    setName.setPayload({ client, name: options?.name });
+    setName.setPayload({ client, name: options?.name as any });
 
     return [ setName ];
+  }
+  validate({ options }: this["payload"] & { options: unknown }): boolean {
+    return validate(options);
   }
 }

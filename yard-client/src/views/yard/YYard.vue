@@ -1,6 +1,6 @@
 <template>
   <div class="y-full-size y-flex-center">
-    <p>Hi there in room {{$yardConnection.room.id}}!</p>
+    <p>Hi there in room {{$yardAPI.room.id}}!</p>
   </div>
 </template>
 

@@ -14,7 +14,7 @@
     name: "YCreatePanel",
     methods: {
       async createYard(): Promise<void> {
-        const roomId = await this.$yardConnection.createYard();
+        const roomId = await this.$yardAPI.createYard();
         if (roomId) {
           await this.$router.push({ name: "Moderation", params: { roomId } });
         } else {

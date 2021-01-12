@@ -24,8 +24,8 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import YJoinPanel from "@/views/home/YJoinPanel.vue";
-  import YCreatePanel from "@/views/home/YCreatePanel.vue";
+  import YJoinPanel from "./YJoinPanel.vue";
+  import YCreatePanel from "./YCreatePanel.vue";
 
   export default defineComponent({
     name: "YHome",

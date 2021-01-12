@@ -18,7 +18,7 @@ export class Yard extends Room<YardState> {
   }
 
   onJoin(client: Client, options: unknown): void {
-    this.dispatcher.dispatch(new OnJoinCommand(), { client, options });
+    this.dispatcher.dispatch(new OnJoinCommand(), { client, options: options as any });
   }
 
   async onLeave(client: Client, consented: boolean): Promise<void> {

@@ -1,11 +1,12 @@
 import * as Colyseus from "colyseus.js";
 
-import { YardJoinOptions } from "../../../yard-server/src/rooms/commands/OnJoinCommand";
+import { YardState } from "%/schema/YardState";
+import { YardRoomJoinOptions } from "%/roomInterface";
 
-export default class YardConnection {
+export default class YardAPI {
   private _client: Colyseus.Client;
 
-  private _room?: Colyseus.Room;
+  private _room?: Colyseus.Room<YardState>;
   get room(): Colyseus.Room | undefined {
     return this._room;
   }
@@ -23,12 +24,13 @@ export default class YardConnection {
     return this._room.id;
   }
 
-  public async joinYard(id: string, options?: YardJoinOptions): Promise<boolean> {
+  public async joinYard(id: string, options?: YardRoomJoinOptions): Promise<boolean> {
     if (this._room) {
       if (this._room.id === id) {
         return true;
       } else {
         this._room.leave(true);
+        this._room = undefined;
       }
     }
     try {
@@ -39,12 +41,13 @@ export default class YardConnection {
     return true;
   }
 
-  public setUsername(username: string): boolean {
+  public send<T>(type: string | number, message?: T): boolean {
     if (this._room) {
-      this._room.send("setName", username.trim().substr(0, 20));
+      this._room.send(type, message);
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 }
 

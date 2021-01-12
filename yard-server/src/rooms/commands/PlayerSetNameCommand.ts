@@ -3,8 +3,13 @@ import { Client } from "colyseus";
 
 import { YardState } from "../schema/YardState";
 
+import { YardPlayerSetNamePayload } from "%/playerInterface";
+import Ajv from "ajv";
+
+const validate = new Ajv().compile(YardPlayerSetNamePayload);
+
 export class PlayerSetNameCommand extends Command<YardState, {
-  client: Client, name: string
+  client: Client, name: YardPlayerSetNamePayload
 }> {
   execute({ client, name }: this["payload"]): void {
     this.state.players.get(client.sessionId).name =
@@ -12,7 +17,7 @@ export class PlayerSetNameCommand extends Command<YardState, {
   }
 
   validate({ client, name }: this["payload"] & { name: any }): boolean {
-    if (typeof name !== "string") {
+    if (!validate(name)) {
       return false;
     }
     return this.state.players.has(client.sessionId);

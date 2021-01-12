@@ -1,7 +1,6 @@
 import http from "http";
 
 import express from "express";
-import cors from "cors";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import serveStatic from "serve-static";
 import expressBasicAuth from "express-basic-auth";
@@ -16,7 +15,6 @@ import localConfig from "../../local.config.json";
 const port = Number(process.env.EXPRESS_PORT ?? localConfig.EXPRESS_PORT);
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 
 const server = http.createServer(app);
@@ -36,8 +34,10 @@ app.use("/colyseus", expressBasicAuth({
 }), monitor());
 
 if (process.env.NODE_ENV === "production") {
+  // in production mode, the express server serves the vue dist directory
   app.use("/", serveStatic(process.env.VUE_DIST_DIR ?? localConfig.VUE_DIST_DIR));
 } else {
+  // in development mode, the express server redirects to the vue dev server
   app.use("/", createProxyMiddleware({
     target: "http://localhost:" + (process.env.VUE_DEV_SERVER_PORT ?? localConfig.VUE_DEV_SERVER_PORT),
     changeOrigin: true,
