@@ -5,6 +5,12 @@ import { YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
 
+export enum JoinYardResult {
+  SUCCESSFUL,
+  ROOM_NOT_FOUND,
+  UNKNOWN_ERROR,
+}
+
 export default class YardAPI {
   private readonly _client: Colyseus.Client;
 
@@ -32,10 +38,10 @@ export default class YardAPI {
     return this._room.id;
   }
 
-  public async joinYard(id: string, options?: YardRoomJoinOptions): Promise<boolean> {
+  public async joinYard(id: string, options?: YardRoomJoinOptions): Promise<JoinYardResult> {
     if (this._room) {
       if (this._room.id === id) {
-        return true;
+        return JoinYardResult.SUCCESSFUL;
       } else {
         this._room.leave(true);
         this._room = undefined;
@@ -45,9 +51,13 @@ export default class YardAPI {
       this._room = await this._client.joinById(id, options);
       this.watchRoom(this._room);
     } catch (e) {
-      return false;
+      if ((e.message as string).includes("not found")) {
+        return JoinYardResult.ROOM_NOT_FOUND;
+      } else {
+        return JoinYardResult.UNKNOWN_ERROR;
+      }
     }
-    return true;
+    return JoinYardResult.SUCCESSFUL;
   }
 
   private watchRoom(room: Colyseus.Room<YardState>) {
