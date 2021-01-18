@@ -3,14 +3,14 @@ import { Client } from "colyseus";
 
 import { YardState } from "../schema/YardState";
 
-import { YardMakeAdminPayload } from "%/playerInterface";
+import { MakeAdminPayload } from "%/playerInterface";
 import Ajv from "ajv";
 import { Yard } from "@/rooms/Yard";
 
-const validate = new Ajv().compile(YardMakeAdminPayload);
+const validate = new Ajv().compile(MakeAdminPayload);
 
 export class MakeAdminCommand extends Command<YardState, {
-  client: Client, key: YardMakeAdminPayload
+  client: Client, key: MakeAdminPayload
 }> {
   execute({ client }: this["payload"]): void {
     const player = this.state.players.get(client.sessionId);

@@ -3,13 +3,13 @@ import { Client } from "colyseus";
 
 import { YardState } from "../schema/YardState";
 
-import { YardPlayerSetNamePayload } from "%/playerInterface";
+import { SetNamePayload } from "%/playerInterface";
 import Ajv from "ajv";
 
-const validate = new Ajv().compile(YardPlayerSetNamePayload);
+const validate = new Ajv().compile(SetNamePayload);
 
 export class PlayerSetNameCommand extends Command<YardState, {
-  client: Client, name: YardPlayerSetNamePayload
+  client: Client, name: SetNamePayload
 }> {
   execute({ client, name }: this["payload"]): void {
     const player = this.state.players.get(client.sessionId);

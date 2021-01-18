@@ -2,6 +2,7 @@ import { DebouncedFunc } from "lodash";
 import debounce from "lodash/debounce";
 
 import YardAPI from "@/yardAPI/YardAPI";
+import { MakeAdminPayload, SetNamePayload } from "%/playerInterface";
 
 export class PlayerAPI {
   private readonly _api: YardAPI;
@@ -19,11 +20,15 @@ export class PlayerAPI {
       return setUsername(username, this._api);
     }
   }
+
+  public makeAdmin(key: string): boolean {
+    return this._api.send("makeAdmin", key as MakeAdminPayload);
+  }
 }
 
 function setUsername(username: string, api: YardAPI): boolean {
   return api.send(
     "setName",
-    username.trim().substr(0, api.store?.settings.playerNameMaxLength),
+    username.trim().substr(0, api.store?.settings.playerNameMaxLength) as SetNamePayload,
   );
 }

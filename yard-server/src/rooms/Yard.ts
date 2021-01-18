@@ -5,6 +5,8 @@ import { YardState } from "./schema/YardState";
 import { OnJoinCommand } from "./commands/OnJoinCommand";
 import { OnLeaveCommand } from "./commands/OnLeaveCommand";
 import { PlayerSetNameCommand } from "./commands/PlayerSetNameCommand";
+import { MakeAdminCommand } from "./commands/MakeAdminCommand";
+
 import { YardRoomJoinOptions } from "%/roomInterface";
 
 import Ajv from "ajv";
@@ -26,6 +28,10 @@ export class Yard extends Room<YardState> {
 
     this.onMessage("setName", (client, name) => {
       this.dispatcher.dispatch(new PlayerSetNameCommand(), { client, name });
+    });
+
+    this.onMessage("makeAdmin", (client, key) => {
+      this.dispatcher.dispatch(new MakeAdminCommand(), { client, key });
     });
   }
 

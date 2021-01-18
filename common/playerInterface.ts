@@ -1,15 +1,15 @@
 import { JSONSchemaType } from "ajv";
 
-export type YardPlayerSetNamePayload = string;
+export type SetNamePayload = string;
 
-export const YardPlayerSetNamePayload: JSONSchemaType<YardPlayerSetNamePayload> = {
+export const SetNamePayload: JSONSchemaType<SetNamePayload> = {
   type: "string",
   minLength: 1,
 };
 
-export type YardMakeAdminPayload = string;
+export type MakeAdminPayload = string;
 
-export const YardMakeAdminPayload: JSONSchemaType<YardMakeAdminPayload> = {
+export const MakeAdminPayload: JSONSchemaType<MakeAdminPayload> = {
   type: "string",
   minLength: 15,
   maxLength: 15,
