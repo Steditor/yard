@@ -5,17 +5,17 @@ import { YardState } from "./schema/YardState";
 import { OnJoinCommand } from "./commands/OnJoinCommand";
 import { OnLeaveCommand } from "./commands/OnLeaveCommand";
 import { PlayerSetNameCommand } from "./commands/PlayerSetNameCommand";
-import { YardRoomCreateOptions, YardRoomJoinOptions } from "%/roomInterface";
+import { YardRoomJoinOptions } from "%/roomInterface";
 
 import Ajv from "ajv";
 
-const validate = new Ajv().compile(YardRoomCreateOptions);
+const validate = new Ajv().compile(YardRoomJoinOptions);
 
 export class Yard extends Room<YardState> {
   dispatcher = new Dispatcher(this);
   private _initialModerationKey: string | undefined;
 
-  onCreate(options: YardRoomCreateOptions): void {
+  onCreate(options: YardRoomJoinOptions): void {
     this.setState(new YardState());
     if (validate(options)) {
       this._initialModerationKey = options.initialModerationKey;

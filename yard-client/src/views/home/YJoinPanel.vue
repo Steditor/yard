@@ -55,7 +55,7 @@
       async joinYard(): Promise<void> {
         this.joinYardResult = await this.$yardAPI.joinYard(
           this.yardCode,
-          { name: this.username },
+          { username: this.username },
         );
         if (this.joinYardResult === JoinYardResult.SUCCESSFUL) {
           await this.$router.push({ name: "Yard", params: { roomId: this.yardCode } });

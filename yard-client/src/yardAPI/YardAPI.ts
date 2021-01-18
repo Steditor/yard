@@ -1,7 +1,7 @@
 import * as Colyseus from "colyseus.js";
 
 import { YardState } from "%/schema/YardState";
-import { YardRoomCreateOptions, YardRoomJoinOptions } from "%/roomInterface";
+import { YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
@@ -33,11 +33,12 @@ export default class YardAPI {
     this.playerAPI = new PlayerAPI(this);
   }
 
-  public async createYard(): Promise<string | undefined> {
+  public async createYard(username: string): Promise<string | undefined> {
     try {
       this._room = await this._client.create("yard", {
         initialModerationKey: nanoid(15),
-      } as YardRoomCreateOptions);
+        username,
+      } as YardRoomJoinOptions);
       this.watchRoom(this._room);
     } catch (e) {
       return undefined;

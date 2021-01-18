@@ -9,7 +9,7 @@ import { MakeAdminCommand } from "./MakeAdminCommand";
 import { YardRoomJoinOptions } from "%/roomInterface";
 import Ajv from "ajv";
 
-const validate = new Ajv().compile<YardRoomJoinOptions>(YardRoomJoinOptions);
+const validate = new Ajv().compile(YardRoomJoinOptions);
 
 export class OnJoinCommand extends Command<YardState, {
   client: Client,
@@ -23,9 +23,9 @@ export class OnJoinCommand extends Command<YardState, {
     this.state.players.set(client.sessionId, player);
 
     const commands = [] as Array<Command>;
-    if (options?.name) {
+    if (options?.username) {
       const setName = new PlayerSetNameCommand();
-      setName.setPayload({ client, name: options.name });
+      setName.setPayload({ client, name: options.username });
       commands.push(setName);
     }
     if (options?.initialModerationKey) {
