@@ -1,5 +1,5 @@
 <template>
-  <RouterLink v-bind="$attrs" class="y-button-link p-component">
+  <RouterLink :to="$attrs.to" v-bind="$attrs" class="y-button-link p-component">
     <span :class="icon"></span>
   </RouterLink>
 </template>

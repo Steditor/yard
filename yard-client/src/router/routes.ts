@@ -6,7 +6,7 @@ import YHome from "@/views/home/YHome.vue";
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 const YModeration = () => import(/* webpackChunkName: "moderation" */ "../views/moderation/YModeration.vue");
 const YYard = () => import(/* webpackChunkName: "yard" */ "../views/yard/YYard.vue");
-const YYardMenu = () => import(/* webpackChunkName: "yardMenu" */ "../views/yard/YYardMenu.vue");
+const YYardMenu = () => import(/* webpackChunkName: "yardMenu" */ "../components/menu/YYardMenu.vue");
 /* eslint-enable @typescript-eslint/explicit-module-boundary-types */
 
 export const routes: Array<RouteRecordRaw> = [
@@ -19,7 +19,10 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/moderation/:roomId",
     name: "Moderation",
     beforeEnter: connectToRoom,
-    component: YModeration,
+    components: {
+      default: YModeration,
+      Sidebar: YYardMenu,
+    },
   },
   {
     path: "/yard/:roomId",

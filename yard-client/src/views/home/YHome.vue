@@ -24,12 +24,15 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
+  import TabView from "primevue/tabview/TabView";
+  import TabPanel from "primevue/tabpanel/TabPanel";
+
   import YJoinPanel from "./YJoinPanel.vue";
   import YCreatePanel from "./YCreatePanel.vue";
 
   export default defineComponent({
     name: "YHome",
-    components: { YCreatePanel, YJoinPanel },
+    components: { YCreatePanel, YJoinPanel, TabView, TabPanel },
   });
 </script>
 

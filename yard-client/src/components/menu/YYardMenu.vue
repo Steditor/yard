@@ -15,13 +15,16 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
+
+  import Button from "primevue/button/Button";
+  import InputText from "primevue/inputtext/InputText";
   import OverlayPanel from "primevue/overlaypanel/OverlayPanel";
 
   import YMenuSeparator from "@/components/menu/YMenuSeparator.vue";
 
   export default defineComponent({
     name: "YYardMenu",
-    components: { YMenuSeparator },
+    components: { YMenuSeparator, OverlayPanel, InputText, Button },
     methods: {
       toggleUserOverlay(event: MouseEvent) {
         (this.$refs.userOverlay as OverlayPanel).toggle(event);

@@ -27,10 +27,14 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
+  import InputText from "primevue/inputtext/InputText";
+  import Button from "primevue/button/Button";
+
   import { JoinYardResult } from "@/yardAPI/YardAPI";
 
   export default defineComponent({
     name: "YJoinPanel",
+    components: { InputText, Button },
     data() {
       return {
         yardCode: "",
