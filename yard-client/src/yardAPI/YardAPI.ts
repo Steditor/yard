@@ -1,11 +1,12 @@
 import * as Colyseus from "colyseus.js";
+import { nanoid } from "nanoid";
 
 import { YardState } from "%/schema/YardState";
 import { YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
-import { nanoid } from "nanoid";
+import router from "@/router";
 
 export enum JoinYardResult {
   SUCCESSFUL,
@@ -87,6 +88,7 @@ export default class YardAPI {
     }
     this._room = undefined;
     this.store.clear();
+    router.push({ name: "Home" });
   }
 }
 
