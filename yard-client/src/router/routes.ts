@@ -1,7 +1,13 @@
 import { RouteRecordRaw } from "vue-router";
 
-import YHome from "@/views/home/YHome.vue";
 import { connectToRoom } from "@/router/helpers";
+
+import YHome from "@/views/home/YHome.vue";
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+const YModeration = () => import(/* webpackChunkName: "moderation" */ "../views/moderation/YModeration.vue");
+const YYard = () => import(/* webpackChunkName: "yard" */ "../views/yard/YYard.vue");
+const YYardMenu = () => import(/* webpackChunkName: "yardMenu" */ "../views/yard/YYardMenu.vue");
+/* eslint-enable @typescript-eslint/explicit-module-boundary-types */
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -13,12 +19,15 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/moderation/:roomId",
     name: "Moderation",
     beforeEnter: connectToRoom,
-    component: () => import(/* webpackChunkName: "moderation" */ "../views/moderation/YModeration.vue"),
+    component: YModeration,
   },
   {
     path: "/yard/:roomId",
     name: "Yard",
     beforeEnter: connectToRoom,
-    component: () => import(/* webpackChunkName: "yard" */ "../views/yard/YYard.vue"),
+    components: {
+      default: YYard,
+      Sidebar: YYardMenu,
+    },
   },
 ];

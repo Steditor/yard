@@ -2,6 +2,7 @@
   <aside>
     <RouterLink :to="{ name: 'Home' }" title="Home" class="logo-link"><YLogo icon animated /></RouterLink>
     <YMenuItem :to="{ name: 'Home' }" title="Home" icon="pi pi-home" />
+    <router-view name="Sidebar" />
   </aside>
 </template>
 

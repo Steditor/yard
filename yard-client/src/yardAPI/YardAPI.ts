@@ -4,6 +4,7 @@ import { YardState } from "%/schema/YardState";
 import { YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
+import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
 
 export enum JoinYardResult {
   SUCCESSFUL,
@@ -24,8 +25,11 @@ export default class YardAPI {
     return this._store;
   }
 
+  public readonly playerAPI: PlayerAPI;
+
   constructor() {
     this._client = new Colyseus.Client(getEndpoint());
+    this.playerAPI = new PlayerAPI(this);
   }
 
   public async createYard(): Promise<string | undefined> {

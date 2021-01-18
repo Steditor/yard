@@ -44,20 +44,20 @@
     // own:
     text-decoration: none;
   }
-  // from .p-button-secondary.p-button-text
+  // from .p-button.p-button-text
   .y-button-link {
     background-color: transparent;
-    color: #F48FB1;
+    color: #9FA8DA;
     border-color: transparent;
     &:hover {
-      background: rgba(244, 143, 177, 0.04);
+      background: rgba(159, 168, 218, 0.04);
       border-color: transparent;
-      color: #F48FB1;
+      color: #9FA8DA;
     }
     &:active, &.router-link-active {
-      background: rgba(244, 143, 177, 0.16);
+      background: rgba(159, 168, 218, 0.16);
       border-color: transparent;
-      color: #F48FB1;
+      color: #9FA8DA;
     }
   }
 </style>
