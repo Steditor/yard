@@ -1,10 +1,11 @@
 import * as Colyseus from "colyseus.js";
 
 import { YardState } from "%/schema/YardState";
-import { YardRoomJoinOptions } from "%/roomInterface";
+import { YardRoomCreateOptions, YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
+import { nanoid } from "nanoid";
 
 export enum JoinYardResult {
   SUCCESSFUL,
@@ -34,7 +35,9 @@ export default class YardAPI {
 
   public async createYard(): Promise<string | undefined> {
     try {
-      this._room = await this._client.create("yard");
+      this._room = await this._client.create("yard", {
+        initialModerationKey: nanoid(15),
+      } as YardRoomCreateOptions);
       this.watchRoom(this._room);
     } catch (e) {
       return undefined;
@@ -66,7 +69,7 @@ export default class YardAPI {
 
   private watchRoom(room: Colyseus.Room<YardState>) {
     room.onLeave((code) => this.onLeaveYard(code));
-    room.onError((code, message) => console.log(message));
+    room.onError((code, message) => console.log(code, message));
     this._store = new YardStore(this, room.state);
   }
 

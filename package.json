@@ -28,7 +28,7 @@
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
   "devDependencies": {
-    "@colyseus/schema": "^1.0.9",
+    "@colyseus/schema": "^1.0.10",
     "ajv": "^7.0.3",
     "cli-real-favicon": "0.0.8",
     "cross-env": "^7.0.3",

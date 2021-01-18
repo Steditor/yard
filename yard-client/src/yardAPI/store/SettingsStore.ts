@@ -9,6 +9,7 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
     canvasWidth: 800,
     canvasHeight: 600,
     playerNameMaxLength: 20,
+    moderationKey: "",
   });
 
   constructor(settings: YardSettings) {
@@ -25,5 +26,9 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
 
   get playerNameMaxLength(): number {
     return this._properties.playerNameMaxLength;
+  }
+
+  get moderationKey(): string {
+    return this._properties.moderationKey;
   }
 }

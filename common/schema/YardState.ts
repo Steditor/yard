@@ -1,9 +1,9 @@
-//
+// 
 // THIS FILE HAS BEEN GENERATED AUTOMATICALLY
 // DO NOT CHANGE IT MANUALLY UNLESS YOU KNOW WHAT YOU'RE DOING
-//
-// GENERATED USING @colyseus/schema 1.0.9
-//
+// 
+// GENERATED USING @colyseus/schema 1.0.10
+// 
 
 import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/schema";
 import { YardPlayer } from "./YardPlayer"

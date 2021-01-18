@@ -4,6 +4,7 @@ import { Client } from "colyseus";
 import { YardState } from "../schema/YardState";
 import { YardPlayer } from "../schema/YardPlayer";
 import { PlayerSetNameCommand } from "./PlayerSetNameCommand";
+import { MakeAdminCommand } from "./MakeAdminCommand";
 
 import { YardRoomJoinOptions } from "%/roomInterface";
 import Ajv from "ajv";
@@ -21,10 +22,18 @@ export class OnJoinCommand extends Command<YardState, {
 
     this.state.players.set(client.sessionId, player);
 
-    const setName = new PlayerSetNameCommand();
-    setName.setPayload({ client, name: options?.name as any });
-
-    return [ setName ];
+    const commands = [] as Array<Command>;
+    if (options?.name) {
+      const setName = new PlayerSetNameCommand();
+      setName.setPayload({ client, name: options.name });
+      commands.push(setName);
+    }
+    if (options?.initialModerationKey) {
+      const makeAdmin = new MakeAdminCommand();
+      makeAdmin.setPayload({ client, key: options.initialModerationKey });
+      commands.push(makeAdmin);
+    }
+    return commands;
   }
   validate({ options }: this["payload"] & { options: unknown }): boolean {
     return validate(options);

@@ -1,4 +1,7 @@
-import { Schema, type } from "@colyseus/schema";
+import { filter, Schema, type } from "@colyseus/schema";
+import { nanoid } from "nanoid";
+
+import { YardState } from "./YardState";
 
 export class YardSettings extends Schema {
   @type("uint16")
@@ -9,4 +12,10 @@ export class YardSettings extends Schema {
 
   @type("uint8")
   playerNameMaxLength = 20;
+
+  @filter(function(client, value, state: YardState) {
+    return state.players.get(client.sessionId)?.admin ?? false;
+  })
+  @type("string")
+  moderationKey = nanoid(15);
 }
