@@ -21,16 +21,14 @@ export default class YardAPI {
     return this._room;
   }
 
-  private _store?: YardStore;
-  get store(): YardStore | undefined {
-    return this._store;
-  }
+  public readonly store: YardStore;
 
   public readonly playerAPI: PlayerAPI;
 
   constructor() {
     this._client = new Colyseus.Client(getEndpoint());
     this.playerAPI = new PlayerAPI(this);
+    this.store = new YardStore(this);
   }
 
   public async createYard(username: string): Promise<string | undefined> {
@@ -71,7 +69,7 @@ export default class YardAPI {
   private watchRoom(room: Colyseus.Room<YardState>) {
     room.onLeave((code) => this.onLeaveYard(code));
     room.onError((code, message) => console.log(code, message));
-    this._store = new YardStore(this, room.state);
+    this.store.watch(room);
   }
 
   public send<T>(type: string | number, message?: T): boolean {
@@ -88,7 +86,7 @@ export default class YardAPI {
       // handle error
     }
     this._room = undefined;
-    this._store = undefined;
+    this.store.clear();
   }
 }
 

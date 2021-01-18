@@ -2,7 +2,20 @@
   <aside>
     <RouterLink :to="{ name: 'Home' }" title="Home" class="logo-link"><YLogo icon animated /></RouterLink>
     <YMenuItem :to="{ name: 'Home' }" title="Home" icon="pi pi-home" />
+
+    <template v-if="$yardAPI.store.roomId">
+      <YMenuSeparator />
+      <YUserSettings />
+    </template>
+
     <router-view name="Sidebar" />
+
+    <div style="flex: 1" />
+    <YMenuSeparator />
+    <template v-if="$yardAPI.store.roomId">
+      <YMenuItem :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Yard" icon="pi pi-desktop" class="p-mb-1" />
+      <YMenuItem :to="{ name: 'Moderation', params: { roomId: $yardAPI.store.roomId } }" title="Settings" icon="pi pi-cog" class="p-mb-3" />
+    </template>
   </aside>
 </template>
 
@@ -11,10 +24,12 @@
 
   import YLogo from "@/components/YLogo.vue";
   import YMenuItem from "@/components/menu/YMenuItem.vue";
+  import YMenuSeparator from "@/components/menu/YMenuSeparator.vue";
+  import YUserSettings from "@/components/menu/YUserSettings.vue";
 
   export default defineComponent({
     name: "YMenu",
-    components: { YMenuItem, YLogo },
+    components: { YUserSettings, YMenuItem, YMenuSeparator, YLogo },
   });
 </script>
 

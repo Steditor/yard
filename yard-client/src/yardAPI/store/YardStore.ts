@@ -1,4 +1,5 @@
-import { shallowReactive } from "vue";
+import { ref, shallowReactive } from "vue";
+import * as Colyseus from "colyseus.js";
 
 import { YardState } from "%/schema/YardState";
 
@@ -9,22 +10,41 @@ import YardAPI from "@/yardAPI/YardAPI";
 
 export default class YardStore {
   private _api: YardAPI;
+  private readonly _sessionId = ref<null | string>(null);
+  private readonly _roomId = ref<null | string>(null);
 
-  public readonly settings: SettingsStore;
+  public readonly settings = new SettingsStore();
   public readonly players = shallowReactive(new Map<string, PlayerStore>());
 
-  constructor(api: YardAPI, state: YardState) {
+  constructor(api: YardAPI) {
     this._api = api;
+  }
 
-    this.settings = new SettingsStore(state.settings);
-    watchMap(this.players, PlayerStore, state.players);
+  public watch(room: Colyseus.Room<YardState>): void {
+    this.clear();
+
+    this._sessionId.value = room.sessionId;
+    this._roomId.value = room.id;
+
+    watchMap(this.players, PlayerStore, room.state.players);
+
+    this.settings.watch(room.state.settings);
   }
 
   public clear(): void {
     this.players.clear();
   }
 
+  get sessionId(): string | null {
+    return this._sessionId.value;
+  }
+
+  get roomId(): string | null {
+    return this._roomId.value;
+  }
+
   public me(): PlayerStore | undefined {
-    return this._api.room?.sessionId ? this.players.get(this._api.room.sessionId) : undefined;
+    const id = this.sessionId;
+    return id ? this.players.get(id) : undefined;
   }
 }

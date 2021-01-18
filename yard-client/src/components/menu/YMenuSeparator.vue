@@ -1,5 +1,5 @@
 <template>
-  <div class="y-menu-separator"></div>
+  <div class="y-menu-separator p-mt-3 p-mb-3"></div>
 </template>
 
 <script>
@@ -14,6 +14,5 @@
   .y-menu-separator {
     width: 100%;
     border-top: 1px solid var(--surface-c);
-    margin: 1rem 0;
   }
 </style>

@@ -12,7 +12,7 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
     moderationKey: "",
   });
 
-  constructor(settings: YardSettings) {
+  public watch(settings: YardSettings): void {
     watchObject(this._properties, settings);
   }
 
