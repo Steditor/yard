@@ -12,8 +12,10 @@ export class PlayerSetNameCommand extends Command<YardState, {
   client: Client, name: YardPlayerSetNamePayload
 }> {
   execute({ client, name }: this["payload"]): void {
-    this.state.players.get(client.sessionId).name =
-      name.trim().substr(0, this.state.settings.playerNameMaxLength);
+    const player = this.state.players.get(client.sessionId);
+    if (player) {
+      player.name = name.trim().substr(0, this.state.settings.playerNameMaxLength);
+    }
   }
 
   validate({ client, name }: this["payload"] & { name: any }): boolean {

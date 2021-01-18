@@ -1,11 +1,11 @@
 import { createApp } from "vue";
 
 import PrimeVue from "primevue/config";
-import Button from "primevue/components/button/Button";
-import Card from "primevue/components/card/Card";
-import InputText from "primevue/components/inputtext/InputText";
-import TabPanel from "primevue/components/tabpanel/TabPanel";
-import TabView from "primevue/components/tabview/TabView";
+import Button from "primevue/button";
+import Card from "primevue/card";
+import InputText from "primevue/inputtext";
+import TabPanel from "primevue/tabpanel";
+import TabView from "primevue/tabview";
 
 import "./styles/styles";
 
@@ -20,9 +20,9 @@ const app = createApp(App)
 
 app.use(PrimeVue);
 app.component("Button", Button);
-app.component("TabView", TabView);
-app.component("TabPanel", TabPanel);
 app.component("Card", Card);
 app.component("InputText", InputText);
+app.component("TabPanel", TabPanel);
+app.component("TabView", TabView);
 
 export const vm = app.mount("#app");
