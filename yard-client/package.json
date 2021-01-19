@@ -15,6 +15,7 @@
     "core-js": "^3.8.2",
     "gsap": "^3.6.0",
     "lodash": "^4.17.20",
+    "mitt": "^2.1.0",
     "nanoid": "^3.1.20",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",

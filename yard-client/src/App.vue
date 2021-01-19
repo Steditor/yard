@@ -3,14 +3,16 @@
     <router-view/>
   </div>
   <YMenu/>
+  <Toast />
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
   import YMenu from "@/components/menu/YMenu.vue";
+  import Toast from "primevue/toast/Toast";
 
   export default defineComponent({
-    components: { YMenu },
+    components: { YMenu, Toast },
     data() {
       return {
         visible: true,

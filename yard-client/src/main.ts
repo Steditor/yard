@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 
 import PrimeVue from "primevue/config";
+import ToastService from "primevue/toastservice";
 
 import "./styles/styles";
 
@@ -14,5 +15,6 @@ const app = createApp(App)
 ;
 
 app.use(PrimeVue);
+app.use(ToastService);
 
 export const vm = app.mount("#app");

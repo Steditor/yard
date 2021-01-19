@@ -7,6 +7,8 @@ import { YardRoomJoinOptions } from "%/roomInterface";
 import YardStore from "@/yardAPI/store/YardStore";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
 import router from "@/router";
+import { vm } from "@/main";
+import { ComponentCustomProperties } from "@vue/runtime-core";
 
 export enum JoinYardResult {
   SUCCESSFUL,
@@ -84,7 +86,12 @@ export default class YardAPI {
 
   private onLeaveYard(code: number) {
     if (code !== 1000) {
-      // handle error
+      (vm as ComponentCustomProperties).$toast.add({
+        severity: "warn",
+        summary: "Disconnected",
+        detail: "You were disconnected from the server.",
+        life: 3000,
+      });
     }
     this._room = undefined;
     this.store.clear();
