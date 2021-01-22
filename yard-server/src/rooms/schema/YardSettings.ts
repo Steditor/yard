@@ -11,6 +11,9 @@ export class YardSettings extends Schema {
   canvasHeight = 600;
 
   @type("uint8")
+  pixelSize = 5;
+
+  @type("uint8")
   playerNameMaxLength = 20;
 
   @filter(function(client, value, state: YardState) {

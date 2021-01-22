@@ -11,6 +11,7 @@ import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/sche
 export class YardSettings extends Schema {
     @type("uint16") public canvasWidth!: number;
     @type("uint16") public canvasHeight!: number;
+    @type("uint8") public pixelSize!: number;
     @type("uint8") public playerNameMaxLength!: number;
     @type("string") public moderationKey!: string;
 }

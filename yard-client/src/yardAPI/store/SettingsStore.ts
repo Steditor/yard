@@ -8,6 +8,7 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
   private readonly _properties = reactive<SchemaProperties<YardSettings>>({
     canvasWidth: 800,
     canvasHeight: 600,
+    pixelSize: 5,
     playerNameMaxLength: 20,
     moderationKey: "",
   });
@@ -22,6 +23,10 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
 
   get canvasHeight(): number {
     return this._properties.canvasHeight;
+  }
+
+  get pixelSize(): number {
+    return this._properties.pixelSize;
   }
 
   get playerNameMaxLength(): number {

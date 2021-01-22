@@ -1,6 +1,8 @@
 <template>
   <div class="y-full-size y-flex-center">
-    <p>Hello {{$yardAPI.store.me()?.name}} in room {{$yardAPI.store.roomId}}!</p>
+    <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet">
+      <rect :x="-pixelSize" :y="-pixelSize" :width="viewWidth" :height="viewHeight" fill="white" />
+    </svg>
   </div>
 </template>
 
@@ -9,6 +11,20 @@
 
   export default defineComponent({
     name: "YYard",
+    computed: {
+      pixelSize(): number {
+        return 5;
+      },
+      viewWidth(): number {
+        return this.$yardAPI.store.settings.canvasWidth + 2 * this.pixelSize;
+      },
+      viewHeight(): number {
+        return this.$yardAPI.store.settings.canvasHeight + 2 * this.pixelSize;
+      },
+      viewBox(): string {
+        return `-${this.pixelSize} -${this.pixelSize} ${this.viewWidth} ${this.viewHeight}`;
+      },
+    },
   });
 </script>
 
