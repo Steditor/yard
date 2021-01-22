@@ -2,7 +2,7 @@ import { DebouncedFunc } from "lodash";
 import debounce from "lodash/debounce";
 
 import YardAPI from "@/yardAPI/YardAPI";
-import { MakeAdminPayload, SetNamePayload } from "%/playerInterface";
+import { KickPayload, MakeAdminPayload, SetNamePayload } from "%/playerInterface";
 
 export class PlayerAPI {
   private readonly _api: YardAPI;
@@ -23,6 +23,10 @@ export class PlayerAPI {
 
   public makeAdmin(key: string): boolean {
     return this._api.send("makeAdmin", key as MakeAdminPayload);
+  }
+
+  public kick(sessionId: string): boolean {
+    return this._api.send("kick", sessionId as KickPayload);
   }
 }
 

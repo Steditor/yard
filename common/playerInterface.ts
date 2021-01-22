@@ -14,3 +14,10 @@ export const MakeAdminPayload: JSONSchemaType<MakeAdminPayload> = {
   minLength: 15,
   maxLength: 15,
 };
+
+export type KickPayload = string;
+
+export const KickPayload: JSONSchemaType<KickPayload> = {
+  type: "string",
+  minLength: 1,
+}

@@ -16,6 +16,7 @@ export class MakeAdminCommand extends Command<YardState, {
     const player = this.state.players.get(client.sessionId);
     if (player) {
       player.admin = true;
+      this.state.settings.rerunFilters();
     }
   }
 

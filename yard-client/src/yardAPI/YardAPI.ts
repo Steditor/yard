@@ -8,7 +8,7 @@ import YardStore from "@/yardAPI/store/YardStore";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
 import router from "@/router";
 import { vm } from "@/main";
-import { ToastMessage, ToastServiceMethods } from "../../typings/primetoast";
+import { ToastServiceMethods } from "../../typings/primetoast";
 
 export enum JoinYardResult {
   SUCCESSFUL,

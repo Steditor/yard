@@ -1,6 +1,7 @@
 <template>
-  <div class="y-full-size y-flex-center" v-if="isAdmin()">
-    <p>Hello {{$yardAPI.store.me()?.name}} in room {{$yardAPI.store.roomId}}!</p>
+  <div v-if="isAdmin()" class="p-grid">
+    <div class="p-col-12 p-lg-6"><YModInfo  /></div>
+    <div class="p-col-12 p-lg-6"><YModPeople /></div>
   </div>
   <YLogin v-else />
 </template>
@@ -9,10 +10,12 @@
   import { defineComponent } from "vue";
 
   import YLogin from "@/views/moderation/YLogin.vue";
+  import YModInfo from "@/views/moderation/YModInfo.vue";
+  import YModPeople from "@/views/moderation/YModPeople.vue";
 
   export default defineComponent({
     name: "YModeration",
-    components: { YLogin },
+    components: { YModPeople, YModInfo, YLogin },
     methods: {
       isAdmin(): boolean {
         return this.$yardAPI.store.me()?.admin ?? false;

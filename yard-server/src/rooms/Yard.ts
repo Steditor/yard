@@ -10,6 +10,7 @@ import { MakeAdminCommand } from "./commands/MakeAdminCommand";
 import { YardRoomJoinOptions } from "%/roomInterface";
 
 import Ajv from "ajv";
+import { KickCommand } from "@/rooms/commands/KickCommand";
 
 const validate = new Ajv().compile(YardRoomJoinOptions);
 
@@ -32,6 +33,10 @@ export class Yard extends Room<YardState> {
 
     this.onMessage("makeAdmin", (client, key) => {
       this.dispatcher.dispatch(new MakeAdminCommand(), { client, key });
+    });
+
+    this.onMessage("kick", (client, sessionId) => {
+      this.dispatcher.dispatch(new KickCommand(), { author: client, sessionId });
     });
   }
 

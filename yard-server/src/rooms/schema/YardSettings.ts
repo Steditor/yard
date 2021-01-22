@@ -18,4 +18,8 @@ export class YardSettings extends Schema {
   })
   @type("string")
   moderationKey = nanoid(15);
+
+  public rerunFilters(): void {
+    this._definition.indexesWithFilters.forEach((index) => this.$changes.touch(index));
+  }
 }
