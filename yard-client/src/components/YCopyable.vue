@@ -1,6 +1,6 @@
 <template>
   <span class="copyable p-shadow-3">
-    {{content}}
+    <slot :content="content">{{content}}</slot>
     <Button icon="pi pi-copy" class="p-button-rounded p-button-text" @click="copy()" />
   </span>
 </template>
@@ -22,6 +22,12 @@
     methods: {
       copy() {
         navigator.clipboard.writeText(this.content);
+        this.$toast.add({
+          severity: "success",
+          summary: "Copied",
+          detail: `'${this.content}' was copied to your clipboard.`,
+          life: 2000,
+        });
       },
     },
   });

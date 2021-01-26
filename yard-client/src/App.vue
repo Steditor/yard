@@ -4,15 +4,19 @@
   </div>
   <YMenu/>
   <Toast />
+  <ConfirmPopup></ConfirmPopup>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import YMenu from "@/components/menu/YMenu.vue";
+
+  import ConfirmPopup from "primevue/confirmpopup/ConfirmPopup";
   import Toast from "primevue/toast/Toast";
 
+  import YMenu from "@/components/menu/YMenu.vue";
+
   export default defineComponent({
-    components: { YMenu, Toast },
+    components: { YMenu, ConfirmPopup, Toast },
     data() {
       return {
         visible: true,

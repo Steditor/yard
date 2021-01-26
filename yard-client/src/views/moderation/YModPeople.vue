@@ -16,7 +16,7 @@
             <Button
               v-if="!slotProps.data.admin"
               icon="pi pi-times" class="p-button-danger p-button-rounded y-button-xs" title="Kick from server"
-              @click="kick(slotProps.data.id)"
+              @click="kick($event, slotProps.data.id)"
             />
           </template>
         </Column>
@@ -49,8 +49,17 @@
       },
     },
     methods: {
-      kick(sessionId: string): void {
-        this.$yardAPI.playerAPI.kick(sessionId);
+      kick(event: MouseEvent, sessionId: string): void {
+        const player = this.$yardAPI.store.players.get(sessionId);
+        if (player) {
+          this.$confirm.require({
+            target: event.currentTarget as Element,
+            message: `Are you sure you want to kick ${player.name}?`,
+            icon: "pi pi-question-circle",
+            accept: () => this.$yardAPI.playerAPI.kick(sessionId),
+            acceptClass: "p-button-danger",
+          });
+        }
       },
     },
   });

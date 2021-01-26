@@ -1,11 +1,12 @@
 import { Command } from "@colyseus/command";
-import { Client } from "colyseus";
+import { Client, Room } from "colyseus";
 
 import { YardState } from "../schema/YardState";
+import { Yard } from "../Yard";
+import { sendToast } from "../helpers";
 
 import { MakeAdminPayload } from "%/playerInterface";
 import Ajv from "ajv";
-import { Yard } from "@/rooms/Yard";
 
 const validate = new Ajv().compile(MakeAdminPayload);
 
@@ -22,6 +23,7 @@ export class MakeAdminCommand extends Command<YardState, {
 
   validate({ client, key }: this["payload"] & { key: any }): boolean {
     if (!validate(key)) {
+      sendKeyError(this.room as Yard, client);
       return false;
     }
     if (this.state.settings.moderationKey !== key && !(this.room as Yard).consumeInitialModerationKey(key)) {
@@ -29,4 +31,13 @@ export class MakeAdminCommand extends Command<YardState, {
     }
     return this.state.players.has(client.sessionId);
   }
+}
+
+function sendKeyError(room: Room, client: Client) {
+  sendToast(client, {
+    severity: "error",
+    summary: "Wrong key",
+    detail: "The given moderation key is invalid.",
+    life: 2000,
+  });
 }

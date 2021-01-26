@@ -8,7 +8,7 @@ import YardStore from "@/yardAPI/store/YardStore";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
 import router from "@/router";
 import { vm } from "@/main";
-import { ToastServiceMethods } from "../../typings/primetoast";
+import { ToastMessage } from "../../typings/primetoast";
 
 export enum JoinYardResult {
   SUCCESSFUL,
@@ -59,6 +59,7 @@ export default class YardAPI {
     try {
       this._room = await this._client.joinById(id, options);
       this.watchRoom(this._room);
+      this.receiveMessages(this._room);
     } catch (e) {
       if ((e.message as string).includes("not found")) {
         return JoinYardResult.ROOM_NOT_FOUND;
@@ -67,12 +68,6 @@ export default class YardAPI {
       }
     }
     return JoinYardResult.SUCCESSFUL;
-  }
-
-  private watchRoom(room: Colyseus.Room<YardState>) {
-    room.onLeave((code) => this.onLeaveYard(code));
-    room.onError((code, message) => console.log(code, message));
-    this.store.watch(room);
   }
 
   public send<T>(type: string | number, message?: T): boolean {
@@ -84,13 +79,24 @@ export default class YardAPI {
     }
   }
 
+  private watchRoom(room: Colyseus.Room<YardState>) {
+    room.onLeave((code) => this.onLeaveYard(code));
+    room.onError((code, message) => console.log(code, message));
+    this.store.watch(room);
+  }
+
+  private receiveMessages(room: Colyseus.Room<YardState>): void {
+    room.onMessage("toast", (message: ToastMessage) => {
+      vm.$toast.add(message);
+    });
+  }
+
   private onLeaveYard(code: number) {
     if (code !== 1000) {
-      ((vm as any).$toast as ToastServiceMethods).add({
+      vm.$toast.add({
         severity: "warn",
         summary: "Disconnected",
         detail: "You were disconnected from the server.",
-        life: 3000,
       });
     }
     this._room = undefined;

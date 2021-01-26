@@ -1,4 +1,4 @@
-// This should be done with declaration merging and/or as shim just as shims-yardAPI.
+// This should be done with declaration merging.
 // However, the declaration of primevue seems non-mergeable.
 
 export type ToastSeverity = "success" | "info" | "warn" | "error";

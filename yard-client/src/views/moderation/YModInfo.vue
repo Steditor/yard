@@ -8,7 +8,7 @@
       <p>
         You're currently moderating yard <YCopyable :content="roomId" />.
         Others can join the yard with this key.
-        They can also use the link <YCopyable :content="yardLink" />.
+        They can also use the link <YCopyable :content="yardLink"><RouterLink :to="yardRoute" target="_blank">{{yardLink}}</RouterLink></YCopyable>.
       </p>
       <p>If you want to allow others to moderate this yard, send them the moderation key <YCopyable :content="moderationKey" /> in addition to the yard link.</p>
     </template>
@@ -20,6 +20,7 @@
 
   import Card from "primevue/card/Card";
   import YCopyable from "@/components/YCopyable.vue";
+  import { RouteLocationRaw } from "vue-router";
 
   export default defineComponent({
     name: "YModInfo",
@@ -31,10 +32,13 @@
       moderationKey(): string {
         return this.$yardAPI.store.settings.moderationKey ?? "";
       },
+      yardRoute(): RouteLocationRaw {
+        return { name: "Yard", params: { roomId: this.$yardAPI.store.roomId ?? "" } };
+      },
       yardLink(): string {
         return document.location.protocol + "//" +
           document.location.host +
-          this.$router.resolve({ name: "Yard", params: { roomId: this.$yardAPI.store.roomId ?? "" } }).fullPath;
+          this.$router.resolve(this.yardRoute).fullPath;
       },
     },
   });

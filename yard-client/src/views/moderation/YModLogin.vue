@@ -30,7 +30,7 @@
   import Card from "primevue/card/Card";
 
   export default defineComponent({
-    name: "YLogin",
+    name: "YModLogin",
     components: { InputText, Button, Card },
     data() {
       return {
