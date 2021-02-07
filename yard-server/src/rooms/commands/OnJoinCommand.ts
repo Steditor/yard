@@ -8,19 +8,22 @@ import { MakeAdminCommand } from "./MakeAdminCommand";
 
 import { YardRoomJoinOptions } from "%/roomInterface";
 import Ajv from "ajv";
+import { Game } from "@/rooms/games/Game";
 
 const validate = new Ajv().compile(YardRoomJoinOptions);
 
 export class OnJoinCommand extends Command<YardState, {
   client: Client,
   options?: YardRoomJoinOptions,
+  game: Game,
 }> {
-  execute({ client, options }: this["payload"]): Array<Command> {
+  execute({ client, options, game }: this["payload"]): Array<Command> {
     const player = new YardPlayer();
 
     player.name = "Unknown";
 
     this.state.players.set(client.sessionId, player);
+    game.onPlayerJoin(client);
 
     const commands = [] as Array<Command>;
     if (options?.username) {

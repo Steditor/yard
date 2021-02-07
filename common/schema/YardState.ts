@@ -6,10 +6,12 @@
 // 
 
 import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/schema";
-import { YardPlayer } from "./YardPlayer"
 import { YardSettings } from "./YardSettings"
+import { YardPlayer } from "./YardPlayer"
+import { YardPixel } from "./YardPixel"
 
 export class YardState extends Schema {
-    @type({ map: YardPlayer }) public players: MapSchema<YardPlayer> = new MapSchema<YardPlayer>();
     @type(YardSettings) public settings: YardSettings = new YardSettings();
+    @type({ map: YardPlayer }) public players: MapSchema<YardPlayer> = new MapSchema<YardPlayer>();
+    @type({ map: YardPixel }) public pixels: MapSchema<YardPixel> = new MapSchema<YardPixel>();
 }

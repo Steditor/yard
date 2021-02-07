@@ -2,15 +2,18 @@
   <div class="y-full-size y-flex-center">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet">
       <rect :x="-pixelSize" :y="-pixelSize" :width="viewWidth" :height="viewHeight" fill="white" />
+      <YPixel v-for="pixel in $yardAPI.store.pixels" :key="pixel[0]" :pixel="pixel[1]" />
     </svg>
   </div>
 </template>
 
 <script lang="ts">
+  import YPixel from "@/views/yard/YPixel.vue";
   import { defineComponent } from "vue";
 
   export default defineComponent({
     name: "YYard",
+    components: { YPixel },
     computed: {
       pixelSize(): number {
         return 5;

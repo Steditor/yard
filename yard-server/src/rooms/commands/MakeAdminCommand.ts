@@ -3,7 +3,7 @@ import { Client, Room } from "colyseus";
 
 import { YardState } from "../schema/YardState";
 import { Yard } from "../Yard";
-import { sendToast } from "../helpers";
+import { sendToast } from "../helpers/messages";
 
 import { MakeAdminPayload } from "%/playerInterface";
 import Ajv from "ajv";

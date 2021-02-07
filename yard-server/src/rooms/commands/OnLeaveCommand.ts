@@ -1,11 +1,14 @@
 import { Command } from "@colyseus/command";
 import { YardState } from "../schema/YardState";
 import { Client } from "colyseus";
+import { Game } from "@/rooms/games/Game";
 
 export class OnLeaveCommand extends Command<YardState, {
-  client: Client, consented: boolean
+  client: Client,
+  consented: boolean,
+  game: Game,
 }> {
-  async execute({ client, consented }: this["payload"]): Promise<void> {
+  async execute({ client, consented, game }: this["payload"]): Promise<void> {
     let timeout = false;
     if (!consented) {
       try {
@@ -15,6 +18,7 @@ export class OnLeaveCommand extends Command<YardState, {
       }
     }
     if (consented || timeout) {
+      game.onPlayerLeave(client);
       this.state.players.delete(client.sessionId);
     }
   }

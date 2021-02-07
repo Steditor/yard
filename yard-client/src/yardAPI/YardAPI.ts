@@ -5,7 +5,10 @@ import { YardState } from "%/schema/YardState";
 import { YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
+import Controller from "@/yardAPI/controller/Controller";
+import { KeyboardController } from "@/yardAPI/controller/KeyboardController";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
+import { PixelAPI } from "@/yardAPI/api/PixelAPI";
 import router from "@/router";
 import { vm } from "@/main";
 import { ToastMessage } from "../../typings/primetoast";
@@ -27,11 +30,17 @@ export default class YardAPI {
   public readonly store: YardStore;
 
   public readonly playerAPI: PlayerAPI;
+  public readonly pixelAPI: PixelAPI;
+
+  public readonly controller: Controller;
 
   constructor() {
     this._client = new Colyseus.Client(getEndpoint());
     this.playerAPI = new PlayerAPI(this);
+    this.pixelAPI = new PixelAPI(this);
     this.store = new YardStore(this);
+
+    this.controller = new KeyboardController(this);
   }
 
   public async createYard(username: string): Promise<string | undefined> {
