@@ -18,10 +18,6 @@
         type: Object as PropType<PixelStore>,
         required: true,
       },
-      showName: {
-        type: Boolean,
-        default: false,
-      },
     },
     computed: {
       pixelSize(): number {
@@ -36,7 +32,7 @@
         };
       },
       dynamicClass(): string {
-        return this.showName ? "show-name" : "";
+        return this.$yardAPI.store.localSettings.showNames ? "show-name" : "";
       },
       pos(): { x: number, y: number } {
         return {
@@ -72,7 +68,7 @@
       transition: opacity 200ms ease-in-out;
       filter: drop-shadow(0 0 3px white);
     }
-    rect:hover + text, .show-name text {
+    rect:hover + text, &.show-name text {
       opacity: 1;
     }
   }

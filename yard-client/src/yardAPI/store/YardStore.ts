@@ -1,6 +1,7 @@
 import { YardState } from "%/schema/YardState";
 
 import { watchMap } from "@/yardAPI/store/helpers";
+import LocalSettingsStore from "@/yardAPI/store/LocalSettingsStore";
 import PixelStore from "@/yardAPI/store/PixelStore";
 import PlayerStore from "@/yardAPI/store/PlayerStore";
 import SettingsStore from "@/yardAPI/store/SettingsStore";
@@ -17,6 +18,8 @@ export default class YardStore {
   public readonly settings = new SettingsStore();
   public readonly players = shallowReactive(new Map<string, PlayerStore>());
   public readonly pixels = shallowReactive(new Map<string, PixelStore>());
+
+  public readonly localSettings = new LocalSettingsStore();
 
   constructor(api: YardAPI) {
     this._api = api;

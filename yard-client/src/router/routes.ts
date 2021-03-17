@@ -6,6 +6,7 @@ import YHome from "@/views/home/YHome.vue";
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 const YModeration = () => import(/* webpackChunkName: "moderation" */ "../views/moderation/YModeration.vue");
 const YYard = () => import(/* webpackChunkName: "yard" */ "../views/yard/YYard.vue");
+const YYardSidebar = () => import(/* webpackChunkName: "yardSidebar" */ "../views/yard/YYardSidebar.vue");
 /* eslint-enable @typescript-eslint/explicit-module-boundary-types */
 
 export const routes: Array<RouteRecordRaw> = [
@@ -28,6 +29,7 @@ export const routes: Array<RouteRecordRaw> = [
     beforeEnter: connectToRoom,
     components: {
       default: YYard,
+      Sidebar: YYardSidebar,
     },
   },
 ];
