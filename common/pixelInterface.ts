@@ -22,3 +22,25 @@ export const MovePayload: JSONSchemaType<MovePayload> = {
   required: [ "p", "a" ],
   additionalProperties: false,
 };
+
+export interface ColorPayload {
+  p: string; // pixel id
+  c: string; // transport data is hex-color as `#rrggbb`
+}
+
+export const ColorPayload: JSONSchemaType<ColorPayload> = {
+  type: "object",
+  properties: {
+    p: {
+      type: "string",
+      minLength: 9,
+      maxLength: 9,
+    },
+    c: {
+      type: "string",
+      pattern: "^#[0-9a-fA-F]{6}$",
+    }
+  },
+  required: [ "p", "c" ],
+  additionalProperties: false,
+}

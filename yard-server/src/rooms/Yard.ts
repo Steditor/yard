@@ -1,11 +1,13 @@
 import { YardRoomJoinOptions } from "%/roomInterface";
 
+import { ColorCommand } from "@/rooms/commands/ColorCommand";
 import { KickCommand } from "@/rooms/commands/KickCommand";
 import { MakeAdminCommand } from "@/rooms/commands/MakeAdminCommand";
 import { MoveCommand } from "@/rooms/commands/MoveCommand";
 import { OnJoinCommand } from "@/rooms/commands/OnJoinCommand";
 import { OnLeaveCommand } from "@/rooms/commands/OnLeaveCommand";
 import { PlayerSetNameCommand } from "@/rooms/commands/PlayerSetNameCommand";
+
 import { DefaultGame } from "@/rooms/games/DefaultGame";
 import { Game } from "@/rooms/games/Game";
 import { YardState } from "@/rooms/schema/YardState";
@@ -46,6 +48,10 @@ export class Yard extends Room<YardState> {
 
     this.onMessage("move", (client, data) => {
       this.dispatcher.dispatch(new MoveCommand(), { client, data, game: this.game });
+    });
+
+    this.onMessage("color", (client, data) => {
+      this.dispatcher.dispatch(new ColorCommand(), { client, data });
     });
   }
 
