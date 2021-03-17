@@ -8,7 +8,7 @@
     "lint": "npx eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "generate-schema": "npx schema-codegen src\\rooms\\schema\\YardState.ts --ts --output ..\\common\\schema\\",
     "loadtest": "colyseus-loadtest loadtest/loadtest.ts --room yard --numClients 70",
-    "build": "tsc",
+    "build": "ttsc",
     "start": "node dist/yard-server/src/index.js"
   },
   "author": "Stefan Neubert <dev@steditor.net>",
@@ -24,7 +24,9 @@
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.1",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.1.3"
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.1.3",
+    "typescript-transform-paths": "^2.2.3"
   },
   "dependencies": {
     "@colyseus/command": "^0.1.6",

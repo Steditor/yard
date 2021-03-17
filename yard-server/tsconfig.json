@@ -16,6 +16,11 @@
       "%/*": [
         "../common/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      }
+    ]
   }
 }
