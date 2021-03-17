@@ -5,13 +5,11 @@ import { YardSettings } from "%/schema/YardSettings";
 import { SchemaProperties, watchObject } from "@/yardAPI/store/helpers";
 
 export default class SettingsStore implements SchemaProperties<YardSettings> {
-  private readonly _properties = reactive<SchemaProperties<YardSettings>>({
-    canvasWidth: 800,
-    canvasHeight: 600,
-    pixelSize: 5,
-    playerNameMaxLength: 20,
-    moderationKey: "",
-  });
+  private readonly _properties = reactive<SchemaProperties<YardSettings>>(defaultSettings());
+
+  public clear(): void {
+    Object.assign(this._properties, defaultSettings());
+  }
 
   public watch(settings: YardSettings): void {
     watchObject(this._properties, settings);
@@ -36,4 +34,14 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
   get moderationKey(): string {
     return this._properties.moderationKey;
   }
+}
+
+function defaultSettings(): SchemaProperties<YardSettings> {
+  return {
+    canvasWidth: 800,
+    canvasHeight: 600,
+    pixelSize: 5,
+    playerNameMaxLength: 20,
+    moderationKey: "",
+  };
 }

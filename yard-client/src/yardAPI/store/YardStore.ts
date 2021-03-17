@@ -39,6 +39,10 @@ export default class YardStore {
   }
 
   public clear(): void {
+    this._sessionId.value = null;
+    this._roomId.value = null;
+
+    this.settings.clear();
     this.players.clear();
     this.pixels.clear();
   }
