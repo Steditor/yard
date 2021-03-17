@@ -34,6 +34,9 @@ export class KeyboardController extends Controller {
     super(api);
 
     document.addEventListener("keydown", (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        return;
+      }
       if (event.key in keyMapping) {
         this.keys[keyMapping[event.key]] = true;
       }

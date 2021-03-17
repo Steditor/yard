@@ -1,7 +1,12 @@
 <template>
   <div v-if="isAdmin()" class="p-grid">
-    <div class="p-col-12 p-lg-6"><YModInfo  /></div>
-    <div class="p-col-12 p-lg-6"><YModPeople /></div>
+    <div class="p-col-12 p-lg-6">
+      <YModInfo  />
+      <YModSettings class="p-mt-3" />
+    </div>
+    <div class="p-col-12 p-lg-6">
+      <YModPeople />
+    </div>
   </div>
   <YModLogin v-else />
 </template>
@@ -9,13 +14,14 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import YModLogin from "@/views/moderation/YModLogin.vue";
   import YModInfo from "@/views/moderation/YModInfo.vue";
+  import YModLogin from "@/views/moderation/YModLogin.vue";
   import YModPeople from "@/views/moderation/YModPeople.vue";
+  import YModSettings from "@/views/moderation/YModSettings.vue";
 
   export default defineComponent({
     name: "YModeration",
-    components: { YModPeople, YModInfo, YModLogin },
+    components: { YModInfo, YModLogin, YModSettings, YModPeople },
     methods: {
       isAdmin(): boolean {
         return this.$yardAPI.store.me()?.admin ?? false;

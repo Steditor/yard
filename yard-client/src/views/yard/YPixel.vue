@@ -1,6 +1,6 @@
 <template>
   <g class="player" ref="group" :style="dynamicStyle" :class="dynamicClass">
-    <rect x="-5" y="-5" width="10" height="10"></rect>
+    <rect :x="-pixelSize/2" :y="-pixelSize/2" :width="pixelSize" :height="pixelSize"></rect>
     <text text-anchor="middle" dominant-baseline="central">{{playerName}}</text>
   </g>
 </template>
@@ -21,7 +21,7 @@
     },
     computed: {
       pixelSize(): number {
-        return 5;
+        return this.$yardAPI.store.settings.pixelSize;
       },
       playerName(): string {
         return this.$yardAPI.store.players.get(this.pixel.player)?.name ?? "";

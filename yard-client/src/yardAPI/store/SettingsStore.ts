@@ -1,8 +1,9 @@
+import { SchemaProperties } from "%/schema/helpers";
 import { reactive } from "vue";
 
 import { YardSettings } from "%/schema/YardSettings";
 
-import { SchemaProperties, watchObject } from "@/yardAPI/store/helpers";
+import { watchObject } from "@/yardAPI/store/helpers";
 
 export default class SettingsStore implements SchemaProperties<YardSettings> {
   private readonly _properties = reactive<SchemaProperties<YardSettings>>(defaultSettings());
@@ -40,7 +41,7 @@ function defaultSettings(): SchemaProperties<YardSettings> {
   return {
     canvasWidth: 800,
     canvasHeight: 600,
-    pixelSize: 5,
+    pixelSize: 10,
     playerNameMaxLength: 20,
     moderationKey: "",
   };

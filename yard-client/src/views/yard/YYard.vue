@@ -1,7 +1,7 @@
 <template>
   <div class="y-full-size y-flex-center yard-container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet">
-      <rect :x="-pixelSize" :y="-pixelSize" :width="viewWidth" :height="viewHeight" fill="white" />
+      <rect :x="0" :y="0" :width="viewWidth" :height="viewHeight" fill="white" />
       <YPixel v-for="pixel in $yardAPI.store.pixels" :key="pixel[0]" :pixel="pixel[1]" />
     </svg>
   </div>
@@ -15,17 +15,14 @@
     name: "YYard",
     components: { YPixel },
     computed: {
-      pixelSize(): number {
-        return 5;
-      },
       viewWidth(): number {
-        return this.$yardAPI.store.settings.canvasWidth + 2 * this.pixelSize;
+        return this.$yardAPI.store.settings.canvasWidth;
       },
       viewHeight(): number {
-        return this.$yardAPI.store.settings.canvasHeight + 2 * this.pixelSize;
+        return this.$yardAPI.store.settings.canvasHeight;
       },
       viewBox(): string {
-        return `-${this.pixelSize} -${this.pixelSize} ${this.viewWidth} ${this.viewHeight}`;
+        return `0 0 ${this.viewWidth} ${this.viewHeight}`;
       },
     },
   });

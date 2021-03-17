@@ -27,7 +27,6 @@
     computed: {
       pixelColor: {
         get(): string {
-          console.log(this.pixel.color);
           return this.pixel.color ?? "";
         },
         set(value: string) {

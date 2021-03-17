@@ -11,7 +11,7 @@ export class YardSettings extends Schema {
   canvasHeight = 600;
 
   @type("uint8")
-  pixelSize = 5;
+  pixelSize = 10;
 
   @type("uint8")
   playerNameMaxLength = 20;

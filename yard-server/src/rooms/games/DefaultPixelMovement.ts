@@ -1,6 +1,9 @@
 import { YardPixel } from "../schema/YardPixel";
-import { PixelMovement } from "./PixelMovement";
+import { YardSettings } from "../schema/YardSettings";
 import { YardState } from "../schema/YardState";
+
+import { PixelMovement } from "./PixelMovement";
+
 import { clamp } from "@/rooms/helpers/math";
 
 const minPause = 1000 / 60; // at most 60 moves per second
@@ -30,11 +33,17 @@ export class DefaultPixelMovement extends PixelMovement {
       speed = Math.min(speed * acceleration, maxSpeed);
     }
 
-    pixel.x = clamp(pixel.x + Math.cos(angle) * speed, 0, this.state.settings.canvasWidth);
-    pixel.y = clamp(pixel.y - Math.sin(angle) * speed, 0, this.state.settings.canvasHeight);
+    pixel.x += Math.cos(angle) * speed;
+    pixel.y -= Math.sin(angle) * speed;
+    clampPixelPosition(pixel, this.state.settings);
 
     this.currentSpeeds.set(pixelId, speed);
     this.lastMoves.set(pixelId, Date.now());
   }
 }
 
+export function clampPixelPosition(pixel: YardPixel, settings: YardSettings): void {
+  const padding = settings.pixelSize / 2;
+  pixel.x = clamp(pixel.x, padding, settings.canvasWidth - padding);
+  pixel.y = clamp(pixel.y, padding, settings.canvasHeight - padding);
+}

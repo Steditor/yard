@@ -1,6 +1,7 @@
+import { SchemaProperties } from "%/schema/helpers";
 import { YardPixel } from "%/schema/YardPixel";
 
-import { SchemaProperties, watchObject } from "@/yardAPI/store/helpers";
+import { watchObject } from "@/yardAPI/store/helpers";
 
 import { reactive } from "vue";
 

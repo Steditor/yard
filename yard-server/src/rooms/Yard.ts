@@ -7,6 +7,7 @@ import { MoveCommand } from "@/rooms/commands/MoveCommand";
 import { OnJoinCommand } from "@/rooms/commands/OnJoinCommand";
 import { OnLeaveCommand } from "@/rooms/commands/OnLeaveCommand";
 import { PlayerSetNameCommand } from "@/rooms/commands/PlayerSetNameCommand";
+import { SetSettingsCommand } from "@/rooms/commands/SetSettingsCommand";
 
 import { DefaultGame } from "@/rooms/games/DefaultGame";
 import { Game } from "@/rooms/games/Game";
@@ -33,6 +34,10 @@ export class Yard extends Room<YardState> {
     }
     this.setState(new YardState());
     this.game = new DefaultGame(this.state);
+
+    this.onMessage("setSettings", (client, settings) => {
+      this.dispatcher.dispatch(new SetSettingsCommand(), { client, settings });
+    });
 
     this.onMessage("setName", (client, name) => {
       this.dispatcher.dispatch(new PlayerSetNameCommand(), { client, name });

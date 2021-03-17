@@ -1,6 +1,5 @@
+import { SchemaProperties } from "%/schema/helpers";
 import { MapSchema, Schema } from "@colyseus/schema";
-
-export type SchemaProperties<T extends Schema> = Omit<T, keyof Schema>;
 
 export function watchObject<T extends Schema>(target: SchemaProperties<T>, source: T): void {
   Object.assign(target, source);

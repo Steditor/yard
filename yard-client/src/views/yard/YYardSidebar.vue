@@ -24,8 +24,10 @@
         return "pi " + (this.$yardAPI.store.localSettings.showNames ? "pi-eye" : "pi-eye-slash");
       },
       pixels(): Map<string, PixelStore> {
-        const all = this.$yardAPI.store.pixels as Map<string, PixelStore>;
-        return new Map([ ...all.entries() ].filter((entry) => entry[1].player === this.$yardAPI.store.sessionId));
+        return new Map(
+          Array.from(this.$yardAPI.store.pixels.entries())
+            .filter(([ , pixel ]) => pixel.player === this.$yardAPI.store.sessionId),
+        );
       },
     },
   });

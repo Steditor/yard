@@ -1,8 +1,9 @@
+import { SchemaProperties } from "%/schema/helpers";
 import { reactive } from "vue";
 
 import { YardPlayer } from "%/schema/YardPlayer";
 
-import { SchemaProperties, watchObject } from "@/yardAPI/store/helpers";
+import { watchObject } from "@/yardAPI/store/helpers";
 
 export default class PlayerStore implements SchemaProperties<YardPlayer> {
   private readonly _properties = reactive<SchemaProperties<YardPlayer>>({

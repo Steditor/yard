@@ -7,8 +7,10 @@
       <DataTable :value="people" class="p-datatable-sm">
         <Column header="Username">
           <template #body="slotProps">
-            {{slotProps.data.name}}
-            <Tag v-if="slotProps.data.id === $yardAPI.store.sessionId" severity="info" value="It's you" />
+            <span>
+              {{slotProps.data.name}}
+              <Tag v-if="slotProps.data.id === $yardAPI.store.sessionId" severity="info" value="It's you" />
+            </span>
           </template>
         </Column>
         <Column header="Kick User">

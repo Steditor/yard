@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      Yard information
+      Yard Information
     </template>
     <template #content>
       <p>Hello {{$yardAPI.store.me()?.name}}!</p>
