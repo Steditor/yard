@@ -13,5 +13,7 @@ export abstract class Game {
   abstract onPlayerJoin(client: Client): void;
   abstract onPlayerLeave(client: Client): void;
 
+  abstract applyGameSettings(): void;
+
   abstract pixelMovement: PixelMovement;
 }

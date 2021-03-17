@@ -35,5 +35,6 @@
     right: 0;
     bottom: 0;
     padding: 2rem;
+    overflow: auto;
   }
 </style>

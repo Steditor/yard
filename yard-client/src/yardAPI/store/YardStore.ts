@@ -5,6 +5,7 @@ import LocalSettingsStore from "@/yardAPI/store/LocalSettingsStore";
 import PixelStore from "@/yardAPI/store/PixelStore";
 import PlayerStore from "@/yardAPI/store/PlayerStore";
 import SettingsStore from "@/yardAPI/store/SettingsStore";
+import GameSettingsStore from "@/yardAPI/store/GameSettingsStore";
 import YardAPI from "@/yardAPI/YardAPI";
 
 import * as Colyseus from "colyseus.js";
@@ -16,8 +17,10 @@ export default class YardStore {
   private readonly _roomId = ref<null | string>(null);
 
   public readonly settings = new SettingsStore();
+  public readonly gameSettings = new GameSettingsStore();
   public readonly players = shallowReactive(new Map<string, PlayerStore>());
   public readonly pixels = shallowReactive(new Map<string, PixelStore>());
+  private readonly _pixelHighlight = ref<null | string>(null);
 
   public readonly localSettings = new LocalSettingsStore();
 
@@ -32,6 +35,7 @@ export default class YardStore {
     this._roomId.value = room.id;
 
     this.settings.watch(room.state.settings);
+    this.gameSettings.watch(room.state.gameSettings);
 
     watchMap(this.players, PlayerStore, room.state.players);
 
@@ -43,8 +47,10 @@ export default class YardStore {
     this._roomId.value = null;
 
     this.settings.clear();
+    this.gameSettings.clear();
     this.players.clear();
     this.pixels.clear();
+    this._pixelHighlight.value = null;
   }
 
   get sessionId(): string | null {
@@ -53,6 +59,14 @@ export default class YardStore {
 
   get roomId(): string | null {
     return this._roomId.value;
+  }
+
+  get pixelHighlight(): string | null {
+    return this._pixelHighlight.value;
+  }
+
+  set pixelHighlight(pixelId: string | null) {
+    this._pixelHighlight.value = pixelId;
   }
 
   public me(): PlayerStore | undefined {

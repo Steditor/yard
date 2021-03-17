@@ -48,6 +48,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    > ::v-deep * {
+      flex-shrink: 0;
+    }
   }
   .logo-link {
     align-self: flex-start;

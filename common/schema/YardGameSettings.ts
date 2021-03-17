@@ -8,7 +8,7 @@
 import { Schema, type, ArraySchema, MapSchema, DataChange } from '@colyseus/schema';
 
 
-export class YardPlayer extends Schema {
-    @type("string") public name!: string;
-    @type("boolean") public admin!: boolean;
+export class YardGameSettings extends Schema {
+    @type("uint8") public minPixelPerPerson!: number;
+    @type("boolean") public rope!: boolean;
 }

@@ -39,11 +39,13 @@ export class KeyboardController extends Controller {
       }
       if (event.key in keyMapping) {
         this.keys[keyMapping[event.key]] = true;
+        event.preventDefault();
       }
     });
     document.addEventListener("keyup", (event) => {
       if (event.key in keyMapping) {
         this.keys[keyMapping[event.key]] = false;
+        event.preventDefault();
       }
     });
     document.addEventListener("blur", () => {

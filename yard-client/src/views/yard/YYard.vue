@@ -2,7 +2,7 @@
   <div class="y-full-size y-flex-center yard-container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet">
       <rect :x="0" :y="0" :width="viewWidth" :height="viewHeight" fill="white" />
-      <YPixel v-for="pixel in $yardAPI.store.pixels" :key="pixel[0]" :pixel="pixel[1]" />
+      <YPixel v-for="pixel in $yardAPI.store.pixels" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" />
     </svg>
   </div>
 </template>

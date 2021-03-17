@@ -10,6 +10,7 @@ import { KeyboardController } from "@/yardAPI/controller/KeyboardController";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
 import { PixelAPI } from "@/yardAPI/api/PixelAPI";
 import { RoomAPI } from "@/yardAPI/api/RoomAPI";
+import { GameAPI } from "@/yardAPI/api/GameAPI";
 import router from "@/router";
 import { vm } from "@/main";
 import { ToastMessage } from "../../typings/primetoast";
@@ -33,6 +34,7 @@ export default class YardAPI {
   public readonly playerAPI: PlayerAPI;
   public readonly pixelAPI: PixelAPI;
   public readonly roomAPI: RoomAPI;
+  public readonly gameAPI: GameAPI;
 
   public readonly controller: Controller;
 
@@ -41,6 +43,7 @@ export default class YardAPI {
     this.playerAPI = new PlayerAPI(this);
     this.pixelAPI = new PixelAPI(this);
     this.roomAPI = new RoomAPI(this);
+    this.gameAPI = new GameAPI(this);
     this.store = new YardStore(this);
 
     this.controller = new KeyboardController(this);
