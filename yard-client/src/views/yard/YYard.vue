@@ -1,5 +1,5 @@
 <template>
-  <div class="y-full-size y-flex-center">
+  <div class="y-full-size y-flex-center yard-container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet">
       <rect :x="-pixelSize" :y="-pixelSize" :width="viewWidth" :height="viewHeight" fill="white" />
       <YPixel v-for="pixel in $yardAPI.store.pixels" :key="pixel[0]" :pixel="pixel[1]" />
@@ -32,4 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
+  .yard-container {
+    user-select: none;
+  }
 </style>
