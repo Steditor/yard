@@ -25,9 +25,9 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import InputText from "primevue/inputtext/InputText";
-  import Button from "primevue/button/Button";
-  import Card from "primevue/card/Card";
+  import Button from "primevue/button";
+  import Card from "primevue/card";
+  import InputText from "primevue/inputtext";
 
   export default defineComponent({
     name: "YModLogin",

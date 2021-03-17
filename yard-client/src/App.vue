@@ -10,8 +10,8 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import ConfirmPopup from "primevue/confirmpopup/ConfirmPopup";
-  import Toast from "primevue/toast/Toast";
+  import ConfirmPopup from "primevue/confirmpopup";
+  import Toast from "primevue/toast";
 
   import YMenu from "@/components/menu/YMenu.vue";
 

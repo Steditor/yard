@@ -17,10 +17,11 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
-
-  import Card from "primevue/card/Card";
-  import YCopyable from "@/components/YCopyable.vue";
   import { RouteLocationRaw } from "vue-router";
+
+  import Card from "primevue/card";
+
+  import YCopyable from "@/components/YCopyable.vue";
 
   export default defineComponent({
     name: "YModInfo",

@@ -5,7 +5,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
 
-  import ColorPicker from "primevue/colorpicker/ColorPicker";
+  import ColorPicker from "primevue/colorpicker";
 
   import PixelStore from "@/yardAPI/store/PixelStore";
 

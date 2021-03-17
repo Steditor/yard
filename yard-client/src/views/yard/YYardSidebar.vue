@@ -6,7 +6,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import Button from "primevue/button/Button";
+  import Button from "primevue/button";
 
   import YPixelSettings from "@/views/yard/YPixelSettings.vue";
   import PixelStore from "@/yardAPI/store/PixelStore";

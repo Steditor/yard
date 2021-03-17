@@ -15,9 +15,9 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import Button from "primevue/button/Button";
-  import InputText from "primevue/inputtext/InputText";
-  import OverlayPanel from "primevue/overlaypanel/OverlayPanel";
+  import Button from "primevue/button";
+  import InputText from "primevue/inputtext";
+  import OverlayPanel from "primevue/overlaypanel";
 
   export default defineComponent({
     name: "YUserSettings",

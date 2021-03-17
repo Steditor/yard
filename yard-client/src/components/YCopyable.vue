@@ -8,7 +8,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import Button from "primevue/button/Button";
+  import Button from "primevue/button";
 
   export default defineComponent({
     name: "YCopyable",

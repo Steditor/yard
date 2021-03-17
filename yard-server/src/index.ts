@@ -36,8 +36,8 @@ app.use("/colyseus", expressBasicAuth({
 if (process.env.NODE_ENV === "production") {
   // in production mode, the express server serves the vue dist directory
   const staticPath = process.env.VUE_DIST_DIR ?? localConfig.VUE_DIST_DIR;
-  app.use("/", serveStatic(staticPath));
-  app.get("*", (req, res) => {
+  app.use(serveStatic(staticPath));
+  app.get("*", (req: express.Request, res: express.Response) => {
     res.sendFile("index.html", { root: staticPath });
   });
 } else {

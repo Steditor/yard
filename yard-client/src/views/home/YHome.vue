@@ -24,8 +24,8 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import TabView from "primevue/tabview/TabView";
-  import TabPanel from "primevue/tabpanel/TabPanel";
+  import TabView from "primevue/tabview";
+  import TabPanel from "primevue/tabpanel";
 
   import YJoinPanel from "./YJoinPanel.vue";
   import YCreatePanel from "./YCreatePanel.vue";

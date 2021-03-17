@@ -28,11 +28,11 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import Button from "primevue/button/Button";
-  import Card from "primevue/card/Card";
-  import Column from "primevue/column/Column";
-  import DataTable from "primevue/datatable/DataTable";
-  import Tag from "primevue/tag/Tag";
+  import Button from "primevue/button";
+  import Card from "primevue/card";
+  import Column from "primevue/column";
+  import DataTable from "primevue/datatable";
+  import Tag from "primevue/tag";
 
   export default defineComponent({
     name: "YModPeople",

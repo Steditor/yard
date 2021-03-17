@@ -17,8 +17,8 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import Button from "primevue/button/Button";
-  import InputText from "primevue/inputtext/InputText";
+  import Button from "primevue/button";
+  import InputText from "primevue/inputtext";
 
   export default defineComponent({
     name: "YCreatePanel",
