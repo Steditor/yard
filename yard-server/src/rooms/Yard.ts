@@ -63,6 +63,10 @@ export class Yard extends Room<YardState> {
     this.onMessage("color", (client, data) => {
       this.dispatcher.dispatch(new ColorCommand(), { client, data });
     });
+
+    this.onMessage("*", (client, type, message) => {
+      this.game.onMessage(type, client, message, this.dispatcher);
+    });
   }
 
   public consumeInitialModerationKey(key: string): boolean {

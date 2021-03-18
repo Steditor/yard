@@ -1,3 +1,4 @@
+import { Dispatcher } from "@colyseus/command";
 import { Client } from "colyseus";
 
 import { YardState } from "../schema/YardState";
@@ -12,6 +13,8 @@ export abstract class Game {
 
   abstract onPlayerJoin(client: Client): void;
   abstract onPlayerLeave(client: Client): void;
+
+  abstract onMessage(type: string | number, client: Client, message: unknown, dispatcher: Dispatcher): void;
 
   abstract applyGameSettings(): void;
 

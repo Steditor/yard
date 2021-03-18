@@ -11,7 +11,6 @@
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
   "dependencies": {
-    "@types/overlayscrollbars": "^1.12.0",
     "colyseus.js": "^0.14.4",
     "core-js": "^3.9.1",
     "gsap": "^3.6.0",
@@ -27,6 +26,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.168",
+    "@types/overlayscrollbars": "^1.12.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "^4.5.12",

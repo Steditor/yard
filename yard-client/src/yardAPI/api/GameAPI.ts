@@ -11,4 +11,8 @@ export class GameAPI {
   public setSettings(settings: SetGameSettingsPayload): boolean {
     return this._api.send("setGameSettings", settings);
   }
+
+  public shuffleRope(): boolean {
+    return this._api.send("shuffleRope");
+  }
 }

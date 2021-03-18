@@ -23,3 +23,17 @@ export function watchMap<T extends Schema, W>(
     target.delete(key);
   };
 }
+
+export function watchArrayMapProxy<T>(
+  target: Array<T>,
+  source: MapSchema<T>,
+): void {
+  source.onAdd = (item, key) => {
+    target[Number.parseInt(key, 36)] = item;
+  };
+  source.onChange = source.onAdd;
+  source.onRemove = () => {
+    // server has to make sure that we only ever delete at the end.
+    target.pop();
+  };
+}

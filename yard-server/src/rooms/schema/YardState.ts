@@ -4,6 +4,7 @@ import { YardPixel } from "./YardPixel";
 import { YardPlayer } from "./YardPlayer";
 import { YardSettings } from "./YardSettings";
 import { YardGameSettings } from "./YardGameSettings";
+import { YardGameData } from "./YardGameData";
 
 export class YardState extends Schema {
   @type(YardSettings)
@@ -17,4 +18,7 @@ export class YardState extends Schema {
 
   @type({ map: YardPixel })
   pixels = new MapSchema<YardPixel>();
+
+  @type(YardGameData)
+  gameData = new YardGameData();
 }
