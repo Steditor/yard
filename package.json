@@ -28,13 +28,13 @@
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
   "devDependencies": {
-    "@colyseus/schema": "^1.0.16",
-    "ajv": "^7.2.1",
+    "@colyseus/schema": "^1.0.23",
+    "ajv": "^8.2.0",
     "cli-real-favicon": "0.0.8",
     "cross-env": "^7.0.3",
     "multiview": "^3.0.1",
-    "tslib": "^2.1.0",
-    "typescript": "^4.2.3"
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
   },
   "dependencies": {}
 }
