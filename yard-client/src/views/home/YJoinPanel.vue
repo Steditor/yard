@@ -63,6 +63,18 @@
         );
         if (this.joinYardResult === JoinYardResult.SUCCESSFUL) {
           await this.$router.push({ name: "Yard", params: { roomId: this.yardCode } });
+        } else if (this.joinYardResult === JoinYardResult.ROOM_NOT_FOUND) {
+          this.$toast.add({
+            severity: "error",
+            summary: "The specified yard was not found.",
+            detail: "Are you sure that the Yard code is correct?",
+          });
+        } else {
+          this.$toast.add({
+            severity: "error",
+            summary: "Could not join the yard.",
+            detail: "Maybe the server is not working properly right now, or your browser or your connection does not fully support WebSockets.",
+          });
         }
       },
     },

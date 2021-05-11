@@ -34,7 +34,11 @@
         if (roomId) {
           await this.$router.push({ name: "Moderation", params: { roomId } });
         } else {
-          // TODO: error handling
+          this.$toast.add({
+            severity: "error",
+            summary: "Your yard could not be created.",
+            detail: "Maybe the server is not working properly right now, or your browser or your connection does not fully support WebSockets.",
+          });
         }
       },
     },
