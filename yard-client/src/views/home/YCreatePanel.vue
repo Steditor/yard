@@ -5,8 +5,8 @@
   <div class="p-field p-fluid">
     <span class="p-float-label p-input-icon-right">
       <i class="pi pi-user" />
-      <InputText id="username" type="text" v-model="username" @keyup.enter="createYard()" />
-      <label for="username">Choose a Username</label>
+      <InputText id="username-create" type="text" v-model="username" @keyup.enter="createYard()" />
+      <label for="username-create">Choose a Username</label>
     </span>
   </div>
   <div class="p-field p-fluid">
