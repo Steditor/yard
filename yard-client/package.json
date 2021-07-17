@@ -1,6 +1,6 @@
 {
   "name": "yard-client",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "description": "client for virtual yard",
   "author": "Stefan Neubert <dev@steditor.net>",
