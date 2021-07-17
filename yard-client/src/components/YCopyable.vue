@@ -1,5 +1,5 @@
 <template>
-  <span class="copyable p-shadow-3">
+  <span class="copyable shadow-3">
     <slot :content="content">{{content}}</slot>
     <Button icon="pi pi-copy" class="p-button-rounded p-button-text" @click="copy()" />
   </span>

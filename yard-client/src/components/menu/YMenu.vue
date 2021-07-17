@@ -13,8 +13,8 @@
     <div style="flex: 1" />
     <YMenuSeparator />
     <template v-if="$yardAPI.store.roomId">
-      <YMenuItem :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Yard" icon="pi pi-desktop" class="p-mb-1" />
-      <YMenuItem :to="{ name: 'Moderation', params: { roomId: $yardAPI.store.roomId } }" title="Settings" icon="pi pi-cog" class="p-mb-3" />
+      <YMenuItem :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Yard" icon="pi pi-desktop" class="mb-1" />
+      <YMenuItem :to="{ name: 'Moderation', params: { roomId: $yardAPI.store.roomId } }" title="Settings" icon="pi pi-cog" class="mb-3" />
     </template>
   </aside>
 </template>
@@ -48,7 +48,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    > ::v-deep * {
+    > ::v-deep(*) {
       flex-shrink: 0;
     }
   }

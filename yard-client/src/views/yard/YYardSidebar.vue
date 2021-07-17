@@ -3,7 +3,7 @@
   <div class="pixel-container">
     <div ref="pixelScrollContainer" class="pixel-scroll-container">
       <div class="inner-pixel-container">
-        <YPixelSettings v-for="pixel in pixels" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" class="p-mt-1" />
+        <YPixelSettings v-for="pixel in pixels" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" class="mt-1" />
       </div>
     </div>
   </div>

@@ -13,9 +13,8 @@ export class KickCommand extends Command<YardState, {
   author: Client | undefined,
   sessionId: KickPayload,
 }> {
-  async execute({ sessionId }: this["payload"]): Promise<boolean> {
+  execute({ sessionId }: this["payload"]): void {
     this.room.clients.find((client) => client.sessionId === sessionId)?.leave(YardCloseCodes.KICKED);
-    return true;
   }
   validate({ author, sessionId }: this["payload"]): boolean {
     if (!validate(sessionId)) {

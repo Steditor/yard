@@ -1,11 +1,11 @@
 <template>
-  <div v-if="isAdmin()" class="p-grid">
-    <div class="p-col-12 p-lg-6">
+  <div v-if="isAdmin()" class="grid">
+    <div class="col-12 lg:col-6">
       <YModInfo  />
-      <YModSettings class="p-mt-3" />
-      <YModGameSettings class="p-mt-3" />
+      <YModSettings class="mt-3" />
+      <YModGameSettings class="mt-3" />
     </div>
-    <div class="p-col-12 p-lg-6">
+    <div class="col-12 lg:col-6">
       <YModPeople />
     </div>
   </div>

@@ -49,10 +49,10 @@
 
 <style lang="scss" scoped>
   .pixel-color-picker {
-    ::v-deep input {
+    ::v-deep(input) {
       transition: border-radius ease-in-out 0.2s;
     }
-    &.active ::v-deep input {
+    &.active ::v-deep(input) {
       box-shadow: inset 0 0 0 1px #9FA8DA;
       border-radius: 10px;
     }

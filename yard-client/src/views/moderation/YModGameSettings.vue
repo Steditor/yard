@@ -4,21 +4,21 @@
       Game Settings
     </template>
     <template #content>
-      <div class="p-fluid p-formgrid">
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Pixel per Person</label>
-          <div class="p-col-6 p-md-5">
+      <div class="p-fluid formgrid">
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0">Pixel per Person</label>
+          <div class="col-6 md:col-5">
             <InputNumber :min="0" v-model="minPixelPerPerson" />
           </div>
         </div>
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Rope</label>
-          <div class="p-col-6 p-md-5 rope-switch-col">
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0">Rope</label>
+          <div class="col-6 md:col-5 rope-switch-col">
             Hide
-            <InputSwitch v-model="rope" class="p-ml-2 p-mr-2" />
+            <InputSwitch v-model="rope" class="ml-2 mr-2" />
             Show
           </div>
-          <div class="p-col-6 p-md-5">
+          <div class="col-6 md:col-5">
             <Button label="Shuffle Rope Order" icon="pi pi-refresh" @click="shuffleRope" />
           </div>
         </div>

@@ -5,7 +5,7 @@
         Login required
       </template>
       <template #content>
-        <div class="p-field p-fluid">
+        <div class="field p-fluid">
           <span class="p-float-label p-input-icon-right">
             <i class="pi pi-user" />
             <InputText id="moderationKey" type="text" v-model="moderationKey" @keyup.enter="login()" />
@@ -14,7 +14,7 @@
         </div>
       </template>
       <template #footer>
-        <div class="p-field p-fluid">
+        <div class="field p-fluid">
           <Button label="Login" icon="pi pi-login" class="p-button-lg p-button-success" @click="login()" />
         </div>
       </template>

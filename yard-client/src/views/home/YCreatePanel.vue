@@ -2,14 +2,14 @@
   <p>
     You want to create a new Yard for you and your friends?
   </p>
-  <div class="p-field p-fluid">
+  <div class="field p-fluid">
     <span class="p-float-label p-input-icon-right">
       <i class="pi pi-user" />
       <InputText id="username-create" type="text" v-model="username" @keyup.enter="createYard()" />
       <label for="username-create">Choose a Username</label>
     </span>
   </div>
-  <div class="p-field p-fluid">
+  <div class="field p-fluid">
     <Button label="Create Yard" icon="pi pi-plus" class="p-button-lg p-button-success" @click="createYard()" />
   </div>
 </template>

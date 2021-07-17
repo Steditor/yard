@@ -1,8 +1,8 @@
 <template>
   <Button title="User Settings" icon="pi pi-user" class="p-button-text p-button-secondary" @click="toggleUserOverlay" />
   <OverlayPanel ref="userOverlay" class="user-settings">
-    <h3 class="p-mt-0">User Settings</h3>
-    <div class="p-field p-fluid">
+    <h3 class="mt-0">User Settings</h3>
+    <div class="field p-fluid">
     <span class="p-float-label p-input-icon-right">
       <i class="pi pi-user" />
       <InputText id="username" type="text" v-model="username" />

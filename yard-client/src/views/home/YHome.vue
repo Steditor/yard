@@ -5,14 +5,14 @@
         <TabPanel>
           <template #header>
             <i class="pi pi-sign-in"></i>
-            <span class="p-ml-3">Join a Yard</span>
+            <span class="ml-3">Join a Yard</span>
           </template>
           <YJoinPanel />
         </TabPanel>
         <TabPanel>
           <template #header>
             <i class="pi pi-plus"></i>
-            <span class="p-ml-3">Create a Yard</span>
+            <span class="ml-3">Create a Yard</span>
           </template>
           <YCreatePanel />
         </TabPanel>

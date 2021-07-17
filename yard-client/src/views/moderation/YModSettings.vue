@@ -4,31 +4,31 @@
       Yard Settings
     </template>
     <template #content>
-      <div class="p-fluid p-formgrid">
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Yard Size</label>
-          <div class="p-col-6 p-md-5">
+      <div class="p-fluid formgrid">
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0">Yard Size</label>
+          <div class="col-6 md:col-5">
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon">Width:</span>
               <InputNumber suffix=" px" :min="100" v-model="yardWidth" />
             </div>
           </div>
-          <div class="p-col-6 p-md-5">
+          <div class="col-6 md:col-5">
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon">Height:</span>
               <InputNumber suffix=" px" :min="100" v-model="yardHeight" />
             </div>
           </div>
         </div>
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Pixel Size</label>
-          <div class="p-col-6 p-md-5">
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0">Pixel Size</label>
+          <div class="col-6 md:col-5">
             <InputNumber suffix=" px" :min="1" v-model="pixelSize" />
           </div>
         </div>
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Playername Max. Length</label>
-          <div class="p-col-6 p-md-5">
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0">Playername Max. Length</label>
+          <div class="col-6 md:col-5">
             <InputNumber :min="5" v-model="playerNameMaxLength" />
           </div>
         </div>

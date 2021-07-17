@@ -6,6 +6,7 @@ import serveStatic from "serve-static";
 import expressBasicAuth from "express-basic-auth";
 
 import { Server } from "colyseus";
+import { WebSocketTransport } from "@colyseus/ws-transport";
 import { monitor } from "@colyseus/monitor";
 
 import { Yard } from "./rooms/Yard";
@@ -19,7 +20,9 @@ app.use(express.json());
 
 const server = http.createServer(app);
 const gameServer = new Server({
-  server,
+  transport: new WebSocketTransport({
+    server,
+  }),
 });
 
 // register room handlers

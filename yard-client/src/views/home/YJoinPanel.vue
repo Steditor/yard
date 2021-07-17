@@ -3,7 +3,7 @@
     You want to join an existing Yard?
     The creator can provide you with a direct link or send you a code to input here:
   </p>
-  <div class="p-field p-fluid">
+  <div class="field p-fluid">
     <span class="p-float-label p-input-icon-right">
       <i class="pi pi-key" />
       <InputText id="yard-code" type="text" v-model="yardCode" @keyup.enter="joinYard()" :class="yardCodeClass" />
@@ -12,7 +12,7 @@
     <small class="p-invalid" v-if="roomNotFound">Yard not found.</small>
     <small class="p-invalid" v-if="unknownError">Could not join Yard due to an unknown error.</small>
   </div>
-  <div class="p-field p-fluid">
+  <div class="field p-fluid">
     <span class="p-float-label p-input-icon-right">
       <i class="pi pi-user" />
       <InputText id="username-join" type="text" v-model="username" @keyup.enter="joinYard()" />

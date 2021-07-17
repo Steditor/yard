@@ -1,5 +1,5 @@
 <template>
-  <div class="y-menu-separator p-mt-3 p-mb-3"></div>
+  <div class="y-menu-separator mt-3 mb-3"></div>
 </template>
 
 <script>
