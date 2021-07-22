@@ -1,6 +1,6 @@
 # Yard
 
-Simulate running around on a yard with many many many people.
+Simulate running around on a yard with many people represented as one or multiple colorful pixels.
 
 ## Setup
 

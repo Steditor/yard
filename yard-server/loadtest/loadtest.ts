@@ -46,7 +46,7 @@ function randomMove(pixel: string): MovePayload {
 function randAngle(oldAngle: number) {
   const rand = Math.random();
   const newAngle = Math.random() * 2 * Math.PI;
-  if (rand < 99 / 100) {
+  if (rand < 75 / 100) {
     return oldAngle;
   } else {
     return newAngle;
