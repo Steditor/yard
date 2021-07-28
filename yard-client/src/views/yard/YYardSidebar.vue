@@ -1,5 +1,4 @@
 <template>
-  <Button title="Show/Hide Names" :icon="icon" class="p-button-text p-button-secondary" @click="toggleViewNames" />
   <div class="pixel-container">
     <div ref="pixelScrollContainer" class="pixel-scroll-container">
       <div class="inner-pixel-container">
@@ -13,23 +12,13 @@
   import { defineComponent } from "vue";
   import OverlayScrollbars from "overlayscrollbars";
 
-  import Button from "primevue/button";
-
   import YPixelSettings from "@/views/yard/YPixelSettings.vue";
   import PixelStore from "@/yardAPI/store/PixelStore";
 
   export default defineComponent({
     name: "YYardSidebar",
-    components: { YPixelSettings, Button },
-    methods: {
-      toggleViewNames() {
-        this.$yardAPI.store.localSettings.showNames = !this.$yardAPI.store.localSettings.showNames;
-      },
-    },
+    components: { YPixelSettings },
     computed: {
-      icon(): string {
-        return "pi " + (this.$yardAPI.store.localSettings.showNames ? "pi-eye" : "pi-eye-slash");
-      },
       pixels(): Map<string, PixelStore> {
         return new Map(
           Array.from(this.$yardAPI.store.pixels.entries())
