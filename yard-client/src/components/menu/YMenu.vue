@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <RouterLink :to="{ name: 'Home' }" title="Home" class="logo-link"><YLogo icon animated /></RouterLink>
+    <RouterLink :to="{ name: 'Home' }" title="Home" class="logo-link lg:block hidden"><YLogo icon animated /></RouterLink>
     <YMenuItem :to="{ name: 'Home' }" title="Home" icon="pi pi-home" />
 
     <template v-if="$yardAPI.store.roomId">
@@ -10,11 +10,11 @@
 
     <router-view name="Sidebar" />
 
-    <div style="flex: 1" />
-    <YMenuSeparator />
+    <div class="flex-1" />
     <template v-if="$yardAPI.store.roomId">
-      <YMenuItem :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Yard" icon="pi pi-desktop" class="mb-1" />
-      <YMenuItem :to="{ name: 'Moderation', params: { roomId: $yardAPI.store.roomId } }" title="Settings" icon="pi pi-cog" class="mb-3" />
+      <YMenuSeparator />
+      <YMenuItem v-if="$router.currentRoute.value.name==='Moderation'" :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Go back to Yard" icon="pi pi-desktop" />
+      <YMenuItem v-if="$router.currentRoute.value.name==='Yard'" :to="{ name: 'Moderation', params: { roomId: $yardAPI.store.roomId } }" title="Configure Yard Settings" icon="pi pi-cog" />
     </template>
   </aside>
 </template>
@@ -44,6 +44,9 @@
     width: vars.$menuWidth;
     background-color: var(--surface-c);
 
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -54,6 +57,6 @@
   }
   .logo-link {
     align-self: flex-start;
-    padding: calc((4rem - 50px) / 2);
+    padding: 0 calc((4rem - 50px) / 2) 0.5rem;
   }
 </style>
