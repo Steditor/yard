@@ -1,5 +1,5 @@
 <template>
-  <ColorPicker v-model="pixelColor" @mouseover="selectAndHighlightPixel" @mouseout="unhighlightPixel" class="pixel-color-picker" :class="{ active }" />
+  <ColorPicker v-model="pixelColor" @pointerover="selectAndHighlightPixel" @pointerout="unhighlightPixel" class="pixel-color-picker" :class="{ active }" />
 </template>
 
 <script lang="ts">
