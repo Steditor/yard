@@ -8,6 +8,7 @@
   import ColorPicker from "primevue/colorpicker";
 
   import PixelStore from "@/yardAPI/store/PixelStore";
+  import OverlayScrollbars from "overlayscrollbars";
 
   export default defineComponent({
     name: "YPixelSettings",
@@ -20,6 +21,9 @@
       pixelId: {
         type: String,
         required: true,
+      },
+      overlayScrollbars: {
+        type: Object as PropType<OverlayScrollbars | undefined>,
       },
     },
     methods: {
@@ -42,6 +46,13 @@
       },
       active(): boolean {
         return this.$yardAPI.controller.activePixel === this.pixelId;
+      },
+    },
+    watch: {
+      active(): void {
+        if (this.active && this.overlayScrollbars) {
+          this.overlayScrollbars.scroll({ el: this.$el, scroll: "ifneeded", block: "nearest" }, 500);
+        }
       },
     },
   });

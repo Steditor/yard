@@ -2,7 +2,8 @@
   <div class="pixel-container">
     <div ref="pixelScrollContainer" class="pixel-scroll-container">
       <div class="inner-pixel-container">
-        <YPixelSettings v-for="pixel in pixels" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" class="mt-1" />
+        <YPixelSettings v-for="pixel in pixels" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" class="mt-1"
+          :overlay-scrollbars="overlayScrollbars" />
       </div>
     </div>
   </div>
@@ -18,6 +19,11 @@
   export default defineComponent({
     name: "YYardSidebar",
     components: { YPixelSettings },
+    data() {
+      return {
+        overlayScrollbars: undefined as OverlayScrollbars | undefined,
+      };
+    },
     computed: {
       pixels(): Map<string, PixelStore> {
         return new Map(
@@ -27,7 +33,7 @@
       },
     },
     mounted() {
-      OverlayScrollbars(this.$refs.pixelScrollContainer as HTMLDivElement, {
+      this.overlayScrollbars = OverlayScrollbars(this.$refs.pixelScrollContainer as HTMLDivElement, {
         resize: "none",
         className: "os-theme-light",
         overflowBehavior: {
