@@ -17,7 +17,7 @@ module.exports = {
       args[0].faviconGenerator = faviconGenerator;
       return args;
     });
-    config.plugins.has("copy") && config.plugin("copy").tap(([ patterns ]) => {
+    config.plugins.has("copy") && config.plugin("copy").tap(([ { patterns } ]) => {
       const to = patterns[0].to;
       patterns[0].force = true; // so the original `/public` folder keeps priority
 
@@ -28,7 +28,7 @@ module.exports = {
         to,
         toType: "dir",
       });
-      return [ patterns ];
+      return [ { patterns } ];
     });
   },
 };

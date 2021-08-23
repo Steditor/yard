@@ -10,6 +10,9 @@
     "dev": "multiview [ npm run dev-client ] [ npm run dev-server ] -x 1000",
     "dev-client": "cd yard-client && npm run serve",
     "dev-server": "cd yard-server && npm run dev",
+    "lint": "npm run lint-client && npm run lint-server",
+    "lint-client": "cd yard-client && npm run lint",
+    "lint-server": "cd yard-server && npm run lint",
     "build": "multiview [ npm run build-client ] [ npm run build-server ] -x 1000",
     "build-client": "cd yard-client && npm run build",
     "build-server": "cd yard-server && npm run build",
@@ -28,12 +31,12 @@
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
   "devDependencies": {
-    "@colyseus/schema": "^1.0.25",
+    "@colyseus/schema": "^1.0.26",
     "ajv": "^8.6.2",
-    "cli-real-favicon": "0.0.8",
+    "cli-real-favicon": "^0.0.8",
     "cross-env": "^7.0.3",
     "multiview": "^3.0.1",
-    "tslib": "^2.3.0",
+    "tslib": "^2.3.1",
     "typescript": "^4.3.5"
   },
   "dependencies": {}
