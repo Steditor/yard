@@ -4,7 +4,7 @@ import { TouchController } from "@/yardAPI/controller/TouchController";
 import { KeyboardController } from "@/yardAPI/controller/KeyboardController";
 
 export class MultiController extends Controller {
-  private readonly controllers: Controller[] = [];
+  public readonly controllers: Controller[] = [];
 
   constructor(api: YardAPI, isMainController: boolean) {
     super(api, isMainController);

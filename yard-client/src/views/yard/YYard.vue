@@ -1,5 +1,5 @@
 <template>
-  <div class="y-full-size y-flex-center yard-container">
+  <div class="y-full-size y-flex-center yard-container" ref="container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet">
       <rect :x="0" :y="0" :width="viewWidth" :height="viewHeight" fill="white" />
       <YRope v-if="$yardAPI.store.gameSettings.rope" />
@@ -9,6 +9,9 @@
 </template>
 
 <script lang="ts">
+  import { TouchController } from "@/yardAPI/controller/TouchController";
+  import { MultiController } from "@/yardAPI/controller/MultiController";
+
   import YPixel from "@/views/yard/YPixel.vue";
   import YRope from "@/views/yard/YRope.vue";
   import { defineComponent } from "vue";
@@ -26,6 +29,17 @@
       viewBox(): string {
         return `0 0 ${this.viewWidth} ${this.viewHeight}`;
       },
+    },
+    mounted() {
+      const controllers: TouchController[] = [];
+      if (this.$yardAPI.controller instanceof TouchController) {
+        controllers.push(this.$yardAPI.controller);
+      } else if (this.$yardAPI.controller instanceof MultiController) {
+        controllers.push(
+          ...this.$yardAPI.controller.controllers.filter((c) => c instanceof TouchController) as TouchController[],
+        );
+      }
+      controllers.forEach((c) => c.registerPointerDown(this.$refs.container as EventTarget));
     },
   });
 </script>
