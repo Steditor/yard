@@ -14,8 +14,10 @@ export class MultiController extends Controller {
     );
   }
 
-  // getter is implemented in super
-  // eslint-disable-next-line accessor-pairs
+  get activePixel(): string | null {
+    return super.activePixel;
+  }
+
   set activePixel(pixel: string | null) {
     super.activePixel = pixel;
     // eslint-disable-next-line no-return-assign
