@@ -30,8 +30,8 @@ export class KeyboardController extends Controller {
     left: false,
   };
 
-  constructor(api: YardAPI) {
-    super(api);
+  constructor(api: YardAPI, isMainController: boolean) {
+    super(api, isMainController);
 
     document.addEventListener("keydown", (event) => {
       if (event.target instanceof HTMLInputElement) {

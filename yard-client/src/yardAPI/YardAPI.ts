@@ -6,7 +6,7 @@ import { YardRoomJoinOptions } from "%/roomInterface";
 
 import YardStore from "@/yardAPI/store/YardStore";
 import Controller from "@/yardAPI/controller/Controller";
-import { KeyboardController } from "@/yardAPI/controller/KeyboardController";
+import { MultiController } from "@/yardAPI/controller/MultiController";
 import { PlayerAPI } from "@/yardAPI/api/PlayerAPI";
 import { PixelAPI } from "@/yardAPI/api/PixelAPI";
 import { RoomAPI } from "@/yardAPI/api/RoomAPI";
@@ -46,7 +46,7 @@ export default class YardAPI {
     this.gameAPI = new GameAPI(this);
     this.store = new YardStore(this);
 
-    this.controller = new KeyboardController(this);
+    this.controller = new MultiController(this, true);
   }
 
   public async createYard(username: string): Promise<string | undefined> {

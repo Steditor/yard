@@ -6,10 +6,12 @@ import { ref, watchEffect } from "vue";
 export default abstract class Controller {
   protected readonly _api: YardAPI;
 
-  protected constructor(api: YardAPI) {
+  protected constructor(api: YardAPI, isMainController: boolean) {
     this._api = api;
-    watchEffect(() => this.grabPixel());
-    this.startLoop();
+    if (isMainController) {
+      watchEffect(() => this.grabPixel());
+      this.startLoop();
+    }
   }
 
   private readonly _activePixel = ref<null | string>(null);
