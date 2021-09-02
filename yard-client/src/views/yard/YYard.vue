@@ -1,5 +1,5 @@
 <template>
-  <div class="y-full-size y-flex-center yard-container" ref="container">
+  <div class="y-full-size yard-container" ref="container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet" class="yard">
       <rect x="0" y="0" :width="viewWidth" :height="viewHeight" fill="white" />
       <YRope v-if="$yardAPI.store.gameSettings.rope" />
@@ -93,6 +93,11 @@
 
 <style lang="scss" scoped>
   .yard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     user-select: none;
     touch-action: none;
 

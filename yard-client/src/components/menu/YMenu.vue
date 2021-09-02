@@ -1,9 +1,8 @@
 <template>
   <aside>
     <RouterLink :to="{ name: 'Home' }" title="Home" class="logo-link lg:block hidden"><YLogo icon animated /></RouterLink>
-    <YMenuItem :to="{ name: 'Home' }" title="Home" icon="pi pi-home" />
 
-    <template v-if="$yardAPI.store.roomId">
+    <template v-if="$yardAPI.store.roomId && $router.currentRoute.value.name!=='Home'">
       <YMenuSeparator />
       <YUserSettings />
     </template>
@@ -13,8 +12,8 @@
     <div class="flex-1" />
     <template v-if="$yardAPI.store.roomId">
       <YMenuSeparator />
-      <YMenuItem v-if="$router.currentRoute.value.name==='Moderation'" :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Go back to Yard" icon="pi pi-desktop" />
       <YMenuItem v-if="$router.currentRoute.value.name==='Yard'" :to="{ name: 'Moderation', params: { roomId: $yardAPI.store.roomId } }" title="Configure Yard Settings" icon="pi pi-cog" />
+      <YMenuItem v-else :to="{ name: 'Yard', params: { roomId: $yardAPI.store.roomId } }" title="Go back to Yard" icon="pi pi-desktop" />
     </template>
   </aside>
 </template>

@@ -27,11 +27,13 @@ p {
   bottom: 0;
 }
 
-.y-flex-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.y-flex-center-wrapper {
+  margin: auto;
+  padding: 1rem;
+}
+
+.p-accordion .p-accordion-tab.p-accordion-tab-active {
+  margin-bottom: 0;
 }
 
 a {
