@@ -38,7 +38,7 @@
 
 <style lang="scss" scoped>
   .login-card {
-    width: 500px;
+    max-width: 500px;
   }
   i, span {
     vertical-align: middle;
