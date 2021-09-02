@@ -7,18 +7,18 @@
       <div class="p-fluid formgrid">
         <div class="field grid">
           <label class="col-12 mb-2 md:col-2 md:mb-0">Pixel per Person</label>
-          <div class="col-6 md:col-5">
+          <div class="col-12 sm:col-6 md:col-5">
             <InputNumber :min="0" v-model="minPixelPerPerson" />
           </div>
         </div>
         <div class="field grid">
           <label class="col-12 mb-2 md:col-2 md:mb-0">Rope</label>
-          <div class="col-6 md:col-5 rope-switch-col">
+          <div class="col-12 mb-3 sm:col-6 sm:mb-0 md:col-5 rope-switch-col">
             Hide
             <InputSwitch v-model="rope" class="ml-2 mr-2" />
             Show
           </div>
-          <div class="col-6 md:col-5">
+          <div class="col-12 sm:col-6 md:col-5">
             <Button label="Shuffle Rope Order" icon="pi pi-refresh" @click="shuffleRope" />
           </div>
         </div>
