@@ -10,7 +10,7 @@
         Others can join the yard with this key.
         They can also use the link <YCopyable :content="yardLink"><RouterLink :to="yardRoute" target="_blank">{{yardLink}}</RouterLink></YCopyable>.
       </p>
-      <p>If you want to allow others to moderate this yard, send them the moderation key <YCopyable :content="moderationKey" /> in addition to the yard link.</p>
+      <p>If you want to allow others to moderate this yard, send them the moderation key in addition to the yard link: <YCopyable :content="moderationKey" secret />.</p>
     </template>
   </Card>
 </template>

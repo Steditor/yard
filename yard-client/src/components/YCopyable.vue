@@ -1,6 +1,6 @@
 <template>
   <span class="copyable shadow-3">
-    <slot :content="content">{{content}}</slot>
+    <span @click="revealSecret = !revealSecret" :class="{ secret }"><slot :content="content">{{visibleContent}}</slot></span>
     <Button icon="pi pi-copy" class="p-button-rounded p-button-text" @click="copy()" />
   </span>
 </template>
@@ -18,14 +18,29 @@
         type: String,
         required: true,
       },
+      secret: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data() {
+      return {
+        revealSecret: false,
+      };
+    },
+    computed: {
+      visibleContent() {
+        return this.secret && !this.revealSecret ? "[click to reveal secret]" : this.content;
+      },
     },
     methods: {
       copy() {
         navigator.clipboard.writeText(this.content);
+        const copyContent = this.secret && !this.revealSecret ? "A hidden string" : `'${this.content}'`;
         this.$toast.add({
           severity: "success",
           summary: "Copied",
-          detail: `'${this.content}' was copied to your clipboard.`,
+          detail: `${copyContent} was copied to your clipboard.`,
           life: 2000,
         });
       },
@@ -41,6 +56,9 @@
     .p-button.p-button-rounded {
       width: 1em;
       height: 1em;
+    }
+    .secret {
+      cursor: pointer;
     }
   }
 </style>
