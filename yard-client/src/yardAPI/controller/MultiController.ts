@@ -4,14 +4,13 @@ import { TouchController } from "@/yardAPI/controller/TouchController";
 import { KeyboardController } from "@/yardAPI/controller/KeyboardController";
 
 export class MultiController extends Controller {
-  public readonly controllers: Controller[] = [];
+  public readonly keyboard: KeyboardController | null = null;
+  public readonly touch: TouchController | null = null;
 
   constructor(api: YardAPI, isMainController: boolean) {
     super(api, isMainController);
-    this.controllers.push(
-      new KeyboardController(api, false),
-      new TouchController(api, false),
-    );
+    this.keyboard = new KeyboardController(api, false);
+    this.touch = new TouchController(api, false);
   }
 
   get activePixel(): string | null {
@@ -20,11 +19,12 @@ export class MultiController extends Controller {
 
   set activePixel(pixel: string | null) {
     super.activePixel = pixel;
-    // eslint-disable-next-line no-return-assign
-    this.controllers.forEach((c) => c.activePixel = pixel);
+    if (this.keyboard) { this.keyboard.activePixel = pixel; }
+    if (this.touch) { this.touch.activePixel = pixel; }
   }
 
   sendMoveCommand(): void {
-    this.controllers.forEach((c) => c.sendMoveCommand());
+    this.keyboard?.sendMoveCommand();
+    this.touch?.sendMoveCommand();
   }
 }
