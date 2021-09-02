@@ -32,10 +32,25 @@ p {
   padding: 1rem;
 }
 
+a {
+  color: var(--text-color-secondary);
+}
+
+// Primevue fixes
+
 .p-accordion .p-accordion-tab.p-accordion-tab-active {
   margin-bottom: 0;
 }
 
-a {
-  color: var(--text-color-secondary);
+.p-speeddial-mask.y-sd-mask {
+  pointer-events: none;
+  &.p-speeddial-mask-visible {
+    pointer-events: all;
+  }
+}
+.p-speeddial {
+  pointer-events: none;
+  > * {
+    pointer-events: all;
+  }
 }

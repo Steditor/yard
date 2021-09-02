@@ -75,7 +75,7 @@ export default class YardAPI {
       this._room = await this._client.joinById(id, options);
       this.watchRoom(this._room);
       this.receiveMessages(this._room);
-    } catch (e) {
+    } catch (e: any) {
       if ((e.message as string).includes("not found")) {
         return JoinYardResult.ROOM_NOT_FOUND;
       } else {
