@@ -20,6 +20,7 @@
     "primeflex": "^3.0.1",
     "primeicons": "^4.1.0",
     "primevue": "^3.6.4",
+    "qrcode": "^1.4.4",
     "screenfull": "^5.1.0",
     "vue": "^3.2.4",
     "vue-router": "^4.0.11"
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.172",
     "@types/overlayscrollbars": "^1.12.1",
+    "@types/qrcode": "^1.4.1",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "@vue/cli-plugin-babel": "^5.0.0-beta.3",
