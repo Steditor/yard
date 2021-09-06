@@ -50,7 +50,7 @@
       },
       touchOrigin(): { cx: number, cy: number } {
         const origin = this.controller?.origin.value;
-        if (origin) {
+        if (origin && this.$refs.touchVisuals) {
           const svgPoint = toSVGCoordinates(origin, this.$refs.touchVisuals as SVGSVGElement);
           return { cx: svgPoint.x, cy: svgPoint.y };
         } else {
@@ -59,7 +59,7 @@
       },
       touchTarget(): { cx: number, cy: number } {
         const target = this.controller?.target.value;
-        if (target) {
+        if (target && this.$refs.touchVisuals) {
           const svgPoint = toSVGCoordinates(target, this.$refs.touchVisuals as SVGSVGElement);
           return { cx: svgPoint.x, cy: svgPoint.y };
         } else {
@@ -69,7 +69,7 @@
       touchControllerPath(): string {
         const origin = this.controller?.origin.value;
         const target = this.controller?.target.value;
-        if (origin && target) {
+        if (origin && target && this.$refs.touchVisuals) {
           const originPoint = toSVGCoordinates(origin, this.$refs.touchVisuals as SVGSVGElement);
           const targetPoint = toSVGCoordinates(target, this.$refs.touchVisuals as SVGSVGElement);
           return `M${originPoint.x} ${originPoint.y}L${targetPoint.x} ${targetPoint.y}`;
