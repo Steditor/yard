@@ -2,7 +2,7 @@
   <div class="pixel-container">
     <div ref="pixelScrollContainer" class="pixel-scroll-container">
       <div class="inner-pixel-container">
-        <YPixelSettings v-for="pixel in pixels" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" class="mt-1"
+        <YPixelSettings v-for="pixel in this.$yardAPI.store.myPixels()" :key="pixel[0]" :pixel="pixel[1]" :pixel-id="pixel[0]" class="mt-1"
           :overlay-scrollbars="overlayScrollbars" />
       </div>
     </div>
@@ -14,7 +14,6 @@
   import OverlayScrollbars from "overlayscrollbars";
 
   import YPixelSettings from "@/views/yard/YPixelSettings.vue";
-  import PixelStore from "@/yardAPI/store/PixelStore";
 
   export default defineComponent({
     name: "YYardSidebar",
@@ -23,14 +22,6 @@
       return {
         overlayScrollbars: undefined as OverlayScrollbars | undefined,
       };
-    },
-    computed: {
-      pixels(): Map<string, PixelStore> {
-        return new Map(
-          Array.from(this.$yardAPI.store.pixels.entries())
-            .filter(([ , pixel ]) => pixel.player === this.$yardAPI.store.sessionId),
-        );
-      },
     },
     mounted() {
       this.overlayScrollbars = OverlayScrollbars(this.$refs.pixelScrollContainer as HTMLDivElement, {

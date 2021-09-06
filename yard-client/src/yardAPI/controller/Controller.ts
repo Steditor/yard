@@ -17,6 +17,9 @@ export default abstract class Controller {
   private readonly _activePixel = ref<null | string>(null);
 
   set activePixel(pixel: string | null) {
+    if (pixel && pixel !== this._activePixel.value) {
+      this._api.store.setPixelHighlight(pixel, true);
+    }
     this._activePixel.value = pixel;
   }
 

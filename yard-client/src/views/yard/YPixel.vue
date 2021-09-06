@@ -6,8 +6,10 @@
       <rect :x="-textWidth/2" :y="-textHeight/2" :width="textWidth" :height="textHeight" rx="5" ry="100%"></rect>
       <text ref="tag">{{playerName}}</text>
     </g>
-    <rect class="pixel-highlight" v-if="pixelId === $yardAPI.store.pixelHighlight"
-          :x="-pixelSize/2" :y="-pixelSize/2" :width="pixelSize" :height="pixelSize" ></rect>
+    <rect class="pixel-highlight" v-if="pixelId === $yardAPI.store.pixelHighlight?.pixelId"
+          :x="-pixelSize/2" :y="-pixelSize/2" :width="pixelSize" :height="pixelSize"
+          :class="{ once: $yardAPI.store.pixelHighlight?.once }"
+    ></rect>
   </g>
 </template>
 
@@ -152,6 +154,9 @@
     stroke: var(--player-color);
     stroke-opacity: 1;
     animation: pixel-pulse 1s infinite cubic-bezier(0.15, 0, 0.42, 1.07);
+    &.once {
+      animation-iteration-count: 1;
+    }
   }
 
   @keyframes pixel-pulse {

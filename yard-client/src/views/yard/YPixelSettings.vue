@@ -29,10 +29,10 @@
     methods: {
       selectAndHighlightPixel(): void {
         this.$yardAPI.controller.activePixel = this.pixelId;
-        this.$yardAPI.store.pixelHighlight = this.pixelId;
+        this.$yardAPI.store.setPixelHighlight(this.pixelId, false);
       },
       unhighlightPixel(): void {
-        this.$yardAPI.store.pixelHighlight = null;
+        this.$yardAPI.store.setPixelHighlight(null);
       },
     },
     computed: {

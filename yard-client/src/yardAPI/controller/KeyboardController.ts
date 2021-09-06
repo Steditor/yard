@@ -41,6 +41,20 @@ export class KeyboardController extends Controller {
         this.keys[keyMapping[event.key]] = true;
         event.preventDefault();
       }
+      if (event.key === "Tab") {
+        if (!this.activePixel) return;
+
+        const myPixels = api.store.myPixels();
+        const currentIndex = myPixels.findIndex(([ id ]) => id === this.activePixel);
+
+        const direction = event.shiftKey ? -1 : 1;
+        const nextPixel = myPixels[(currentIndex + direction + myPixels.length) % myPixels.length];
+        if (nextPixel) {
+          api.controller.activePixel = nextPixel[0];
+        }
+
+        event.preventDefault();
+      }
     });
     document.addEventListener("keyup", (event) => {
       if (event.key in keyMapping) {

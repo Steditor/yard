@@ -22,7 +22,7 @@ export default class YardStore {
   public readonly gameData = new GameDataStore();
   public readonly players = shallowReactive(new Map<string, PlayerStore>());
   public readonly pixels = shallowReactive(new Map<string, PixelStore>());
-  private readonly _pixelHighlight = ref<null | string>(null);
+  private readonly _pixelHighlight = ref<null | { pixelId: string, once: boolean }>(null);
 
   public readonly localSettings = new LocalSettingsStore();
 
@@ -65,16 +65,22 @@ export default class YardStore {
     return this._roomId.value;
   }
 
-  get pixelHighlight(): string | null {
+  get pixelHighlight(): null | { pixelId: string, once: boolean } {
     return this._pixelHighlight.value;
   }
 
-  set pixelHighlight(pixelId: string | null) {
-    this._pixelHighlight.value = pixelId;
+  setPixelHighlight(pixelId: string | null, once = false): void {
+    this._pixelHighlight.value = pixelId ? { pixelId, once } : null;
   }
 
   public me(): PlayerStore | undefined {
     const id = this.sessionId;
     return id ? this.players.get(id) : undefined;
+  }
+
+  public myPixels(): Array<[ string, PixelStore ]> {
+    return Array.from(this.pixels.entries())
+      .filter(([ , pixel ]) => pixel.player === this.sessionId)
+      .sort(([ idA ], [ idB ]) => idA < idB ? -1 : idA > idB ? 1 : 0);
   }
 }
