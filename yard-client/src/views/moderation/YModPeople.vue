@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      People
+      {{numberOfPeople}} {{numberOfPeople === 1 ? 'Person' : 'People'}} on the Yard
     </template>
     <template #content>
       <DataTable :value="people" class="p-datatable-sm">
@@ -48,6 +48,9 @@
             admin: player.admin,
           }),
         );
+      },
+      numberOfPeople() {
+        return this.$yardAPI.store.players.size;
       },
     },
     methods: {
