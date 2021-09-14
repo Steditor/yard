@@ -47,6 +47,8 @@ export default class YardAPI {
     this.store = new YardStore(this);
 
     this.controller = new MultiController(this, true);
+
+    window.addEventListener("beforeunload", () => this.onBeforeUnload());
   }
 
   public async createYard(username: string): Promise<string | undefined> {
@@ -117,6 +119,10 @@ export default class YardAPI {
     this._room = undefined;
     this.store.clear();
     router.push({ name: "Home" });
+  }
+
+  private onBeforeUnload() {
+    this._room?.leave(true);
   }
 }
 
