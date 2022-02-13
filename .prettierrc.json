@@ -1,0 +1,14 @@
+{
+  "trailingComma": "all",
+  "vueIndentScriptAndStyle": true,
+  "importOrder": [
+    "^vue$",
+    "^primevue/(.*)$",
+    "^@yard/(.*)$",
+    "^[\\./](.*)(?<!local\\.config\\.json)$",
+    "^[\\./](.*)local\\.config\\.json$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"]
+}

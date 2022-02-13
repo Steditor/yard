@@ -1,24 +1,24 @@
 {
-  "name": "yard",
-  "version": "2.5.0",
+  "name": "@yard/yard",
+  "version": "3.0.0",
   "private": true,
   "description": "Simulate running around on a yard with many people.",
   "scripts": {
-    "postinstall": "multiview [ npm run install-client ] [ npm run install-server ] -x 4000",
-    "install-client": "cd yard-client && npm install",
-    "install-server": "cd yard-server && npm install",
-    "dev": "multiview [ npm run dev-client ] [ npm run dev-server ] -x 1000",
-    "dev-client": "cd yard-client && npm run serve",
-    "dev-server": "cd yard-server && npm run dev",
-    "lint": "npm run lint-client && npm run lint-server",
-    "lint-client": "cd yard-client && npm run lint",
-    "lint-server": "cd yard-server && npm run lint",
-    "build": "multiview [ npm run build-client ] [ npm run build-server ] -x 1000",
-    "build-client": "cd yard-client && npm run build",
-    "build-server": "cd yard-server && npm run build",
+    "clean": "npm run clean --workspaces && rimraf *.tsbuildinfo",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces",
+    "prettier": "prettier --write .",
+    "dev": "npm run build:common && stmux -w always -e ERROR -t \"Yard (Ctrl+a, ?)\" --mouse -- [ \"npm run dev:server\" .. \"npm run dev:client\" .. \"npm run dev:common\" ]",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "dev:common": "npm run dev -w common",
+    "build": "npm run build:common && stmux -w error -t \"Yard (Ctrl+a, ?)\" -- [ \"npm run build:server\" .. \"npm run build:client\" ]",
+    "build:server": "npm run build -w server",
+    "build:client": "npm run build -w client",
+    "build:common": "npm run build -w common",
+    "prepare": "husky install",
     "build-favicon": "cd logo && real-favicon generate faviconDescription.json faviconData.json favicon",
-    "check-favicon": "cd logo && real-favicon check-for-update --fail-on-update faviconData.json",
-    "start": "cross-env-shell NODE_ENV=production \"cd yard-server && npm start\""
+    "check-favicon": "cd logo && real-favicon check-for-update --fail-on-update faviconData.json"
   },
   "repository": {
     "type": "git",
@@ -30,14 +30,39 @@
   ],
   "author": "Stefan Neubert <dev@steditor.net>",
   "license": "MIT",
+  "workspaces": [
+    "client",
+    "server",
+    "common"
+  ],
+  "dependencies": {
+    "ajv": "^8.10.0",
+    "lodash-es": "^4.17.21",
+    "tslib": "^2.3.1"
+  },
   "devDependencies": {
     "@colyseus/schema": "^1.0.26",
-    "ajv": "^8.6.2",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^16.11.24",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "cli-real-favicon": "^0.0.8",
-    "cross-env": "^7.0.3",
-    "multiview": "^3.0.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.3.5"
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.2",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "stmux": "^1.8.3",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "^4.5.5"
   },
-  "dependencies": {}
+  "lint-staged": {
+    "**/*.{js,ts,vue}": "eslint --cache --fix",
+    "**/*": "prettier --write --ignore-unknown"
+  }
 }

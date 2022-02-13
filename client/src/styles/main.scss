@@ -1,0 +1,57 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+
+  background-color: var(--surface-b);
+
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+#app {
+  height: 100%;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+.y-full-size {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.y-flex-center-wrapper {
+  margin: auto;
+  padding: 1rem;
+}
+
+a {
+  color: var(--text-color-secondary);
+}
+
+// Primevue fixes
+
+.p-accordion .p-accordion-tab.p-accordion-tab-active {
+  margin-bottom: 0;
+}
+
+.p-speeddial-mask.y-sd-mask {
+  pointer-events: none;
+  &.p-speeddial-mask-visible {
+    pointer-events: all;
+  }
+}
+.p-speeddial {
+  pointer-events: none;
+  > * {
+    pointer-events: all;
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@yard/server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist *.tsbuildinfo",
+    "lint": "eslint \"./**/*.{js,ts}\"",
+    "lint:fix": "eslint \"./**/*.{js,ts}\" --fix",
+    "dev": "nodemon --watch ../common --watch . --exec \"node --experimental-json-modules --loader ts-node/esm\" src/index.ts",
+    "generate-schema": "npx schema-codegen src/rooms/schema/* --ts --output ../common/src/schema/",
+    "loadtest": "colyseus-loadtest loadtest/loadtest.ts",
+    "build": "tsc --build tsconfig.build.json",
+    "start": "cross-env NODE_ENV=production node --experimental-json-modules dist/index.js"
+  },
+  "devDependencies": {
+    "@colyseus/loadtest": "^0.14.6",
+    "@types/debug": "^4.1.7",
+    "@types/express": "^4.17.13",
+    "@types/randomcolor": "^0.5.6",
+    "@types/serve-static": "^1.13.10",
+    "cross-env": "^7.0.3"
+  },
+  "dependencies": {
+    "@colyseus/command": "^0.1.7",
+    "@colyseus/monitor": "^0.14.22",
+    "colyseus": "^0.14.23",
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
+    "http-proxy-middleware": "^2.0.1",
+    "nanoid": "^3.1.25",
+    "randomcolor": "^0.6.2",
+    "serve-static": "^1.14.1"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@yard/client",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist *.tsbuildinfo",
+    "lint": "eslint \"./**/*.{js,ts,vue}\"",
+    "lint:fix": "eslint \"./**/*.{js,ts,vue}\" --fix",
+    "dev": "vite",
+    "prebuild": "npm run clean",
+    "build": "tsc --build && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "colyseus.js": "^0.14.13",
+    "gsap": "^3.9.1",
+    "nanoid": "^3.2.0",
+    "overlayscrollbars": "^1.13.1",
+    "primeflex": "^3.1.2",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.11.1",
+    "qrcode": "^1.5.0",
+    "screenfull": "^6.0.1",
+    "vue": "^3.2.30",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@types/overlayscrollbars": "^1.12.1",
+    "@types/qrcode": "^1.4.2",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "eslint-plugin-vue": "^8.4.1",
+    "sass": "^1.49.7",
+    "vite": "^2.8.0",
+    "vite-plugin-html": "^3.0.6",
+    "vite-plugin-static-copy": "^0.2.0"
+  }
+}
