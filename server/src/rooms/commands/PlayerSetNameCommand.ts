@@ -4,12 +4,12 @@ import { Client } from "colyseus";
 
 import { SetNamePayload } from "@yard/common/playerInterface";
 
-import { YardState } from "../schema/YardState.js";
+import { Yard } from "../Yard.js";
 
 const validate = new Ajv().compile(SetNamePayload);
 
 export class PlayerSetNameCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     name: SetNamePayload;

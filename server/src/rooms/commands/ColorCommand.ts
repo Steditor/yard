@@ -4,13 +4,13 @@ import { Client } from "colyseus";
 
 import { ColorPayload } from "@yard/common/pixelInterface";
 
+import { Yard } from "../Yard.js";
 import { YardPixel } from "../schema/YardPixel.js";
-import { YardState } from "../schema/YardState.js";
 
 const validate = new Ajv().compile(ColorPayload);
 
 export class ColorCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     data: ColorPayload;

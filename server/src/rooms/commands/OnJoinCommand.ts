@@ -4,16 +4,16 @@ import { Client } from "colyseus";
 
 import { YardRoomJoinOptions } from "@yard/common/roomInterface";
 
+import { Yard } from "../Yard.js";
 import { Game } from "../games/Game.js";
 import { YardPlayer } from "../schema/YardPlayer.js";
-import { YardState } from "../schema/YardState.js";
 import { MakeAdminCommand } from "./MakeAdminCommand.js";
 import { PlayerSetNameCommand } from "./PlayerSetNameCommand.js";
 
 const validate = new Ajv().compile(YardRoomJoinOptions);
 
 export class OnJoinCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     options?: YardRoomJoinOptions;

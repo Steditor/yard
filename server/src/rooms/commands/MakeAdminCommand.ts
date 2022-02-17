@@ -6,12 +6,11 @@ import { MakeAdminPayload } from "@yard/common/playerInterface";
 
 import { Yard } from "../Yard.js";
 import { sendToast } from "../helpers/messages.js";
-import { YardState } from "../schema/YardState.js";
 
 const validate = new Ajv().compile(MakeAdminPayload);
 
 export class MakeAdminCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     key: MakeAdminPayload;

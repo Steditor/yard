@@ -3,6 +3,7 @@ import { Client } from "colyseus";
 import shuffle from "lodash-es/shuffle.js";
 import { nanoid } from "nanoid";
 
+import { Yard } from "../Yard";
 import { ShuffleRopeCommand } from "../commands/ShuffleRopeCommand.js";
 import ArrayMapProxy from "../helpers/ArrayMapProxy.js";
 import { randomPixel } from "../helpers/pixels.js";
@@ -50,7 +51,7 @@ export class DefaultGame extends Game {
     type: string | number,
     client: Client,
     message: unknown,
-    dispatcher: Dispatcher,
+    dispatcher: Dispatcher<Yard>,
   ): void {
     if (type === "shuffleRope") {
       dispatcher.dispatch(new ShuffleRopeCommand(), { client, game: this });

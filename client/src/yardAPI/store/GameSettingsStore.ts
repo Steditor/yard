@@ -27,11 +27,16 @@ export default class GameSettingsStore
   get rope(): boolean {
     return this._properties.rope;
   }
+
+  get hideSelf(): boolean {
+    return this._properties.hideSelf;
+  }
 }
 
 function defaultSettings(): SchemaProperties<YardGameSettings> {
   return {
     minPixelPerPerson: 1,
     rope: false,
+    hideSelf: false,
   };
 }

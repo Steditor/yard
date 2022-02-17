@@ -6,4 +6,7 @@ export class YardGameSettings extends Schema {
 
   @type("boolean")
   rope = false;
+
+  @type("boolean")
+  hideSelf = false;
 }

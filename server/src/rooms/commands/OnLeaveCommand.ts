@@ -1,11 +1,11 @@
 import { Command } from "@colyseus/command";
 import { Client } from "colyseus";
 
+import { Yard } from "../Yard.js";
 import { Game } from "../games/Game.js";
-import { YardState } from "../schema/YardState.js";
 
 export class OnLeaveCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     consented: boolean;

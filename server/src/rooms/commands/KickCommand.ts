@@ -5,12 +5,12 @@ import { Client } from "colyseus";
 import { KickPayload } from "@yard/common/playerInterface";
 import { YardCloseCodes } from "@yard/common/roomInterface";
 
-import { YardState } from "../schema/YardState.js";
+import { Yard } from "../Yard.js";
 
 const validate = new Ajv().compile(KickPayload);
 
 export class KickCommand extends Command<
-  YardState,
+  Yard,
   {
     author: Client | undefined;
     sessionId: KickPayload;

@@ -4,13 +4,13 @@ import { Client } from "colyseus";
 
 import { SetGameSettingsPayload } from "@yard/common/gameInterface";
 
+import { Yard } from "../Yard.js";
 import { Game } from "../games/Game.js";
-import { YardState } from "../schema/YardState.js";
 
 const validate = new Ajv().compile(SetGameSettingsPayload);
 
 export class SetGameSettingsCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     settings: SetGameSettingsPayload;

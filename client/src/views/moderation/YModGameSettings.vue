@@ -24,6 +24,14 @@
             />
           </div>
         </div>
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0">Own pixels</label>
+          <div class="col-12 mb-3 sm:col-6 sm:mb-0 md:col-5 rope-switch-col">
+            Show
+            <InputSwitch v-model="hideSelf" class="ml-2 mr-2" />
+            Hide
+          </div>
+        </div>
       </div>
     </template>
   </Card>
@@ -58,6 +66,14 @@
         },
         set(value: boolean) {
           this.$yardAPI.gameAPI.setSettings({ rope: value });
+        },
+      },
+      hideSelf: {
+        get(): boolean {
+          return this.$yardAPI.store.gameSettings.hideSelf;
+        },
+        set(value: boolean) {
+          this.$yardAPI.gameAPI.setSettings({ hideSelf: value });
         },
       },
     },

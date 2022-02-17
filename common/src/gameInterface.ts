@@ -19,6 +19,10 @@ export const SetGameSettingsPayload: JSONSchemaType<SetGameSettingsPayload> = {
       type: "boolean",
       nullable: true,
     },
+    hideSelf: {
+      type: "boolean",
+      nullable: true,
+    },
   },
   required: [],
   additionalProperties: false,

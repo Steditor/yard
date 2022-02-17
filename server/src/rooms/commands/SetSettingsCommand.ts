@@ -4,13 +4,13 @@ import { Client } from "colyseus";
 
 import { SetSettingsPayload } from "@yard/common/roomInterface";
 
+import { Yard } from "../Yard.js";
 import { clampPixelPosition } from "../games/DefaultPixelMovement.js";
-import { YardState } from "../schema/YardState.js";
 
 const validate = new Ajv().compile(SetSettingsPayload);
 
 export class SetSettingsCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     settings: SetSettingsPayload;
@@ -27,7 +27,7 @@ export class SetSettingsCommand extends Command<
     // shorten too long player names
     this.state.players.forEach(
       (player) =>
-        (player.name = player.name.substr(0, settings.playerNameMaxLength)),
+        (player.name = player.name.substring(0, settings.playerNameMaxLength)),
     );
   }
 

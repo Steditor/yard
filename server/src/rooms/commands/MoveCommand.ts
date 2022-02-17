@@ -4,15 +4,15 @@ import { Client } from "colyseus";
 
 import { MovePayload } from "@yard/common/pixelInterface";
 
+import { Yard } from "../Yard.js";
 import { Game } from "../games/Game.js";
 import { toRadians } from "../helpers/math.js";
 import { YardPixel } from "../schema/YardPixel.js";
-import { YardState } from "../schema/YardState.js";
 
 const validate = new Ajv().compile(MovePayload);
 
 export class MoveCommand extends Command<
-  YardState,
+  Yard,
   {
     client: Client;
     data: MovePayload;

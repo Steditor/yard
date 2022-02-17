@@ -11,4 +11,5 @@ import { Schema, type, ArraySchema, MapSchema, SetSchema, DataChange } from '@co
 export class YardGameSettings extends Schema {
     @type("uint8") public minPixelPerPerson!: number;
     @type("boolean") public rope!: boolean;
+    @type("boolean") public hideSelf!: boolean;
 }

@@ -4,7 +4,7 @@
       <rect x="0" y="0" :width="viewWidth" :height="viewHeight" fill="white" />
       <YRope v-if="$yardAPI.store.gameSettings.rope" />
       <YPixel
-        v-for="pixel in $yardAPI.store.pixels"
+        v-for="pixel in filteredPixels"
         :key="pixel[0]"
         :pixel="pixel[1]"
         :pixel-id="pixel[0]"
@@ -30,6 +30,7 @@
   import { MultiController } from "../../yardAPI/controller/MultiController";
   import { TouchController } from "../../yardAPI/controller/TouchController";
   import { Vec2 } from "../../yardAPI/controller/math";
+  import PixelStore from "../../yardAPI/store/PixelStore";
   import YPixel from "./YPixel.vue";
   import YRope from "./YRope.vue";
 
@@ -98,6 +99,17 @@
           return `M${originPoint.x} ${originPoint.y}L${targetPoint.x} ${targetPoint.y}`;
         } else {
           return "";
+        }
+      },
+      filteredPixels(): Map<string, PixelStore> {
+        if (this.$yardAPI.store.gameSettings.hideSelf) {
+          return new Map(
+            [...this.$yardAPI.store.pixels].filter(
+              ([_, pixel]) => pixel.player !== this.$yardAPI.store.sessionId,
+            ),
+          );
+        } else {
+          return this.$yardAPI.store.pixels;
         }
       },
     },
