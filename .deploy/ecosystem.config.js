@@ -7,7 +7,7 @@ module.exports = {
   apps: [
     {
       name: "Yard.io",
-      script: "./server/src/index.js",
+      script: "./index.js",
       env: Object.assign(
         {
           NODE_ENV: "production",
@@ -15,6 +15,7 @@ module.exports = {
         settings,
       ),
       cwd: "./server/dist",
+      interpreter_args: "--experimental-json-modules",
     },
   ],
 };
