@@ -23,6 +23,7 @@ export abstract class Game {
   ): void;
 
   abstract applyGameSettings(): void;
+  abstract ensurePixelCount(playerId: string): void;
 
   abstract pixelMovement: PixelMovement;
 }

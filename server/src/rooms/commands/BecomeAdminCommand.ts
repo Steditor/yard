@@ -2,18 +2,18 @@ import { Command } from "@colyseus/command";
 import Ajv from "ajv";
 import { Client, Room } from "colyseus";
 
-import { MakeAdminPayload } from "@yard/common/playerInterface";
+import { BecomeAdminPayload } from "@yard/common/playerInterface";
 
 import { Yard } from "../Yard.js";
 import { sendToast } from "../helpers/messages.js";
 
-const validate = new Ajv().compile(MakeAdminPayload);
+const validate = new Ajv().compile(BecomeAdminPayload);
 
-export class MakeAdminCommand extends Command<
+export class BecomeAdminCommand extends Command<
   Yard,
   {
     client: Client;
-    key: MakeAdminPayload;
+    key: BecomeAdminPayload;
   }
 > {
   execute({ client }: this["payload"]): void {

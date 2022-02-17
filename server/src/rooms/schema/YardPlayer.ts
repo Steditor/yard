@@ -5,5 +5,8 @@ export class YardPlayer extends Schema {
   name = "";
 
   @type("boolean")
+  spectator = false;
+
+  @type("boolean")
   admin = false;
 }

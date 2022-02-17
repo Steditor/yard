@@ -2,8 +2,8 @@ import { DebouncedFunc } from "lodash";
 import debounce from "lodash/debounce";
 
 import {
-  KickPayload,
-  MakeAdminPayload,
+  BecomeAdminPayload,
+  SessionIdPayload,
   SetNamePayload,
 } from "@yard/common/playerInterface";
 
@@ -26,12 +26,26 @@ export class PlayerAPI {
     }
   }
 
-  public makeAdmin(key: string): boolean {
-    return this._api.send("makeAdmin", key as MakeAdminPayload);
+  public becomeAdmin(key: string): boolean {
+    return this._api.send("becomeAdmin", key as BecomeAdminPayload);
+  }
+
+  public convertPlayer(sessionId: string, spectator: boolean): boolean {
+    return this._api.send(
+      spectator ? "makeSpectator" : "makePlayer",
+      sessionId as SessionIdPayload,
+    );
+  }
+
+  public convertUser(sessionId: string, admin: boolean): boolean {
+    return this._api.send(
+      admin ? "makeAdmin" : "makeUser",
+      sessionId as SessionIdPayload,
+    );
   }
 
   public kick(sessionId: string): boolean {
-    return this._api.send("kick", sessionId as KickPayload);
+    return this._api.send("kick", sessionId as SessionIdPayload);
   }
 }
 

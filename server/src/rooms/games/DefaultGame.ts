@@ -47,6 +47,28 @@ export class DefaultGame extends Game {
     }
   }
 
+  ensurePixelCount(playerId: string): void {
+    const player = this.state.players.get(playerId);
+    if (!player) return;
+    const current = Array.from(this.state.pixels.entries()).filter(
+      ([, pixel]) => pixel.player === playerId,
+    );
+
+    const min = player.spectator
+      ? 0
+      : this.state.gameSettings.minPixelPerPerson;
+    const max = min; // todo: maxPixelPerPerson
+    current.forEach(([key], index) => {
+      if (index >= max) {
+        this.removePixel(key);
+      }
+    });
+
+    for (let i = current.length; i < min; i++) {
+      this.addPixelFor(playerId);
+    }
+  }
+
   onMessage(
     type: string | number,
     client: Client,
@@ -62,27 +84,6 @@ export class DefaultGame extends Game {
     if (this.orderedPixelProxy) {
       const pixels = shuffle(Array.from(this.state.pixels.keys()));
       this.orderedPixelProxy.splice(0, undefined, ...pixels);
-    }
-  }
-
-  private ensurePixelCount(playerId: string): void {
-    const current = Array.from(this.state.pixels.entries()).filter(
-      ([, pixel]) => pixel.player === playerId,
-    );
-
-    // todo: maxPixelPerPerson
-    current.forEach(([key], index) => {
-      if (index >= this.state.gameSettings.minPixelPerPerson) {
-        this.removePixel(key);
-      }
-    });
-
-    for (
-      let i = current.length;
-      i < this.state.gameSettings.minPixelPerPerson;
-      i++
-    ) {
-      this.addPixelFor(playerId);
     }
   }
 

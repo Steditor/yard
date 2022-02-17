@@ -8,6 +8,7 @@ import { watchObject } from "./helpers";
 export default class PlayerStore implements SchemaProperties<YardPlayer> {
   private readonly _properties = reactive<SchemaProperties<YardPlayer>>({
     name: "",
+    spectator: false,
     admin: false,
   });
 
@@ -17,6 +18,10 @@ export default class PlayerStore implements SchemaProperties<YardPlayer> {
 
   get name(): string {
     return this._properties.name;
+  }
+
+  get spectator(): boolean {
+    return this._properties.spectator;
   }
 
   get admin(): boolean {

@@ -7,7 +7,7 @@ import { YardRoomJoinOptions } from "@yard/common/roomInterface";
 import { Yard } from "../Yard.js";
 import { Game } from "../games/Game.js";
 import { YardPlayer } from "../schema/YardPlayer.js";
-import { MakeAdminCommand } from "./MakeAdminCommand.js";
+import { BecomeAdminCommand } from "./BecomeAdminCommand.js";
 import { PlayerSetNameCommand } from "./PlayerSetNameCommand.js";
 
 const validate = new Ajv().compile(YardRoomJoinOptions);
@@ -35,9 +35,9 @@ export class OnJoinCommand extends Command<
       commands.push(setName);
     }
     if (options?.initialModerationKey) {
-      const makeAdmin = new MakeAdminCommand();
-      makeAdmin.setPayload({ client, key: options.initialModerationKey });
-      commands.push(makeAdmin);
+      const becomeAdmin = new BecomeAdminCommand();
+      becomeAdmin.setPayload({ client, key: options.initialModerationKey });
+      commands.push(becomeAdmin);
     }
     return commands;
   }

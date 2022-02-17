@@ -4,9 +4,11 @@ import { Client, Room } from "colyseus";
 
 import { YardRoomJoinOptions } from "@yard/common/roomInterface";
 
+import { BecomeAdminCommand } from "./commands/BecomeAdminCommand.js";
 import { ColorCommand } from "./commands/ColorCommand.js";
+import { ConvertPlayerCommand } from "./commands/ConvertPlayerCommand.js";
+import { ConvertUserCommand } from "./commands/ConvertUserCommand.js";
 import { KickCommand } from "./commands/KickCommand.js";
-import { MakeAdminCommand } from "./commands/MakeAdminCommand.js";
 import { MoveCommand } from "./commands/MoveCommand.js";
 import { OnJoinCommand } from "./commands/OnJoinCommand.js";
 import { OnLeaveCommand } from "./commands/OnLeaveCommand.js";
@@ -51,8 +53,42 @@ export class Yard extends Room<YardState> {
       this.dispatcher.dispatch(new PlayerSetNameCommand(), { client, name });
     });
 
-    this.onMessage("makeAdmin", (client, key) => {
-      this.dispatcher.dispatch(new MakeAdminCommand(), { client, key });
+    this.onMessage("becomeAdmin", (client, key) => {
+      this.dispatcher.dispatch(new BecomeAdminCommand(), { client, key });
+    });
+
+    this.onMessage("makeSpectator", (client, sessionId) => {
+      this.dispatcher.dispatch(new ConvertPlayerCommand(), {
+        author: client,
+        sessionId,
+        spectator: true,
+        game: this.game,
+      });
+    });
+
+    this.onMessage("makePlayer", (client, sessionId) => {
+      this.dispatcher.dispatch(new ConvertPlayerCommand(), {
+        author: client,
+        sessionId,
+        spectator: false,
+        game: this.game,
+      });
+    });
+
+    this.onMessage("makeAdmin", (client, sessionId) => {
+      this.dispatcher.dispatch(new ConvertUserCommand(), {
+        author: client,
+        sessionId,
+        admin: true,
+      });
+    });
+
+    this.onMessage("makeUser", (client, sessionId) => {
+      this.dispatcher.dispatch(new ConvertUserCommand(), {
+        author: client,
+        sessionId,
+        admin: false,
+      });
     });
 
     this.onMessage("kick", (client, sessionId) => {

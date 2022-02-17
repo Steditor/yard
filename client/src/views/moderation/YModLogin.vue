@@ -49,7 +49,7 @@
     },
     methods: {
       login() {
-        this.$yardAPI.playerAPI.makeAdmin(this.moderationKey);
+        this.$yardAPI.playerAPI.becomeAdmin(this.moderationKey);
       },
     },
   });

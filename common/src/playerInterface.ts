@@ -7,17 +7,17 @@ export const SetNamePayload: JSONSchemaType<SetNamePayload> = {
   minLength: 1,
 };
 
-export type MakeAdminPayload = string;
+export type BecomeAdminPayload = string;
 
-export const MakeAdminPayload: JSONSchemaType<MakeAdminPayload> = {
+export const BecomeAdminPayload: JSONSchemaType<BecomeAdminPayload> = {
   type: "string",
   minLength: 15,
   maxLength: 15,
 };
 
-export type KickPayload = string;
+export type SessionIdPayload = string;
 
-export const KickPayload: JSONSchemaType<KickPayload> = {
+export const SessionIdPayload: JSONSchemaType<SessionIdPayload> = {
   type: "string",
   minLength: 1,
 };
