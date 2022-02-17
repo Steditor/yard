@@ -9,6 +9,7 @@
     "dev": "nodemon --watch ../common --watch . --exec \"node --experimental-json-modules --loader ts-node/esm\" src/index.ts",
     "generate-schema": "npx schema-codegen src/rooms/schema/* --ts --output ../common/src/schema/",
     "loadtest": "colyseus-loadtest loadtest/loadtest.ts",
+    "prebuild": "npm run clean",
     "build": "tsc --build tsconfig.build.json",
     "start": "cross-env NODE_ENV=production node --experimental-json-modules dist/index.js"
   },
