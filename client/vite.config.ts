@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
-import localConfig from "../local.config.json";
+import localConfig from "../local.config.json" assert { type: "json" };
 
 const faviconGenerator = fs.readFileSync(
   "../logo/favicon/html_code.html",

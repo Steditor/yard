@@ -12,7 +12,7 @@
     "dev:server": "npm run dev -w server",
     "dev:client": "npm run dev -w client",
     "dev:common": "npm run dev -w common",
-    "build": "npm run build:common && stmux -w error -t \"Yard (Ctrl+a, ?)\" -- [ \"npm run build:server\" .. \"npm run build:client\" ]",
+    "build": "npm run build:common && npm run build:server && npm run build:client",
     "build:server": "npm run build -w server",
     "build:client": "npm run build -w client",
     "build:common": "npm run build -w common",

@@ -9,7 +9,7 @@ import serveStatic from "serve-static";
 
 import { Yard } from "./rooms/Yard.js";
 
-import localConfig from "../../local.config.json";
+import localConfig from "../../local.config.json" assert { type: "json" };
 
 const port = Number(process.env.EXPRESS_PORT ?? localConfig.EXPRESS_PORT);
 const app = express();

@@ -10,7 +10,7 @@
     "paths": {
       "@yard/common/*": ["./common/src/*"]
     },
-    "module": "ES2020",
+    "module": "esnext",
 
     // emit
     "declaration": true,
