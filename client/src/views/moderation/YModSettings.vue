@@ -38,16 +38,12 @@
 </template>
 
 <script lang="ts">
-  import {
-    ComponentCustomProperties,
-    WritableComputedOptions,
-    defineComponent,
-  } from "vue";
+  import { defineComponent } from "vue";
 
   import Card from "primevue/card";
   import InputNumber from "primevue/inputnumber";
 
-  import { SetSettingsPayload } from "@yard/common/roomInterface";
+  import { settingsFieldModel } from "../../yardAPI/helpers/fieldModels";
 
   export default defineComponent({
     name: "YModSettings",
@@ -62,23 +58,4 @@
       playerNameMaxLength: settingsFieldModel("playerNameMaxLength"),
     },
   });
-
-  type PropertiesOfType<TObj, TResult> = {
-    [K in keyof TObj]: TObj[K] extends TResult ? K : never;
-  }[keyof TObj];
-
-  function settingsFieldModel<
-    T extends SetSettingsPayload[keyof SetSettingsPayload],
-  >(
-    field: PropertiesOfType<Required<SetSettingsPayload>, T>,
-  ): WritableComputedOptions<T> {
-    return {
-      get(this: ComponentCustomProperties): T {
-        return this.$yardAPI.store.settings[field] as T;
-      },
-      set(this: ComponentCustomProperties, value: T) {
-        this.$yardAPI.roomAPI.setSettings({ [field]: value });
-      },
-    };
-  }
 </script>

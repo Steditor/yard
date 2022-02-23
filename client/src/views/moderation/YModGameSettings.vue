@@ -45,6 +45,8 @@
   import InputNumber from "primevue/inputnumber";
   import InputSwitch from "primevue/inputswitch";
 
+  import { gameSettingsFieldModel } from "../../yardAPI/helpers/fieldModels";
+
   export default defineComponent({
     name: "YModGameSettings",
     components: { Button, Card, InputNumber, InputSwitch },
@@ -52,30 +54,9 @@
       roomId(): string {
         return this.$yardAPI.store.roomId ?? "";
       },
-      minPixelPerPerson: {
-        get(): number {
-          return this.$yardAPI.store.gameSettings.minPixelPerPerson;
-        },
-        set(value: number) {
-          this.$yardAPI.gameAPI.setSettings({ minPixelPerPerson: value });
-        },
-      },
-      rope: {
-        get(): boolean {
-          return this.$yardAPI.store.gameSettings.rope;
-        },
-        set(value: boolean) {
-          this.$yardAPI.gameAPI.setSettings({ rope: value });
-        },
-      },
-      hideSelf: {
-        get(): boolean {
-          return this.$yardAPI.store.gameSettings.hideSelf;
-        },
-        set(value: boolean) {
-          this.$yardAPI.gameAPI.setSettings({ hideSelf: value });
-        },
-      },
+      minPixelPerPerson: gameSettingsFieldModel("minPixelPerPerson"),
+      rope: gameSettingsFieldModel("rope"),
+      hideSelf: gameSettingsFieldModel("hideSelf"),
     },
     methods: {
       shuffleRope() {
