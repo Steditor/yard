@@ -36,6 +36,7 @@
 
   import { defineComponent } from "vue";
 
+  import { MenuItem } from "primevue/menuitem";
   import SpeedDial from "primevue/speeddial";
 
   import YLogo from "../YLogo.vue";
@@ -95,7 +96,7 @@
             label: "Go Home",
             command: () => this.$router.push({ name: "Home" }),
           },
-        ],
+        ] as MenuItem[],
         isFullscreen: screenfull.isEnabled ? screenfull.isFullscreen : false,
       };
     },
