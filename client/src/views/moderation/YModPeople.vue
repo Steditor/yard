@@ -5,6 +5,16 @@
       the Yard
     </template>
     <template #content>
+      <div class="p-fluid formgrid">
+        <div class="field grid">
+          <label class="col-12 mb-2 sm:col-6 sm:mb-0 md:col-4"
+            >Playername Max. Length</label
+          >
+          <div class="col-12 sm:col-6 md:col-8">
+            <InputNumber :min="5" v-model="playerNameMaxLength" />
+          </div>
+        </div>
+      </div>
       <DataTable :value="people" class="p-datatable-sm">
         <Column header="Username">
           <template #body="slotProps">
@@ -84,11 +94,14 @@
   import Card from "primevue/card";
   import Column from "primevue/column";
   import DataTable from "primevue/datatable";
+  import InputNumber from "primevue/inputnumber";
   import Tag from "primevue/tag";
+
+  import { settingsFieldModel } from "../../yardAPI/helpers/fieldModels";
 
   export default defineComponent({
     name: "YModPeople",
-    components: { Button, Card, Column, DataTable, Tag },
+    components: { Button, Card, Column, DataTable, InputNumber, Tag },
     computed: {
       people() {
         return Array.from(this.$yardAPI.store.players.entries()).map(
@@ -103,6 +116,7 @@
       numberOfPeople() {
         return this.$yardAPI.store.players.size;
       },
+      playerNameMaxLength: settingsFieldModel("playerNameMaxLength"),
     },
     methods: {
       convertPlayer(sessionId: string, spectator: boolean): void {
