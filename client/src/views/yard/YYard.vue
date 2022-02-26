@@ -2,6 +2,7 @@
   <div class="yard-container" ref="container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet" class="yard">
       <rect x="0" y="0" :width="viewWidth" :height="viewHeight" fill="white" />
+      <g v-html="backgroundCode"></g>
       <YRope v-if="$yardAPI.store.gameSettings.rope" />
       <YPixel
         v-for="pixel in filteredPixels"
@@ -37,7 +38,16 @@
   export default defineComponent({
     name: "YYard",
     components: { YRope, YPixel },
+    props: {
+      background: {
+        type: String,
+        required: false,
+      },
+    },
     computed: {
+      backgroundCode(): string {
+        return this.background ?? this.$yardAPI.store.settings.backgroundCode;
+      },
       viewWidth(): number {
         return this.$yardAPI.store.settings.canvasWidth;
       },

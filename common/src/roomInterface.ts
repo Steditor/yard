@@ -33,7 +33,11 @@ export enum YardCloseCodes {
 export type SetSettingsPayload = Partial<
   Pick<
     SchemaProperties<YardSettings>,
-    "canvasWidth" | "canvasHeight" | "pixelSize" | "playerNameMaxLength"
+    | "canvasWidth"
+    | "canvasHeight"
+    | "backgroundCode"
+    | "pixelSize"
+    | "playerNameMaxLength"
   >
 >;
 
@@ -48,6 +52,10 @@ export const SetSettingsPayload: JSONSchemaType<SetSettingsPayload> = {
     canvasHeight: {
       type: "number",
       minimum: 100,
+      nullable: true,
+    },
+    backgroundCode: {
+      type: "string",
       nullable: true,
     },
     pixelSize: {

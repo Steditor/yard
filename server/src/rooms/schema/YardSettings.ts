@@ -10,6 +10,9 @@ export class YardSettings extends Schema {
   @type("uint16")
   canvasHeight = 600;
 
+  @type("string")
+  backgroundCode = `<svg xmlns="http://www.w3.org/2000/svg"></svg>`;
+
   @type("uint8")
   pixelSize = 10;
 

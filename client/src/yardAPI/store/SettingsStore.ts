@@ -26,6 +26,10 @@ export default class SettingsStore implements SchemaProperties<YardSettings> {
     return this._properties.canvasHeight;
   }
 
+  get backgroundCode(): string {
+    return this._properties.backgroundCode;
+  }
+
   get pixelSize(): number {
     return this._properties.pixelSize;
   }
@@ -43,6 +47,7 @@ function defaultSettings(): SchemaProperties<YardSettings> {
   return {
     canvasWidth: 800,
     canvasHeight: 600,
+    backgroundCode: "",
     pixelSize: 10,
     playerNameMaxLength: 20,
     moderationKey: "",
