@@ -1,3 +1,4 @@
+import router from "../../router";
 import YardAPI from "../YardAPI";
 import Controller from "./Controller";
 import { Vec2, addVec2 } from "./math";
@@ -34,6 +35,9 @@ export class KeyboardController extends Controller {
     super(api, isMainController);
 
     document.addEventListener("keydown", (event) => {
+      if (router.currentRoute.value.name !== "Yard") {
+        return;
+      }
       if (event.target instanceof HTMLInputElement) {
         return;
       }

@@ -1,5 +1,6 @@
 import { ref } from "vue";
 
+import router from "../../router";
 import YardAPI from "../YardAPI";
 import Controller from "./Controller";
 import { Vec2 } from "./math";
@@ -21,6 +22,9 @@ export class TouchController extends Controller {
     this.registerPointerDown(document); // fallback; should be replaced by the yard container as soon as it's mounted.
 
     document.addEventListener("pointermove", (event) => {
+      if (router.currentRoute.value.name !== "Yard") {
+        return;
+      }
       if (this.origin.value && this.activePixel) {
         this.target.value = [event.clientX, event.clientY];
       }
