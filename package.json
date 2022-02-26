@@ -1,6 +1,6 @@
 {
   "name": "@yard/yard",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "description": "Simulate running around on a yard with many people.",
   "scripts": {
