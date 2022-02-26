@@ -66,7 +66,7 @@
     color: var(--primary-color);
     .p-button.p-button-rounded {
       width: 1em;
-      height: 1em;
+      height: 1em !important;
     }
     .secret {
       cursor: pointer;
