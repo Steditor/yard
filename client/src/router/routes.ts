@@ -8,8 +8,8 @@ const YModeration = () =>
   import(
     /* webpackChunkName: "moderation" */ "../views/moderation/YModeration.vue"
   );
-const YYard = () =>
-  import(/* webpackChunkName: "yard" */ "../views/yard/YYard.vue");
+const YYardView = () =>
+  import(/* webpackChunkName: "yard" */ "../views/yard/YYardView.vue");
 const YYardSidebar = () =>
   import(
     /* webpackChunkName: "yardSidebar" */ "../views/yard/YYardSidebar.vue"
@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Yard",
     beforeEnter: connectToRoom,
     components: {
-      default: YYard,
+      default: YYardView,
       Sidebar: YYardSidebar,
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="y-full-size yard-container" ref="container">
+  <div class="yard-container" ref="container">
     <svg :viewBox="viewBox" preserveAspectRatio="xMidYMid meet" class="yard">
       <rect x="0" y="0" :width="viewWidth" :height="viewHeight" fill="white" />
       <YRope v-if="$yardAPI.store.gameSettings.rope" />
@@ -105,7 +105,7 @@
         if (this.$yardAPI.store.gameSettings.hideSelf) {
           return new Map(
             [...this.$yardAPI.store.pixels].filter(
-              ([_, pixel]) => pixel.player !== this.$yardAPI.store.sessionId,
+              ([, pixel]) => pixel.player !== this.$yardAPI.store.sessionId,
             ),
           );
         } else {
