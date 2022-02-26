@@ -14,6 +14,13 @@
   />
   <Menu ref="generators" :model="generatorItems" :popup="true" />
   <YModBackgroundColorGenerator v-model:visible="showColorGeneratorDialog" />
+  <Button
+    label="Edit SVG"
+    icon="pi pi-pencil"
+    class="ml-2"
+    @click="showSVGEditDialog = true"
+  />
+  <YModBackgroundEditor v-model:visible="showSVGEditDialog" />
 </template>
 
 <script lang="ts">
@@ -24,6 +31,7 @@
   import { MenuItem } from "primevue/menuitem";
 
   import YModBackgroundColorGenerator from "./YModBackgroundColorGenerator.vue";
+  import YModBackgroundEditor from "./YModBackgroundEditor.vue";
 
   export default defineComponent({
     name: "YModBackground",
@@ -31,9 +39,11 @@
       Button,
       Menu,
       YModBackgroundColorGenerator,
+      YModBackgroundEditor,
     },
     data() {
       return {
+        showSVGEditDialog: false,
         showColorGeneratorDialog: false,
         generatorItems: [
           {
