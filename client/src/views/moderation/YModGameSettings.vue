@@ -60,7 +60,14 @@
     },
     methods: {
       shuffleRope() {
-        this.$yardAPI.gameAPI.shuffleRope();
+        if (this.$yardAPI.gameAPI.shuffleRope()) {
+          this.$toast.add({
+            severity: "success",
+            summary: "Rope shuffled",
+            detail: `The rope order was shuffled.`,
+            life: 2000,
+          });
+        }
       },
     },
   });
