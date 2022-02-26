@@ -1,20 +1,10 @@
 import { RouteRecordRaw } from "vue-router";
 
 import YHome from "../views/home/YHome.vue";
+import YModeration from "../views/moderation/YModeration.vue";
+import YYardSidebar from "../views/yard/YYardSidebar.vue";
+import YYardView from "../views/yard/YYardView.vue";
 import { connectToRoom } from "./helpers";
-
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-const YModeration = () =>
-  import(
-    /* webpackChunkName: "moderation" */ "../views/moderation/YModeration.vue"
-  );
-const YYardView = () =>
-  import(/* webpackChunkName: "yard" */ "../views/yard/YYardView.vue");
-const YYardSidebar = () =>
-  import(
-    /* webpackChunkName: "yardSidebar" */ "../views/yard/YYardSidebar.vue"
-  );
-/* eslint-enable @typescript-eslint/explicit-module-boundary-types */
 
 export const routes: Array<RouteRecordRaw> = [
   {

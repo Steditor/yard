@@ -37,4 +37,19 @@ export default defineConfig({
     port: localConfig.VUE_DEV_SERVER_PORT,
     strictPort: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("monaco-editor")) {
+            return "monaco-editor";
+          } else if (id.includes("prime")) {
+            return "primefaces";
+          } else if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        },
+      },
+    },
+  },
 });
