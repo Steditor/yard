@@ -29,4 +29,8 @@ export const routes: Array<RouteRecordRaw> = [
       Sidebar: YYardSidebar,
     },
   },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/",
+  },
 ];
