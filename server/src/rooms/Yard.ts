@@ -4,6 +4,7 @@ import { Client, Room } from "colyseus";
 
 import { YardRoomJoinOptions } from "@yard/common/roomInterface";
 
+import StringRepository from "../services/StringRepository.js";
 import { BecomeAdminCommand } from "./commands/BecomeAdminCommand.js";
 import { ColorCommand } from "./commands/ColorCommand.js";
 import { ConvertPlayerCommand } from "./commands/ConvertPlayerCommand.js";
@@ -138,5 +139,9 @@ export class Yard extends Room<YardState> {
       consented,
       game: this.game,
     });
+  }
+
+  onDispose(): void | Promise<any> {
+    StringRepository.removeRoom(this.roomId);
   }
 }

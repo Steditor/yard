@@ -8,6 +8,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import serveStatic from "serve-static";
 
 import { Yard } from "./rooms/Yard.js";
+import StringRepository from "./services/StringRepository.js";
 
 import localConfig from "../../local.config.json" assert { type: "json" };
 
@@ -25,6 +26,9 @@ const gameServer = new Server({
 
 // register room handlers
 gameServer.define("yard", Yard);
+
+// register string repository
+app.use("/services/string", StringRepository.app);
 
 // register colyseus monitor
 const monitorPassword =

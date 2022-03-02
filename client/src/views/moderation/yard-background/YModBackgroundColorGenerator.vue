@@ -42,7 +42,7 @@
     },
     data() {
       return {
-        value: "#ffffff",
+        value: "ffffff",
       };
     },
     computed: {

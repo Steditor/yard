@@ -11,6 +11,7 @@ import { GameAPI } from "./api/GameAPI";
 import { PixelAPI } from "./api/PixelAPI";
 import { PlayerAPI } from "./api/PlayerAPI";
 import { RoomAPI } from "./api/RoomAPI";
+import { StringRepositoryAPI } from "./api/StringRepositoryAPI";
 import Controller from "./controller/Controller";
 import { MultiController } from "./controller/MultiController";
 import YardStore from "./store/YardStore";
@@ -35,6 +36,7 @@ export default class YardAPI {
   public readonly pixelAPI: PixelAPI;
   public readonly roomAPI: RoomAPI;
   public readonly gameAPI: GameAPI;
+  public readonly stringRepositoryAPI: StringRepositoryAPI;
 
   public readonly controller: Controller;
 
@@ -44,6 +46,7 @@ export default class YardAPI {
     this.pixelAPI = new PixelAPI(this);
     this.roomAPI = new RoomAPI(this);
     this.gameAPI = new GameAPI(this);
+    this.stringRepositoryAPI = new StringRepositoryAPI(this);
     this.store = new YardStore(this);
 
     this.controller = new MultiController(this, true);

@@ -7,6 +7,7 @@ import { JSDOM } from "jsdom";
 import { SetSettingsPayload } from "@yard/common/roomInterface";
 import { SvgCodeSanitizer } from "@yard/common/svgCodeSanitizer";
 
+import StringRepository from "../../services/StringRepository.js";
 import { Yard } from "../Yard.js";
 import { clampPixelPosition } from "../games/DefaultPixelMovement.js";
 
@@ -24,9 +25,17 @@ export class SetSettingsCommand extends Command<
 > {
   execute({ settings }: this["payload"]): void {
     if (settings.backgroundCode) {
+      const old = this.state.settings.backgroundCode;
+      if (old.length > 0) {
+        StringRepository.removeString(old, this.room.roomId);
+      }
+
       const sanitizer = new SvgCodeSanitizer(DOMPurify);
       sanitizer.check(settings.backgroundCode);
-      settings.backgroundCode = sanitizer.sanitized;
+      settings.backgroundCode = StringRepository.addString(
+        this.room.roomId,
+        sanitizer.sanitized,
+      );
     }
     Object.assign(this.state.settings, settings);
 

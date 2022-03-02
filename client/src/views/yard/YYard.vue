@@ -46,7 +46,14 @@
     },
     computed: {
       backgroundCode(): string {
-        return this.background ?? this.$yardAPI.store.settings.backgroundCode;
+        if (this.background) {
+          return this.background;
+        }
+        const codeId = this.$yardAPI.store.settings.backgroundCode;
+        if (codeId) {
+          this.$yardAPI.stringRepositoryAPI.request(codeId);
+        }
+        return this.$yardAPI.store.strings.get(codeId) ?? "";
       },
       viewWidth(): number {
         return this.$yardAPI.store.settings.canvasWidth;
@@ -55,7 +62,7 @@
         return this.$yardAPI.store.settings.canvasHeight;
       },
       viewBox(): string {
-        return `0 0 ${this.viewWidth} ${this.viewHeight}`;
+        return `0 0 ${this.viewWidth ?? 0} ${this.viewHeight ?? 0}`;
       },
       controller(): TouchController | null {
         const controller = this.$yardAPI.controller;

@@ -7,10 +7,11 @@
     :maximizable="true"
     ref="dialog"
     class="y-background-editor-dialog"
+    @show="reset"
   >
     <div class="grid">
       <div class="col-7">
-        <YMonacoEditor v-model="value" />
+        <YMonacoEditor v-model="model" />
       </div>
       <div class="col-5">
         <YYard :background="sanitized" />
@@ -66,7 +67,7 @@
     },
     data() {
       return {
-        value: this.$yardAPI.store.settings.backgroundCode,
+        value: "",
       };
     },
     computed: {
@@ -78,15 +79,22 @@
           this.$emit("update:visible", visible);
         },
       },
-      backgroundCode: settingsFieldModel("backgroundCode"),
+      backgroundCode: settingsFieldModel<string>("backgroundCode"),
+      code() {
+        this.$yardAPI.stringRepositoryAPI.request(this.backgroundCode);
+        return this.$yardAPI.store.strings.get(this.backgroundCode) ?? "";
+      },
+      model: {
+        get() {
+          return this.code;
+        },
+        set(value: string) {
+          this.value = value;
+        },
+      },
       sanitized() {
         this.sanitizer.check(this.value);
         return this.sanitizer.sanitized;
-      },
-    },
-    watch: {
-      backgroundCode() {
-        this.reset();
       },
     },
     methods: {
@@ -105,7 +113,7 @@
         });
       },
       reset() {
-        this.value = this.$yardAPI.store.settings.backgroundCode;
+        this.value = this.code;
       },
       close() {
         this.dialogVisible = false;

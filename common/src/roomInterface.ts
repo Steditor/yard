@@ -56,6 +56,7 @@ export const SetSettingsPayload: JSONSchemaType<SetSettingsPayload> = {
     },
     backgroundCode: {
       type: "string",
+      maxLength: 2 * 1024 * 1024,
       nullable: true,
     },
     pixelSize: {

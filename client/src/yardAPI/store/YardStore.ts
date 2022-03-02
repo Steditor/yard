@@ -28,6 +28,8 @@ export default class YardStore {
     once: boolean;
   }>(null);
 
+  public readonly strings = shallowReactive(new Map<string, string>());
+
   public readonly localSettings = new LocalSettingsStore();
 
   constructor(api: YardAPI) {
