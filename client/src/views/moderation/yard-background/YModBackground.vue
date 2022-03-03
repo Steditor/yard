@@ -14,6 +14,7 @@
   />
   <Menu ref="generators" :model="generatorItems" :popup="true" />
   <YModBackgroundColorGenerator v-model:visible="showColorGeneratorDialog" />
+  <YModBackgroundAxisGenerator v-model:visible="showAxisGeneratorDialog" />
   <Button
     label="Edit SVG"
     icon="pi pi-pencil"
@@ -30,6 +31,7 @@
   import Menu from "primevue/menu";
   import { MenuItem } from "primevue/menuitem";
 
+  import YModBackgroundAxisGenerator from "./YModBackgroundAxisGenerator.vue";
   import YModBackgroundColorGenerator from "./YModBackgroundColorGenerator.vue";
   import YModBackgroundEditor from "./YModBackgroundEditor.vue";
 
@@ -38,6 +40,7 @@
     components: {
       Button,
       Menu,
+      YModBackgroundAxisGenerator,
       YModBackgroundColorGenerator,
       YModBackgroundEditor,
     },
@@ -45,7 +48,13 @@
       return {
         showSVGEditDialog: false,
         showColorGeneratorDialog: false,
+        showAxisGeneratorDialog: false,
         generatorItems: [
+          {
+            label: "Coordinate System",
+            icon: "pi pi-arrows-h",
+            command: () => this.showAxisGenerator(),
+          },
           {
             label: "Background Color",
             icon: "pi pi-palette",
@@ -71,6 +80,9 @@
       },
       showColorGenerator() {
         this.showColorGeneratorDialog = true;
+      },
+      showAxisGenerator() {
+        this.showAxisGeneratorDialog = true;
       },
     },
   });
