@@ -16,6 +16,14 @@ Access the frontend via the server URL `localhost:{{EXPRESS_PORT}}` which serves
 
 ## Deployment
 
+### Docker
+
+Deploy the docker image defined in [`Dockerfile`](Dockerfile).
+Remember to set the environment variable `MONITOR_PASSWORD` to a secure password.
+The image exposes the express server on port 2567.
+
+### PM2
+
 Install [PM2](https://pm2.keymetrics.io/) on your server.
 Run [`.deploy/deploy.sh`](.deploy/deploy.sh) from the project's root directory.
 The script will install all dependencies and build both server and client.
