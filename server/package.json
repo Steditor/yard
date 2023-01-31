@@ -14,23 +14,23 @@
     "start": "cross-env NODE_ENV=production node --experimental-json-modules dist/index.js"
   },
   "devDependencies": {
-    "@colyseus/loadtest": "^0.14.6",
+    "@colyseus/loadtest": "^0.14.8",
     "@types/debug": "^4.1.7",
-    "@types/express": "^4.17.13",
-    "@types/jsdom": "^16.2.14",
-    "@types/randomcolor": "^0.5.6",
-    "@types/serve-static": "^1.13.10",
+    "@types/express": "^4.17.16",
+    "@types/jsdom": "^20.0.1",
+    "@types/randomcolor": "^0.5.7",
+    "@types/serve-static": "^1.15.0",
     "cross-env": "^7.0.3"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
     "@colyseus/monitor": "^0.14.22",
-    "colyseus": "^0.14.23",
-    "express": "^4.17.3",
-    "express-basic-auth": "^1.2.0",
-    "http-proxy-middleware": "^2.0.1",
-    "jsdom": "^19.0.0",
+    "colyseus": "^0.14.24",
+    "express": "^4.18.2",
+    "express-basic-auth": "^1.2.1",
+    "http-proxy-middleware": "^2.0.6",
+    "jsdom": "^21.1.0",
     "randomcolor": "^0.6.2",
-    "serve-static": "^1.14.1"
+    "serve-static": "^1.15.0"
   }
 }

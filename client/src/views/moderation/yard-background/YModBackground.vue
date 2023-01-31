@@ -29,11 +29,13 @@
 
   import Button from "primevue/button";
   import Menu from "primevue/menu";
-  import { MenuItem } from "primevue/menuitem";
 
   import YModBackgroundAxisGenerator from "./YModBackgroundAxisGenerator.vue";
   import YModBackgroundColorGenerator from "./YModBackgroundColorGenerator.vue";
   import YModBackgroundEditor from "./YModBackgroundEditor.vue";
+
+  // import { MenuItem } from "primevue/menuitem";
+  type MenuItem = any; // can't be imported at the moment
 
   export default defineComponent({
     name: "YModBackground",

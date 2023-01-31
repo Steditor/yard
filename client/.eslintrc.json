@@ -15,7 +15,8 @@
   ],
   "root": true,
   "rules": {
-    "vue/script-indent": "off"
+    "vue/script-indent": "off",
+    "vue/no-reserved-component-names": "off"
   },
   "overrides": [
     {

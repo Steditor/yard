@@ -36,12 +36,14 @@
 
   import { defineComponent } from "vue";
 
-  import { MenuItem } from "primevue/menuitem";
   import SpeedDial from "primevue/speeddial";
 
   import YLogo from "../YLogo.vue";
   import YMenuSeparator from "./YMenuSeparator.vue";
   import YUserSettings from "./YUserSettings.vue";
+
+  // import { MenuItem } from "primevue/menuitem";
+  type MenuItem = any; // can't be imported at the moment
 
   export default defineComponent({
     name: "YMenu",

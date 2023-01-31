@@ -1,29 +1,23 @@
 import vue from "@vitejs/plugin-vue";
 import * as fs from "fs";
 import { defineConfig } from "vite";
-import { createHtmlPlugin } from "vite-plugin-html";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
 import localConfig from "../local.config.json" assert { type: "json" };
 
-const faviconGenerator = fs.readFileSync(
-  "../logo/favicon/html_code.html",
-  "utf8",
-);
+const faviconCode = fs.readFileSync("../logo/favicon/html_code.html", "utf8");
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    createHtmlPlugin({
-      entry: "src/main.ts",
-      template: "index.html",
-      inject: {
-        data: {
-          faviconGenerator,
-        },
+    {
+      name: "include-favicon-code",
+      enforce: "pre",
+      transformIndexHtml(html: string) {
+        return html.replace("<!-- faviconGenerator -->", faviconCode);
       },
-    }),
+    },
+    vue(),
     viteStaticCopy({
       targets: [
         {
